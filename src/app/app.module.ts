@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule, MatButtonModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import {AutoCompleteComponent} from './components/search-auto-complete/search-auto-complete.component';
 
 import 'hammerjs';
 
@@ -16,6 +18,7 @@ import 'hammerjs';
     AppComponent,
     MapComponent,
     ButtonFilterComponent,
+    AutoCompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +27,7 @@ import 'hammerjs';
     HttpClientModule,
     MatToolbarModule,
     MatButtonModule,
+    AutocompleteLibModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
