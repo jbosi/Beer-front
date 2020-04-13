@@ -2,7 +2,7 @@
 	<div class="autocomplete-container">
 		<mat-icon class="autocomplete-icon" color="primary">search</mat-icon>
 		<ng-autocomplete 
-			[data]="data"
+			[data]="data | async"
 			[searchKeyword]="keyword"
 			(selected)="selectEvent($event)"
 			(inputChanged)="onChangeSearch($event)"

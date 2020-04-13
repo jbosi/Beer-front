@@ -16,7 +16,21 @@ export class BarPropertiesService {
 			coord: {
 				lat: 48.863869,
 				lon: 2.354605,
-			}
+			},
+			beers: [
+				{
+					id: 3,
+					pricing: [
+						{
+							quantity: 33,
+							price: 2,
+						}
+					],
+					name: 'Triple Karmeliet',
+					degré: 8,
+					type: 'blonde',
+				}
+			],
 		},
 		{
 			id: 2,
@@ -25,7 +39,21 @@ export class BarPropertiesService {
 			coord: {
 				lat: 48.855793,
 				lon: 2.35612,
-			}
+			},
+			beers: [
+				{
+					id: 6,
+					pricing: [
+						{
+							quantity: 50,
+							price: 5,
+						}
+					],
+					name: 'straffe hendrik quadruple',
+					degré: 12,
+					type: 'brune',
+				}
+			],
 		}])
 	}
 }

@@ -7,12 +7,13 @@ import { MapComponent } from './components/map-page/map/map.component';
 import { ButtonFilterComponent } from './components/button-filter/button-filter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatIconModule, MatButtonModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatDialogModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {AutoCompleteComponent} from './components/search-auto-complete/search-auto-complete.component';
 import { BarPropertiesService } from './services/bar-properties.service';
 import { MapPageComponent } from './components/map-page/map-page.component';
+import { BarPropertiesModalComponent } from './components/modals/bar-properties-modal/bar-properties-modal.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MapPageComponent } from './components/map-page/map-page.component';
     ButtonFilterComponent,
     AutoCompleteComponent,
     MapPageComponent,
+    BarPropertiesModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,8 +33,10 @@ import { MapPageComponent } from './components/map-page/map-page.component';
     MatToolbarModule,
     MatButtonModule,
     AutocompleteLibModule,
+    MatDialogModule,
   ],
   providers: [BarPropertiesService],
+  entryComponents: [BarPropertiesModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

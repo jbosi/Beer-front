@@ -2,6 +2,12 @@ import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angu
 import * as L from 'leaflet';
 import { BarPropertiesService } from 'src/app/services/bar-properties.service';
 import { barProperties } from '../../../models/bar-properties.model';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BarPropertiesModalComponent } from '../../modals/bar-properties-modal/bar-properties-modal.component';
+
+declare var require: any;
+const lightRedMarker: string = require('./../../../../icons/marker-light-red.svg');
+const blueMarker: string = require('./../../../../icons/marker-blue.svg');
 
 @Component({
 	selector: 'app-map',
@@ -15,8 +21,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	@Input() iconChangeId: number;
 	
 	constructor(
-		private markerService: BarPropertiesService, 
-	) { }
+		private markerService: BarPropertiesService,
+		public dialog: MatDialog, 
+	) { 
+	}
 		
 	ngAfterViewInit(): void {
 		this.initMap();
@@ -43,17 +51,17 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 	private changeIconColor(id: number, isSelected: boolean) {
 		const icon = L.icon({
-			iconUrl: isSelected ? 'marker-light-red.svg' : 'marker-blue.svg',
+			iconUrl: isSelected ? lightRedMarker : blueMarker,
 			iconSize: [25, 45],
 			iconAnchor: [12, 44],
 			popupAnchor: [1, -45],
 		});
-		const marker = this.markers.find(marker => marker.id === id);
+		const marker = this.markers.find(marker => marker.bar.id === id);
 		marker.setIcon(icon);
 	}
 
 	private centerLeafletMapOnMarker(id: number) {
-		const marker = this.markers.find(marker => marker.id === id)
+		const marker = this.markers.find(marker => marker.bar.id === id)
 		this.map.setView(marker.getLatLng(), 14);
 	}
 	
@@ -72,7 +80,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	
 	private addMarkers(): void {
 		const icon = L.icon({
-			iconUrl: 'marker-blue.svg',
+			iconUrl: blueMarker,
 			iconSize: [25, 45],
 			iconAnchor: [12, 44],
 			popupAnchor: [1, -45],
@@ -84,12 +92,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
 					icon: icon,
 				})
 				.addTo(this.map)
-				.bindPopup(bar.name);
+				// .bindPopup(bar.name)
+				.on('click', (e) => this.onMarkerClick(e, this));
 
-				marker.id = bar.id;
+				marker.bar = bar;
 
 				this.markers.push(marker);
 			})
 		})
+	}
+
+	private onMarkerClick(e: any, that: any) {
+		that.dialog.open(BarPropertiesModalComponent, {
+			width: '250px',
+			data: e.target.bar
+		});
 	}
 }
