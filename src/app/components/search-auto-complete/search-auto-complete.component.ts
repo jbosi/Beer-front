@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { barProperties } from 'src/app/models/bar-properties.model';
 
 @Component({
 	selector: 'app-search-auto-complete',
@@ -7,29 +8,37 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 	styleUrls: ['./search-auto-complete.component.scss']
 })
 export class AutoCompleteComponent implements AutocompleteLibModule {
+
+	constructor(
+	) {}
+
+	@Output() itemChanged: EventEmitter<number> = new EventEmitter<number>();
+
 	keyword = 'name';
-	data = [
+	data: barProperties[] = [
 		{
 			id: 1,
-			name: 'Bar 1'
+			name: 'Loustic',
+			address: '40 Rue Chapon, 75003 Paris',
+			coord: {
+				lat: 48.863869,
+				lon: 2.354605,
+			}
 		},
 		{
 			id: 2,
-			name: 'Bar 2'
-		},
-		{
-			id: 3,
-			name: 'Le bar de fou'
-		},
-		{
-			id: 4,
-			name: 'Le bar de Baptou'
+			name: 'La Perla Bar',
+			address: '26 Rue François Miron, 75004 Paris',
+			coord: {
+				lat: 48.855793,
+				lon: 2.35612,
+			}
 		}
 	];
 	
 	
-	selectEvent(item) {
-		// do something with selected item
+	selectEvent(item : barProperties) {
+		this.itemChanged.emit(item.id);
 	}
 	
 	onChangeSearch(val: string) {

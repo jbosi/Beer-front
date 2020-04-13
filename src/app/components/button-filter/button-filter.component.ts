@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button-filter',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonFilterComponent implements OnInit {
 
-  constructor() { }
+  @Input() iconName: string;
 
   ngOnInit() {
   }

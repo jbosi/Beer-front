@@ -1,19 +1,23 @@
 <div class="ng-autocomplete">
-    <ng-autocomplete 
-      [data]="data"
-      [searchKeyword]="keyword"
-      (selected)='selectEvent($event)'
-      (inputChanged)='onChangeSearch($event)'
-      (inputFocused)='onFocused($event)'
-      [itemTemplate]="itemTemplate"
-      [notFoundTemplate]="notFoundTemplate">                                 
-    </ng-autocomplete>
-     
-    <ng-template #itemTemplate let-item>
-    <a [innerHTML]="item.name"></a>
-    </ng-template>
-     
-    <ng-template #notFoundTemplate let-notFound>
-    <div>Essaye encore</div>
-    </ng-template>
+	<div class="autocomplete-container">
+		<mat-icon class="autocomplete-icon" color="primary">search</mat-icon>
+		<ng-autocomplete 
+			[data]="data"
+			[searchKeyword]="keyword"
+			(selected)="selectEvent($event)"
+			(inputChanged)="onChangeSearch($event)"
+			(inputFocused)="onFocused($event)"
+			[itemTemplate]="itemTemplate"
+			[placeHolder]="'Rechercher un bar'"
+			[notFoundTemplate]="notFoundTemplate">                                 
+		</ng-autocomplete>
+	</div>
+
+	<ng-template #itemTemplate let-item>
+		<a [innerHTML]="item.name"></a>
+	</ng-template>
+
+	<ng-template #notFoundTemplate let-notFound>
+		<div>Essaye encore</div>
+	</ng-template>
 </div>

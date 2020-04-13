@@ -19,7 +19,7 @@ export class BarPropertiesService {
 			}
 		},
 		{
-			id: 1,
+			id: 2,
 			name: 'La Perla Bar',
 			address: '26 Rue François Miron, 75004 Paris',
 			coord: {

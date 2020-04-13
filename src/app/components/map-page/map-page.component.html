@@ -1,9 +1,9 @@
 <div class="mat-app-background">
-    <app-map></app-map>
+    <app-map [iconChangeId]="iconChangeId"></app-map>
     <div class="map-action-element-container">
-        <app-search-auto-complete></app-search-auto-complete>
-        <app-button-filter></app-button-filter>
-        <app-button-filter></app-button-filter>
-        <app-button-filter></app-button-filter>
+        <app-search-auto-complete (itemChanged)="iconIdChanged($event)"></app-search-auto-complete>
+        <app-button-filter [iconName]="'local_bar'"></app-button-filter>
+        <app-button-filter [iconName]="'attach_money'"></app-button-filter>
+        <app-button-filter [iconName]="'access_time'"></app-button-filter>
     </div>
 </div>
