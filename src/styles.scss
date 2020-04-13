@@ -4,3 +4,18 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.map-filter-button-expand .mat-button-wrapper {
+	margin-left: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: lighter;
+	text-align: center;
+}
+
+li {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+}

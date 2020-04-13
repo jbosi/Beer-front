@@ -3,3 +3,16 @@
 //     top: 80px;
 //     left: 10px;
 // }
+
+.map-filter-button-expand {
+	border-radius: 46px;
+	width: 300px;
+	-webkit-transition: max-height 0.8s, opacity 0.5s 0.1s;
+	-moz-transition: max-height 0.8s, opacity 0.5s 0.1s;
+	transition: max-height 0.8s, opacity 0.5s 0.1s;
+	display: flex;
+}
+
+.map-filter-button-collapse {
+
+}

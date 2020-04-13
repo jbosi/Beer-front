@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import * as L from 'leaflet';
 import { BarPropertiesService } from 'src/app/services/bar-properties.service';
 import { barProperties } from '../../../models/bar-properties.model';
@@ -6,8 +6,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { BarPropertiesModalComponent } from '../../modals/bar-properties-modal/bar-properties-modal.component';
 
 declare var require: any;
-const lightRedMarker: string = require('./../../../../icons/marker-light-red.svg');
-const blueMarker: string = require('./../../../../icons/marker-blue.svg');
+const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
+const blueMarker: string = require('./../../../../icons/markers/marker-blue.svg');
 
 @Component({
 	selector: 'app-map',
@@ -22,7 +22,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	
 	constructor(
 		private markerService: BarPropertiesService,
-		public dialog: MatDialog, 
+		public dialog: MatDialog,
+		private cd: ChangeDetectorRef,
 	) { 
 	}
 		
@@ -39,6 +40,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
+		console.log('change')
 		const iconId = changes.iconChangeId;
 		if (iconId.currentValue != iconId.previousValue) {
 			this.changeIconColor(iconId.currentValue, true);
@@ -103,9 +105,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	}
 
 	private onMarkerClick(e: any, that: any) {
+		that.iconChangeId = e.target.bar.id;
 		that.dialog.open(BarPropertiesModalComponent, {
-			width: '250px',
-			data: e.target.bar
+			width: '400px',
+			position: { bottom: 1 + 'rem' },
+			data: e.target.bar,
+			backdropClass: 'dialog-remove-overlay'
 		});
 	}
 }

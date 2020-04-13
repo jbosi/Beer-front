@@ -1,0 +1,18 @@
+.brand {
+	font-weight: 100;
+	left: 1rem;
+	font-size: medium;
+}
+
+.nav-items {
+	margin: auto;
+	span {
+		padding-right: 1rem;
+		font-weight: 100;
+	}
+}
+
+.nav-bar {
+	z-index: 1;
+	position: relative;
+}

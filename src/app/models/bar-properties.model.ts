@@ -8,21 +8,7 @@ export interface barProperties {
 	},
 	// hhTime: weekDaysOpeningHours,
 	// openingTime: weekDaysOpeningHours,
-	beers: [
-		{
-			id: number,
-			pricing: [
-				{
-					quantity: number,
-					price: number,
-				}
-			]
-			name: string,
-			// image: string,
-			degré: number,
-			type: string,
-		}
-	],
+	beers: beerInfo[]
 }
 
 export interface weekDaysOpeningHours {
@@ -39,4 +25,18 @@ export interface DayOpeningHours {
 	start: string,
 	end: string,
 	isOpen: boolean
+}
+
+export interface beerInfo {
+	id: number,
+	pricing: [
+		{
+			quantity: number,
+			price: number,
+		}
+	]
+	name: string,
+	image: string,
+	degré: number,
+	type: string,
 }

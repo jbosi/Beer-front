@@ -28,7 +28,34 @@ export class BarPropertiesService {
 					],
 					name: 'Triple Karmeliet',
 					degré: 8,
-					type: 'blonde',
+					image: '../../icons/beers/beer-blond.png',
+					type: 'blond',
+				},
+				{
+					id: 6,
+					pricing: [
+						{
+							quantity: 50,
+							price: 5,
+						}
+					],
+					name: 'straffe hendrik quadruple',
+					degré: 12,
+					image: '../../icons/beers/beer-brown.png',
+					type: 'brown',
+				},
+				{
+					id: 8,
+					pricing: [
+						{
+							quantity: 33,
+							price: 4,
+						}
+					],
+					name: 'Celis white',
+					degré: 6,
+					image: '../../icons/beers/beer-white.png',
+					type: 'white',
 				}
 			],
 		},
@@ -50,8 +77,9 @@ export class BarPropertiesService {
 						}
 					],
 					name: 'straffe hendrik quadruple',
+					image: '../../icons/beers/beer-brown.png',
 					degré: 12,
-					type: 'brune',
+					type: 'brown',
 				}
 			],
 		}])

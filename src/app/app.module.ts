@@ -14,6 +14,7 @@ import {AutoCompleteComponent} from './components/search-auto-complete/search-au
 import { BarPropertiesService } from './services/bar-properties.service';
 import { MapPageComponent } from './components/map-page/map-page.component';
 import { BarPropertiesModalComponent } from './components/modals/bar-properties-modal/bar-properties-modal.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { BarPropertiesModalComponent } from './components/modals/bar-properties-
     AutoCompleteComponent,
     MapPageComponent,
     BarPropertiesModalComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
