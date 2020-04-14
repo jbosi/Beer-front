@@ -16,7 +16,7 @@ export class AutoCompleteComponent implements AutocompleteLibModule, OnInit {
 		private barPropertiesService: BarPropertiesService,
 	) {}
 		
-	@Output() itemChanged: EventEmitter<number> = new EventEmitter<number>();
+	@Output() itemChanged = new EventEmitter<number>();
 	
 	public keyword = 'name';
 	public data: Observable<barProperties[]>;
