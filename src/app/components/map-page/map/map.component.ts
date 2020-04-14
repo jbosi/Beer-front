@@ -51,7 +51,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		}
 	}
 
-	private changeIconColor(id: number, isSelected?: boolean) {
+	public changeIconColor(id: number, isSelected?: boolean) {
 		const icon = L.icon({
 			iconUrl: isSelected ? lightRedMarker : blueMarker,
 			iconSize: [25, 45],
