@@ -36,7 +36,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     AutocompleteLibModule,
     MatDialogModule,
   ],
-  providers: [BarPropertiesService],
+  providers: [
+	BarPropertiesService,
+],
   entryComponents: [BarPropertiesModalComponent],
   bootstrap: [AppComponent]
 })
