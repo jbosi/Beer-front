@@ -9,6 +9,7 @@ import { GeoJson, FeatureCollection } from '../../class/map-class';
 declare var require: any;
 const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
 const blueMarker: string = require('./../../../../icons/markers/marker-blue.svg');
+const blueMarkerPng: string = require('./../../../../icons/markers/marker-blue.png');
 
 @Component({
 	selector: 'app-map',
@@ -26,15 +27,11 @@ export class MapComponent implements OnInit {
 		private cd: ChangeDetectorRef,
 	) { }
 		
-		
-		
-	/// default settings
 	map: mapboxgl.Map;
 	style = 'mapbox://styles/jbosi/ck97965il2bne1io7gjsj1lwk';
 	lat = 48.8534;
 	lng = 2.3488;
 	
-	// data
 	source: any;
 	mapMarkers: any;
 	
@@ -44,7 +41,7 @@ export class MapComponent implements OnInit {
 	}
 	
 	private initializeMap() {
-		/// locate the user
+
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(position => {
 				this.lat = position.coords.latitude;
@@ -64,48 +61,113 @@ export class MapComponent implements OnInit {
 			zoom: 14,
 			center: [this.lng, this.lat]
 		});
-
-		/// Add map controls
+		
 		this.map.addControl(new mapboxgl.NavigationControl());
+		
+		this.map.on('load', () => {
+			this.map.loadImage(blueMarkerPng, (error, image) => {
+				if (error) throw error;
+				this.map.addImage('blueMarker', image);
+			});
 
-		this.map.on('load', (event) => {
-			/// register source
 			this.map.addSource('dbMarkers', {
 				type: 'geojson',
+				cluster: true,
 				data: {
 					type: 'FeatureCollection',
 					features: []
 				}
 			});
-
-			/// get source
+			
 			this.source = this.map.getSource('dbMarkers');
 
-
-			/// subscribe to realtime database and set data source
 			this.mapMarkers.subscribe(markers => {
 				let data = new FeatureCollection(markers)
 				this.source.setData(data)
 			})
+
+			// inspect a cluster on click
+			this.map.on('click', 'dbMarkers', (e) => {
+				this.map.flyTo({ center: e.features[0].geometry.coordinates, speed: 0.5 });
+			});
+
+			this.map.on('click', 'clusters', (e) => {
+				this.map.flyTo({ center: e.features[0].geometry.coordinates, speed: 0.5 });
+			});
+
+			this.map.addLayer({
+				id: 'clusters',
+				type: 'circle',
+				source: 'dbMarkers',
+				filter: ['has', 'point_count'],
+				paint: {
+					'circle-color': {
+						property: 'point_count',
+						type: 'interval',
+						stops: [
+							[0, '#51bbd6'],
+							[20, '#f1f075'],
+							[40, '#f28cb1'],
+						]
+					},
+					'circle-radius': {
+						property: 'point_count',
+						type: 'interval',
+						stops: [
+							[0, 20],
+							[20, 30],
+							[40, 40]
+						]
+					}
+				}
+			});
+				 
+			this.map.addLayer({
+				id: 'cluster-count',
+				type: 'symbol',
+				source: 'dbMarkers',
+				filter: ['has', 'point_count'],
+				layout: {
+					'text-field': '{point_count_abbreviated}',
+					'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+					'text-size': 12
+				}
+			});
 
 			// create map layers with realtime data
 			this.map.addLayer({
 				id: 'dbMarkers',
 				source: 'dbMarkers',
 				type: 'symbol',
+				filter: ['!', ['has', 'point_count']],
 				layout: {
-				  'text-field': '',
-				  'text-size': 24,
-				  'text-transform': 'uppercase',
-				  'icon-image': blueMarker,
-				  'text-offset': [0, 1.5]
+					'icon-image': "blueMarker",
+					'icon-size': 0.6,
+					'icon-anchor': 'bottom',
+					'icon-allow-overlap': true,
 				},
-				paint: {
-				  'text-color': '#f16624',
-				  'text-halo-color': '#fff',
-				  'text-halo-width': 2
+			})
+
+			this.map.addLayer({
+				id: 'dbMarkers-text',
+				type: 'symbol',
+				source: 'dbMarkers',
+				filter: ['!', ['has', 'point_count']],
+				layout: {
+					'text-field': '{id}',
+					'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+					'text-size': 12,
+					'text-offset': [-0.1,-2.2],
+					'text-allow-overlap': true
 				}
-			  })
+			});
+			const mapCursor = this.map.getCanvas();
+
+			this.map.on('mouseenter', 'clusters', () => mapCursor.style.cursor = 'pointer');
+			this.map.on('mouseleave', 'clusters', () => mapCursor.style.cursor = '');
+
+			this.map.on('mouseenter', 'dbMarkers', () => mapCursor.style.cursor = 'pointer');
+			this.map.on('mouseleave', 'dbMarkers', () => mapCursor.style.cursor = '');
 		
 		});
 	}

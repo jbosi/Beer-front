@@ -80,6 +80,8 @@ export class BarPropertiesService {
 				]
 			},
 			"properties": {
+				// "image-name": 'test',
+				// "icon": "https://upload.wikimedia.org/wikipedia/commons/8/88/Map_marker.svg",
 				"id":  2,
 				"name": 'La Perla Bar',
 				"address": '26 Rue François Miron, 75004 Paris',
