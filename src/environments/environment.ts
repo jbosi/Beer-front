@@ -4,12 +4,8 @@
 
 export const environment = {
 	production: false,
-  
-	mapbox: {
-	  accessToken: 'pk.eyJ1IjoiamJvc2kiLCJhIjoiY2s5NzNrN2JpMGVlNTNmdGNtMWZmMWswdyJ9.iyYDNUbxnLkgY49e6N8Z4w'
-	}
-  }
-  
+}
+
 
 /*
  * For easier debugging in development mode, you can import the following file

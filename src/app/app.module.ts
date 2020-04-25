@@ -20,6 +20,7 @@ import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MapPopupComponent } from './components/map-popup/map-popup.component'
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
 	declarations: [
@@ -46,6 +47,7 @@ import { MapPopupComponent } from './components/map-popup/map-popup.component'
 		ReactiveFormsModule,
 		DynamicFormsMaterialUIModule,
 		AppRoutingModule,
+		LeafletModule,
 	],
 	providers: [
 		BarPropertiesService,
