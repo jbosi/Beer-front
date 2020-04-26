@@ -115,6 +115,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 					const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
 					// Listen to the close event
 					popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
+					popupEl.barData = bar
 					// Add to the DOM
 					document.body.appendChild(popupEl);
 					return popupEl;
