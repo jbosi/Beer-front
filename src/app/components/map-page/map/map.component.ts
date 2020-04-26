@@ -20,7 +20,7 @@ export class MapComponent implements OnInit {
 	public markers: any[] = [];
 	
 	@Input() iconChangeId: number;
-	
+
 	constructor(
 		private markerService: BarPropertiesService,
 		public dialog: MatDialog,
@@ -86,13 +86,8 @@ export class MapComponent implements OnInit {
 				this.source.setData(data)
 			})
 
-			// inspect a cluster on click
-			this.map.on('click', 'dbMarkers', (e) => {
-				this.map.flyTo({ center: e.features[0].geometry.coordinates, speed: 0.5 });
-			});
-
 			this.map.on('click', 'clusters', (e) => {
-				this.map.flyTo({ center: e.features[0].geometry.coordinates, speed: 0.5 });
+				this.map.flyTo({ center: e.features[0].geometry.coordinates, zoom: 13, speed: 0.5 });
 			});
 
 			this.map.addLayer({

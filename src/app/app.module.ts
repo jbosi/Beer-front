@@ -18,7 +18,8 @@ import { AddBeerFormComponent } from './components/add-beer-form/add-beer-form.c
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
 import { AppRoutingModule } from './app-routing.module';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MapPopupComponent } from './components/map-popup/map-popup.component'
 
 @NgModule({
 	declarations: [
@@ -31,6 +32,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 		NavBarComponent,
 		AddBeerFormComponent,
 		PageNotFoundComponent,
+		MapPopupComponent,
 	],
 	imports: [
 		BrowserModule,
