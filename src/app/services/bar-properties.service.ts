@@ -4,13 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { barProperties } from '../models/';
 
+
 @Injectable()
 export class BarPropertiesService {
 	
 	constructor(
 		public http: HttpClient
-	) { 
-	}
+	) {	}
 
 	getMarkers(): Observable<barProperties[]> {
 		return this.http.get('https://aleforall.herokuapp.com/bars').pipe(

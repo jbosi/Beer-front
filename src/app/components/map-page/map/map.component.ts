@@ -78,6 +78,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			iconAnchor: [12, 44],
 			popupAnchor: [1, -45],
 		});
+
 		const marker = this.markers.find(marker => marker.bar.id === id);
 		marker.setIcon(icon);
 	}
@@ -113,6 +114,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				
 				this.markers.push(marker);
 				this.cluster.addLayer(marker)
+
 			})
 		})
 		
