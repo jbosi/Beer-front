@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { barProperties } from '../models/bar-properties.model';
-import { of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { barProperties } from '../models/';
 
 @Injectable()
 export class BarPropertiesService {
