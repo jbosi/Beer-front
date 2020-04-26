@@ -1,11 +1,13 @@
-import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef, } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactoryResolver, Injector, ApplicationRef, } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BarPropertiesService } from '../../../services/';
 import { barProperties } from '../../../models/';
 import { BarPropertiesModalComponent } from '../../modals/';
+import { NgElement, WithProperties } from '@angular/elements';
 
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
+import { MapPopupComponent } from '../../map-popup';
 
 declare var require: any;
 const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
@@ -101,13 +103,21 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				const marker: any = L.marker(bar.coordinates, {
 					icon: icon,
 				})
-				// .bindPopup(bar.name)
 				// .on('click', (e) => this.onMarkerClick(e, this));
 				.bindTooltip("4", {
 					permanent: true,
 					direction: 'center',
 					offset: [0,27],
 					className: 'map-marker-tooltip-price'
+				})
+
+				.bindPopup(() => {	
+					const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
+					// Listen to the close event
+					popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
+					// Add to the DOM
+					document.body.appendChild(popupEl);
+					return popupEl;
 				})
 				
 				marker.bar = bar;
