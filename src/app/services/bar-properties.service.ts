@@ -1,53 +1,42 @@
 import { Injectable } from '@angular/core';
-import { barProperties } from '../models/bar-properties.model';
-import { of, Observable } from 'rxjs';
-import { GeoJson } from '../components/class/map-class';
-import { environment } from 'src/environments/environment';
-import * as mapboxgl from 'mapbox-gl';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { barProperties } from '../models/';
+
 
 @Injectable()
 export class BarPropertiesService {
 	
 	constructor(
 		public http: HttpClient
-	) { 
-		mapboxgl.accessToken = environment.mapbox.accessToken
-	}
+	) {	}
 
-	getMarkers(): Observable<any> {
+	getMarkers(): Observable<barProperties[]> {
 		return this.http.get('https://aleforall.herokuapp.com/bars').pipe(
 			map((response: any) => {
-				return response.map( item => {
+				return response.map( (bar: any) => {
 
-					const coordinates = item.coordinates.split(',')
 					return {
-						"type": "Feature",
-							"geometry": {
-								"type": "Point",
-								"coordinates": coordinates.reverse()
-							},
-							"properties": {
-								"id":  2,
-								"name": item.name,
-								"address": 'Rue du bar ' + item.name,
-								"beers": [
-									{
-										"id": 6,
-										"pricing": [
-											{
-												"quantity": 50,
-												"price": 5,
-											}
-										],
-										"name": 'straffe hendrik quadruple',
-										"image": '../../icons/beers/beer-brown.png',
-										"degré": 12,
-										"type": 'brown',
-									}
-								],
-							}
+							coordinates: bar.coordinates.split(','),
+							id:  2,
+							name: bar.name,
+							address: 'Rue du bar ' + bar.name,
+							beers: [
+								{
+									id: 6,
+									pricing: [
+										{
+											quantity: 50,
+											price: 5,
+										}
+									],
+									name: 'straffe hendrik quadruple',
+									image: '../../icons/beers/beer-brown.png',
+									degré: 12,
+									type: 'brown',
+								}
+							],
 						}
 					}
 				)

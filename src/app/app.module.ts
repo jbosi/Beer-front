@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MapPopupComponent } from './components/map-popup/map-popup.component'
+import { createCustomElement } from '@angular/elements';
 
 @NgModule({
 	declarations: [
@@ -50,7 +51,12 @@ import { MapPopupComponent } from './components/map-popup/map-popup.component'
 	providers: [
 		BarPropertiesService,
 	],
-	entryComponents: [BarPropertiesModalComponent],
+	entryComponents: [BarPropertiesModalComponent, MapPopupComponent],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+	constructor(private injector: Injector) {
+		const PopupElement = createCustomElement(MapPopupComponent, {injector});
+		customElements.define('popup-element', PopupElement);
+	}
+ }

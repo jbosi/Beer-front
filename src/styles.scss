@@ -1,5 +1,6 @@
 @import './scss/_variables.scss';
 @import './scss/_autocomplete.scss';
+@import "~leaflet/dist/leaflet.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -17,4 +18,11 @@ li {
 	display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.map-marker-tooltip-price {
+	background: none;
+	border: none;
+	box-shadow: none;
+	color: white;
 }

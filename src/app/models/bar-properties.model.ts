@@ -1,11 +1,10 @@
+import { LatLngExpression } from 'leaflet';
+
 export interface barProperties {
 	id: number,
 	name: string,
 	address: string,
-	coord: {
-		lat: number,
-		lon: number
-	},
+	coordinates: LatLngExpression,
 	// hhTime: weekDaysOpeningHours,
 	// openingTime: weekDaysOpeningHours,
 	beers: beerInfo[]
