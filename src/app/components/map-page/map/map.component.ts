@@ -12,7 +12,8 @@ import { MapPopupComponent } from '../../map-popup';
 declare var require: any;
 const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
 const blueMarker: string = require('./../../../../icons/markers/marker-blue.svg');
-const blueMarkerPng: string = require('./../../../../icons/markers/marker-blue.png');
+// const blueMarkerPng: string = require('./../../../../icons/markers/marker-blue.png');
+const customMarker: string = require('./../../../../icons/markers/custom-marker.svg');
 
 @Component({
 	selector: 'app-map',
@@ -92,9 +93,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	
 	private addMarkers(): void {
 		const icon = L.icon({
-			iconUrl: blueMarker,
+			iconUrl: customMarker,
 			iconSize: [25, 45],
-			iconAnchor: [12, 44],
+			iconAnchor: [13, 46],
 			popupAnchor: [1, -45],
 		});
 				
