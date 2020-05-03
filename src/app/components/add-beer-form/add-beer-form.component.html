@@ -1,1 +1,18 @@
-<p>add-beer-form works!</p>
+<div [formGroup]="form">
+	<label for="name">Nom</label>
+	<input formControlName="Name" id="name" />
+  
+	<label for="brewery">Brasserie</label>
+	<input formControlName="brewery" id="brewery" />
+
+	<label for="degre">Degre</label>
+	<input formControlName="degre" id="degre" />
+  
+	<label for="type">Type</label>
+	<select formControlName="type" id="type" >
+		<option *ngFor="let option of options">{{option}}</option>
+	</select>
+
+  
+  
+  </div>

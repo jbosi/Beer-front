@@ -1,3 +1,5 @@
+import { AddBeerPageComponent } from './components/add-beer-page/add-beer-page.component';
+import { BeerPropertiesService } from './services/beer-properties.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import 'hammerjs';
@@ -22,6 +24,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MapPopupComponent } from './components/map-popup/map-popup.component'
 import { createCustomElement } from '@angular/elements';
 
+
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -34,6 +38,7 @@ import { createCustomElement } from '@angular/elements';
 		AddBeerFormComponent,
 		PageNotFoundComponent,
 		MapPopupComponent,
+		AddBeerPageComponent
 	],
 	imports: [
 		BrowserModule,
@@ -50,6 +55,7 @@ import { createCustomElement } from '@angular/elements';
 	],
 	providers: [
 		BarPropertiesService,
+		BeerPropertiesService,
 	],
 	entryComponents: [BarPropertiesModalComponent, MapPopupComponent],
 	bootstrap: [AppComponent]

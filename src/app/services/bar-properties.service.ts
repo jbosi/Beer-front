@@ -18,7 +18,7 @@ export class BarPropertiesService {
 				return response.map( (bar: any) => {
 
 					return {
-							coordinates: bar.coordinates.split(','),
+							coordinates: [bar.location.latitude, bar.location.longitude],
 							id:  2,
 							name: bar.name,
 							address: 'Rue du bar ' + bar.name,
