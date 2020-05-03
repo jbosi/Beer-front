@@ -104,7 +104,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 					icon: icon,
 				})
 				// .on('click', (e) => this.onMarkerClick(e, this));
-				.bindTooltip("4", {
+				.bindTooltip(bar.minPrice.toString(), {
 					permanent: true,
 					direction: 'center',
 					offset: [0,27],

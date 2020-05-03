@@ -21,7 +21,8 @@ export class BarPropertiesService {
 							coordinates: [bar.location.latitude, bar.location.longitude],
 							id:  2,
 							name: bar.name,
-							address: 'Rue du bar ' + bar.name,
+							address: bar.address,
+							minPrice: bar.minPrice || 0,
 							beers: [
 								{
 									id: 6,

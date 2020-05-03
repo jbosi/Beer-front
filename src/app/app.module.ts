@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
-import { MapComponent, AlgoliaSearchComponent, ButtonFilterComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, BarPropertiesModalComponent, NavBarComponent, AddBeerFormComponent, PageNotFoundComponent } from './components';
+import { HomeComponent, MapComponent, AlgoliaSearchComponent, ButtonFilterComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, BarPropertiesModalComponent, NavBarComponent, AddBeerFormComponent, PageNotFoundComponent } from './components';
 import { BarPropertiesService } from './services';
 
 // Keep these dependencies ?
@@ -23,6 +24,7 @@ const MATERIAL_MODULES = [
 	MatButtonModule,
 	MatDialogModule,
 	MatCardModule,
+	MatGridListModule,
 ]
 
 @NgModule({
@@ -37,7 +39,8 @@ const MATERIAL_MODULES = [
 		AddBeerFormComponent,
 		PageNotFoundComponent,
 		MapPopupComponent,
-		AlgoliaSearchComponent
+		AlgoliaSearchComponent,
+		HomeComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
@@ -49,6 +52,7 @@ const MATERIAL_MODULES = [
 		DynamicFormsMaterialUIModule,
 		AppRoutingModule,
 		NgAisModule.forRoot(),
+		FlexLayoutModule,
 	],
 	providers: [
 		BarPropertiesService,

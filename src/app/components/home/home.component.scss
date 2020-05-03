@@ -1,0 +1,35 @@
+.home-text-container {
+	margin: 13rem auto;
+	max-width: 70%;
+
+	h1 {
+		color: #444444;
+		font-size: 3rem;
+		text-transform: capitalize;
+		text-align: left;
+	}
+
+	p {
+		font-size: 1rem;
+		color: #757575;
+	}
+
+	button {
+		margin-top: 2.5rem;
+		font-size: 1.5rem;
+		font-weight: 300;
+		line-height: 3rem;
+		width: 11rem;
+		border-radius: 30px;
+	}
+}
+
+.home-image {
+	max-width: 55%;
+	max-height: 95%;
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: -1;
+}
