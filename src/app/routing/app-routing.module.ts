@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, AddBeerFormComponent, MapPageComponent, HomeComponent } from '../components';
+import { PageNotFoundComponent, MapPageComponent, HomeComponent, AddBeerPageComponent } from '../components';
 
 const routes: Routes = [
 	{ path: 'map', component: MapPageComponent },
-	{ path: 'add-beer', component: AddBeerFormComponent },
+	{ path: 'add-beer', component: AddBeerPageComponent },
 	{ path: '', component: HomeComponent, pathMatch: 'full' },
 	{ path: '**', component: PageNotFoundComponent }, 
 ];

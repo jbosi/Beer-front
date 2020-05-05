@@ -1,3 +1,5 @@
+import { AddBeerPageComponent } from './components/add-beer-page/add-beer-page.component';
+import { BeerPropertiesService } from './services/beer-properties.service';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
@@ -9,6 +11,7 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
+
 
 import { HomeComponent, MapComponent, AlgoliaSearchComponent, ButtonFilterComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, BarPropertiesModalComponent, NavBarComponent, AddBeerFormComponent, PageNotFoundComponent } from './components';
 import { BarPropertiesService } from './services';
@@ -27,6 +30,8 @@ const MATERIAL_MODULES = [
 	MatGridListModule,
 ]
 
+
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -39,6 +44,7 @@ const MATERIAL_MODULES = [
 		AddBeerFormComponent,
 		PageNotFoundComponent,
 		MapPopupComponent,
+		AddBeerPageComponent,
 		AlgoliaSearchComponent,
 		HomeComponent
 	],
@@ -56,6 +62,7 @@ const MATERIAL_MODULES = [
 	],
 	providers: [
 		BarPropertiesService,
+		BeerPropertiesService,
 	],
 	entryComponents: [BarPropertiesModalComponent, MapPopupComponent],
 	bootstrap: [AppComponent]

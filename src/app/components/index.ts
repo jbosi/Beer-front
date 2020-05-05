@@ -1,4 +1,5 @@
 export * from './add-beer-form';
+export * from './add-beer-page';
 export * from './algolia-search';
 export * from './button-filter';
 export * from './map-page';
