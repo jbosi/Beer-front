@@ -1,28 +1,34 @@
 import { AddBeerPageComponent } from './components/add-beer-page/add-beer-page.component';
 import { BeerPropertiesService } from './services/beer-properties.service';
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
-import 'hammerjs';
-
-import { AppComponent } from './app.component';
-import { MapComponent } from './components/map-page/map/map.component';
-import { ButtonFilterComponent } from './components/button-filter/button-filter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule } from '@angular/material';
-import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-import { AutoCompleteComponent } from './components/search-auto-complete/search-auto-complete.component';
-import { BarPropertiesService } from './services/bar-properties.service';
-import { MapPageComponent } from './components/map-page/map-page.component';
-import { BarPropertiesModalComponent } from './components/modals/bar-properties-modal/bar-properties-modal.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { AddBeerFormComponent } from './components/add-beer-form/add-beer-form.component';
+import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
-import { AppRoutingModule } from './app-routing.module';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { MapPopupComponent } from './components/map-popup/map-popup.component'
+import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import 'hammerjs';
+
+
+import { HomeComponent, MapComponent, AlgoliaSearchComponent, ButtonFilterComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, BarPropertiesModalComponent, NavBarComponent, AddBeerFormComponent, PageNotFoundComponent } from './components';
+import { BarPropertiesService } from './services';
+
+// Keep these dependencies ?
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
+import { NgAisModule } from 'angular-instantsearch';
+
+const MATERIAL_MODULES = [
+	MatIconModule,
+	MatToolbarModule,
+	MatButtonModule,
+	MatDialogModule,
+	MatCardModule,
+	MatGridListModule,
+]
 
 
 
@@ -38,20 +44,21 @@ import { createCustomElement } from '@angular/elements';
 		AddBeerFormComponent,
 		PageNotFoundComponent,
 		MapPopupComponent,
-		AddBeerPageComponent
+		AddBeerPageComponent,
+		AlgoliaSearchComponent,
+		HomeComponent
 	],
 	imports: [
+		...MATERIAL_MODULES,
 		BrowserModule,
 		BrowserAnimationsModule,
-		MatIconModule,
 		HttpClientModule,
-		MatToolbarModule,
-		MatButtonModule,
 		AutocompleteLibModule,
-		MatDialogModule,
 		ReactiveFormsModule,
 		DynamicFormsMaterialUIModule,
 		AppRoutingModule,
+		NgAisModule.forRoot(),
+		FlexLayoutModule,
 	],
 	providers: [
 		BarPropertiesService,

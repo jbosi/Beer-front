@@ -5,6 +5,7 @@ export interface barProperties {
 	name: string,
 	address: string,
 	coordinates: LatLngExpression,
+	minPrice?: number,
 	// hhTime: weekDaysOpeningHours,
 	// openingTime: weekDaysOpeningHours,
 	beers: beerInfo[]
