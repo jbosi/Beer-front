@@ -9,18 +9,17 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./add-beer-page.component.scss']
 })
 export class AddBeerPageComponent implements OnInit {
-	addBeerForm: FormGroup;
+  addBeerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private beerPropertiesService: BeerPropertiesService) {
-	  this.addBeerForm = this.formBuilder.group({
-		addBeer: [],
-	  })
+    this.addBeerForm = this.formBuilder.group({
+      addBeer: [],
+    });
   }
 
   submit() {
-	console.log(this.addBeerForm.value);
-	this.beerPropertiesService.addBeer(this.addBeerForm.value);
-;
+    console.log(this.addBeerForm.value);
+    this.beerPropertiesService.addBeer(this.addBeerForm.value);
   }
 
   resetForm() {
