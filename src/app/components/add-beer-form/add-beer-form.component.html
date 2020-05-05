@@ -1,21 +1,18 @@
 <div [formGroup]="form" class="form-group ">
 	<label for="name">Nom</label>
-  <input formControlName="name" id="name" class="form-control" required>
-<div *ngIf="nameControl.touched && nameControl.hasError('required')" class="alert alert-danger">
-  name is required
-</div>
-  
+	<input formControlName="name" id="name" class="form-control" required>
+	<div *ngIf="nameControl.touched && nameControl.hasError('required')" class="alert alert-danger">
+		name is required
+	</div>
+	
 	<label for="brewery">Brasserie</label>
 	<input formControlName="brewery" id="brewery" class="form-control"/>
-
+	
 	<label for="degre">Degre</label>
 	<input formControlName="degre" id="degre" class="form-control"/>
-  
+	
 	<label for="type">Type</label>
 	<select formControlName="type" id="type" class="form-control">
 		<option *ngFor="let option of options" >{{option}}</option>
 	</select>
-
-  
-  
-  </div>
+</div>

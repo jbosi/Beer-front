@@ -1,4 +1,5 @@
 <form [formGroup]="addBeerForm" (ngSubmit)="submit()" class="container">
 	<app-add-beer-form formControlName="addBeer"></app-add-beer-form>
-	<button type="button" class="btn btn-primary">Ajouter</button> <button type="button" class="btn btn-light"(click)="resetForm()">Reset</button>
+	<button class="btn btn-primary">Ajouter</button> 
+	<button type="button" class="btn btn-light"(click)="resetForm()">Reset</button>
 </form>
