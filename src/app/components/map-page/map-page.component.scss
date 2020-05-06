@@ -1,7 +1,21 @@
+@import './../../../scss/custom';
+
+:host {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	-webkit-box-flex: 1;
+}
+
 .map-action-element-container {
 	padding: 1rem 0 0 1rem;
 	display: flex;
 	flex-direction: column;
 	height: 20rem;
 	justify-content: space-between;
+}
+
+.map-filter {
+	color: _theme("primary");
 }
