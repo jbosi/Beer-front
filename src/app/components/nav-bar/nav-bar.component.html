@@ -1,8 +1,10 @@
-<mat-toolbar class="nav-bar">
-	<div class="brand" fxShow.xs="false"><img src={{logoPath}} class="navBar-logo">Drinks for all</div>
+<mat-toolbar class="nav-bar" color="primary">
+	<div class="brand" fxShow.xs="false"><img src={{logoPath}} class="navBar-logo"></div>
 	<div class= "nav-items">
-		<span><a routerLink="" routerLinkActive="active">Home</a></span>
-		<span><a routerLink="map" routerLinkActive="active">Map</a></span>
-		<span><a routerLink="add-beer" routerLinkActive="active">Add a beer</a></span>
+		<span><a routerLink="" routerLinkActive="active">HOME</a></span>
+		<span><a routerLink="/map" routerLinkActive="active">MAP</a></span>
+		<span><a routerLink="/add-beer" routerLinkActive="active">BEER</a></span>
 	</div>
 </mat-toolbar>
+
+<router-outlet></router-outlet>
