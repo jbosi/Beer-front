@@ -1,5 +1,35 @@
+@import 'custom';
+
 .leaflet-popup-content {
 	margin: 0;
 	width: 300px;
 	height: 500px;
+}
+
+.marker-cluster-small {
+	background-color: $primary;
+	opacity: 0.8 !important;
+	div {
+		background-color: unset;
+		color: white;
+	}
+}
+
+.marker-cluster-medium {
+	background-color: $warn;
+	opacity: 0.8 !important;
+	div {
+		background-color: unset;
+		color: white;
+	}
+}
+
+.marker-cluster-large {
+	background-color: $accent;
+	opacity: 0.8 !important;
+	div {
+		background-color: unset;
+		color: white;
+	}
+
 }

@@ -22,22 +22,25 @@
 .nav-bar {
 	z-index: 1;
 	position: relative;
-	background-color: transparent;
 }
 
 a {
+	font-weight: 400;
 	text-decoration: none;
 	&:visited {
 		color: inherit;
 	}
 
 	&:hover {
-		color: #d6cece;
+		color: #ffffff;
 	}
 }
 
 .navBar-logo {
-	height: 30px;
+	height: 3rem;
 	vertical-align: top;
 	margin-right: 0.4rem;
+	position: absolute;
+	top: 0.6rem;
+	left: 0.6rem;
 }

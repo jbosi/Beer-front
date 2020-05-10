@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactoryResolver, Injector, ApplicationRef, } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BarPropertiesService } from '../../../services/';
 import { barProperties } from '../../../models/';
 import { BarPropertiesModalComponent } from '../../modals/';
@@ -26,7 +26,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 	private cluster = L.markerClusterGroup({
 		showCoverageOnHover: false,
-		disableClusteringAtZoom: 18
+		disableClusteringAtZoom: 18,
+		maxClusterRadius: 100
 	});
 	
 	@Input() iconChangeId: number;
@@ -48,7 +49,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 		this.addMarkers();
 		this.map.locate({setView: true, maxZoom: 15});
-		this.map.on('locationfound',(e: any) => this.onLocationFound(e));
+		this.map.on('locationfound', (e: any) => this.onLocationFound(e));
 	}
 
 	private initMap(): void {

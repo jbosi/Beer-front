@@ -9,7 +9,7 @@ declare var require: any;
 })
 
 export class NavBarComponent implements OnInit {
-	public logoPath: string = require('./../../../assets/logo/logo-pin.png');	
+	public logoPath: string = require('./../../../assets/logo/logoTitleWhite.png');	
 	
 	constructor() { }
 	
