@@ -12,9 +12,9 @@ export class BeerPropertiesService {
 		private http: HttpClient,
 	) { }
 
-	getBeers() : Observable<beerInfo[]> {
+	getBeers() : Observable<[]> {
 		
-		return this.http.get<beerInfo[]>('https://aleforall.herokuapp.com/beers');
+		return this.http.get<[]>('https://aleforall.herokuapp.com/beers');
 	}
 
 	addBeer(payload: any): Observable<any> {

@@ -1,15 +1,9 @@
-.brand {
-	position: absolute;
-	font-weight: 100;
-	left: 1rem;
-	font-size: medium;
-}
-
 .nav-items {
 	margin: auto;
 	span {
 		padding-right: 1rem;
 		font-weight: 100;
+		font-size: medium;
 	}
 }
 
@@ -17,6 +11,7 @@
 	z-index: 1;
 	position: relative;
 	background-color: transparent;
+	height: auto;
 }
 
 a {
@@ -28,10 +23,4 @@ a {
 	&:hover {
 		color: #d6cece;
 	}
-}
-
-.navBar-logo {
-	height: 30px;
-	vertical-align: top;
-	margin-right: 0.4rem;
 }

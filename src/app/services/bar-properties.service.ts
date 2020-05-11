@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -43,6 +44,8 @@ export class BarPropertiesService {
 				)
 			})
 		)
+
+		
 
 		// Mock Data
 		// return of([{
@@ -133,5 +136,9 @@ export class BarPropertiesService {
 		// 		],
 		// 	}
 		// }])
+	}
+
+	getBars(): Observable<barProperties[]>{
+		return this.http.get<barProperties[]>('https://aleforall.herokuapp.com/bars');
 	}
 }
