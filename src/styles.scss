@@ -6,10 +6,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.map-filter-button-expand .mat-button-wrapper {
-	margin-left: 16px;
-}
-
 h1, h2, h3, h4, h5, h6 {
 	font-weight: lighter;
 	text-align: center;
@@ -26,4 +22,16 @@ li {
 	border: none;
 	box-shadow: none;
 	color: white;
+}
+
+app-root {
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }

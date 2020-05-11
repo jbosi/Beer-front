@@ -1,11 +1,27 @@
-<div class="mat-app-background">
-    <app-map [iconChangeId]="iconChangeId"></app-map>
-    <div class="map-action-element-container">
-		<!-- <app-search-auto-complete (itemChanged)="iconIdChanged($event)"></app-search-auto-complete> -->
-		<!-- <app-algolia-search></app-algolia-search> -->
-        <!-- <app-button-filter [iconName]="'store'"></app-button-filter>
-        <app-button-filter [iconName]="'local_bar'"></app-button-filter>
-        <app-button-filter [iconName]="'attach_money'"></app-button-filter>
-        <app-button-filter [iconName]="'access_time'"></app-button-filter> -->
-    </div>
+<div class="map-container" >
+	<app-map [iconChangeId]="iconChangeId"></app-map>
+</div>
+
+<div class="content" 
+fxLayout="row"
+fxLayoutGap="15px"
+fxFlexFill >
+
+<div fxFlex="30" class="map-filter" fxFlexOffset="10">
+</div>
+
+<div fxFlex="50">
+	</div>
+
+	<div fxFlex="10">
+	</div>
+
+	<!-- <div class="map-action-element-container">
+		<app-search-auto-complete (itemChanged)="iconIdChanged($event)"></app-search-auto-complete>
+		<app-algolia-search></app-algolia-search>
+		<app-button-filter [iconName]="'store'"></app-button-filter>
+			<app-button-filter [iconName]="'local_bar'"></app-button-filter>
+			<app-button-filter [iconName]="'attach_money'"></app-button-filter>
+			<app-button-filter [iconName]="'access_time'"></app-button-filter>
+	</div> -->
 </div>
