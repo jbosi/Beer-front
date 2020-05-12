@@ -34,9 +34,7 @@ const MATERIAL_MODULES = [
 	MatTableModule,
 	MatPaginatorModule,
 	MatSortModule,
-
-	
-]
+];
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -76,7 +74,7 @@ const MATERIAL_MODULES = [
 	entryComponents: [BarPropertiesModalComponent, MapPopupComponent],
 	bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 	constructor(private injector: Injector) {
 		const PopupElement = createCustomElement(MapPopupComponent, {injector});
 		customElements.define('popup-element', PopupElement);

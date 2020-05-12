@@ -5,7 +5,7 @@ import { PageNotFoundComponent, MapPageComponent, HomeComponent, BarAdminCompone
 
 const routes: Routes = [
 	{
-		path: '', component: HomeComponent,	
+		path: '', component: HomeComponent,
 		pathMatch: 'full',
 	},
 	{
@@ -13,22 +13,21 @@ const routes: Routes = [
 		component: NavBarComponent,
 		children: [
 			{ path: 'map', component: MapPageComponent },
-			{ 
-				path: 'dashboard', 
+			{
+				path: 'dashboard',
 				component: DashboardComponent,
 				children: [
-					{ path: '',	component: BarAdminComponent},
+					{ path: '', component: BarAdminComponent},
 					{ path: 'bar', component: BarAdminComponent },
 					{ path: 'biere', component: BeerAdminComponent }
 				]
 			},
-	]
-},
-
-{ path: '**', component: PageNotFoundComponent }, 
+		]
+	},
+	{ path: '**', component: PageNotFoundComponent },
 ];
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule]
 })
-export class AppRoutingModule { } 
+export class AppRoutingModule { }

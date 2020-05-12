@@ -1,4 +1,4 @@
-import { beerInfo } from '../../models/bar-properties.model';
+import { beerInfo } from '../../models';
 import { BeerPropertiesService } from '../../services/beer-properties.service';
 import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormGroup, FormControl, NG_VALIDATORS } from '@angular/forms';

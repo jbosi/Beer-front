@@ -1,4 +1,4 @@
-import { barProperties, beerInfo } from './../models/bar-properties.model';
+import { beerInfo } from './../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -7,14 +7,13 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class BeerPropertiesService {
-	
+
 	constructor(
 		private http: HttpClient,
 	) { }
 
-	getBeers() : Observable<[]> {
-		
-		return this.http.get<[]>('https://aleforall.herokuapp.com/beers');
+	getBeers(): Observable<beerInfo[]> {
+		return this.http.get<beerInfo[]>('https://aleforall.herokuapp.com/beers');
 	}
 
 	addBeer(payload: any): Observable<any> {
@@ -29,4 +28,3 @@ export class BeerPropertiesService {
 		);
 	}
 }
-	
