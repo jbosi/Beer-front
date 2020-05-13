@@ -1,0 +1,26 @@
+.nav-items {
+	margin: auto;
+	span {
+		padding-right: 1rem;
+		font-weight: 100;
+		font-size: medium;
+	}
+}
+
+.nav-bar {
+	z-index: 1;
+	position: relative;
+	background-color: transparent;
+	height: auto;
+}
+
+a {
+	text-decoration: none;
+	&:visited {
+		color: inherit;
+	}
+
+	&:hover {
+		color: #d6cece;
+	}
+}

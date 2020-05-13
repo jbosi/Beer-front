@@ -1,5 +1,4 @@
-export * from './add-beer-form';
-export * from './add-beer-page';
+export * from './beer-form';
 export * from './algolia-search';
 export * from './button-filter';
 export * from './map-page';
@@ -9,3 +8,4 @@ export * from './nav-bar';
 export * from './page-not-found';
 export * from './search-auto-complete';
 export * from './home';
+export * from './dashboard';

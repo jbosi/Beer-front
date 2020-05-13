@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, AddBeerPageComponent, MapPageComponent, HomeComponent, NavBarComponent } from '../components';
+import { PageNotFoundComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, DashboardComponent ,NavBarComponent} from '../components';
+
 
 const routes: Routes = [
 	{
-		path: '', component: HomeComponent,	
+		path: '', component: HomeComponent,
 		pathMatch: 'full',
 	},
 	{
@@ -12,13 +13,21 @@ const routes: Routes = [
 		component: NavBarComponent,
 		children: [
 			{ path: 'map', component: MapPageComponent },
-			{ path: 'add-beer', component: AddBeerPageComponent },
+			{
+				path: 'dashboard',
+				component: DashboardComponent,
+				children: [
+					{ path: '', component: BarAdminComponent},
+					{ path: 'bar', component: BarAdminComponent },
+					{ path: 'biere', component: BeerAdminComponent }
+				]
+			},
 		]
 	},
-	{ path: '**', component: PageNotFoundComponent }, 
+	{ path: '**', component: PageNotFoundComponent },
 ];
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule]
 })
-export class AppRoutingModule { } 
+export class AppRoutingModule { }

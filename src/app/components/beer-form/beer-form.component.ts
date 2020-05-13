@@ -1,30 +1,30 @@
-import { beerInfo } from './../../models/bar-properties.model';
-import { BeerPropertiesService } from './../../services/beer-properties.service';
+import { beerInfo } from '../../models';
+import { BeerPropertiesService } from '../../services/beer-properties.service';
 import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormGroup, FormControl, NG_VALIDATORS } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 
 @Component({
-	selector: 'app-add-beer-form',
-	templateUrl: './add-beer-form.component.html',
-	styleUrls: ['./add-beer-form.component.scss'],
+	selector: 'app-beer-form',
+	templateUrl: './beer-form.component.html',
+	styleUrls: ['./beer-form.component.scss'],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => AddBeerFormComponent),
+			useExisting: forwardRef(() => BeerFormComponent),
 			multi: true
 		},
 		{
 			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => AddBeerFormComponent),
+			useExisting: forwardRef(() => BeerFormComponent),
 			multi: true,
 		}
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AddBeerFormComponent implements ControlValueAccessor, OnDestroy {
+export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 	public options: string[] = ['blonde', 'brune', 'noire', 'ambree', 'rouge', 'fruitee'];
 	public form: FormGroup;
 	private subscriptions: Subscription[] = [];

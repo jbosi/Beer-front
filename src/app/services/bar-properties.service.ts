@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -7,47 +8,46 @@ import { barProperties } from '../models/';
 
 @Injectable()
 export class BarPropertiesService {
-	
-	constructor(
-		public http: HttpClient
-	) {	}
+
+	constructor(public http: HttpClient) {
+
+		}
 
 	getMarkers(): Observable<barProperties[]> {
 		return this.http.get('https://aleforall.herokuapp.com/bars').pipe(
-			map((response: any) => {
-				return response.map( (bar: any) => {
+		map((response: any) => {
+			return response.map( (bar: any) => {
 
-					return {
-							coordinates: [bar.location.latitude, bar.location.longitude],
-							id:  2,
-							name: bar.name,
-							address: bar.address,
-							minPrice: bar.minPrice || 0,
-							beers: [
+				return {
+					coordinates: [bar.location.latitude, bar.location.longitude],
+					id:  2,
+					name: bar.name,
+					address: bar.address,
+					minPrice: bar.minPrice || 0,
+					beers: [
+						{
+							id: 6,
+							pricing: [
 								{
-									id: 6,
-									pricing: [
-										{
-											quantity: 50,
-											price: 5,
-										}
-									],
-									name: 'straffe hendrik quadruple',
-									image: '../../icons/beers/beer-brown.png',
-									degré: 12,
-									type: 'brown',
+									quantity: 50,
+									price: 5,
 								}
 							],
+							name: 'straffe hendrik quadruple',
+							image: '../../icons/beers/beer-brown.png',
+							degré: 12,
+							type: 'brown',
 						}
-					}
-				)
-			})
-		)
-
+					],
+				};
+			}
+			);
+		})
+		);
 		// Mock Data
 		// return of([{
 		// 	"type": "Feature",
-      	// 	"geometry": {
+		// 	"geometry": {
 		// 		"type": "Point",
 		// 		"coordinates": [
 		// 			2.354605,
@@ -133,5 +133,9 @@ export class BarPropertiesService {
 		// 		],
 		// 	}
 		// }])
+	}
+
+	getBars(): Observable<barProperties[]> {
+		return this.http.get<barProperties[]>('https://aleforall.herokuapp.com/bars');
 	}
 }
