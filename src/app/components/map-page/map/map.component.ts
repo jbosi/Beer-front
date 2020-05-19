@@ -1,13 +1,14 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { BarPropertiesService } from '../../../services/';
-import { barProperties } from '../../../models/';
-import { BarPropertiesModalComponent } from '../../modals/';
 import { NgElement, WithProperties } from '@angular/elements';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BarPropertiesService } from '../../../services/';
+import { IBarProperties } from '../../../models/';
+import { MapPopupComponent } from '../../map-popup';
+
 
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import { MapPopupComponent } from '../../map-popup';
 
 declare var require: any;
 const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
@@ -33,9 +34,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	@Input() iconChangeId: number;
 
 	constructor(
-		private markerService: BarPropertiesService,
+		private barPropertiesService: BarPropertiesService,
 		public dialog: MatDialog,
 		private cd: ChangeDetectorRef,
+		private router: Router,
+		private activatedRoute: ActivatedRoute
 	) { }
 
 	ngAfterViewInit(): void {
@@ -100,13 +103,14 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			popupAnchor: [1, -45],
 		});
 				
-		this.markerService.getMarkers().subscribe((bars: barProperties[]) => {
-			bars.map((bar: barProperties) => {
-				const marker: any = L.marker(bar.coordinates, {
+		this.barPropertiesService.getBarsProperties().subscribe((bars: IBarProperties[]) => {
+			bars.map((bar: IBarProperties) => {
+				const cheapestBeer = bar.cheapestBeer ? bar.cheapestBeer.toString() : 'NA';
+				const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
 					icon: icon,
 				})
-				// .on('click', (e) => this.onMarkerClick(e, this));
-				.bindTooltip(bar.minPrice.toString(), {
+				// .on('click', (e) => this.router.navigate([bar.id], {relativeTo: this.activatedRoute}))
+				.bindTooltip(cheapestBeer, {
 					permanent: true,
 					direction: 'center',
 					offset: [0,27],
@@ -117,8 +121,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 					const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
 					// Listen to the close event
 					popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
-					popupEl.barData = bar
-					// Add to the DOM
+
+					popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
+					
 					document.body.appendChild(popupEl);
 					return popupEl;
 				})
@@ -134,16 +139,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		this.map.addLayer(this.cluster)
 	}
 			
-	private onMarkerClick(e: any, that: any) {
-		that.iconChangeId = e.target.bar.id;
-		that.dialog.open(BarPropertiesModalComponent, {
-			width: '400px',
-			position: { bottom: 1 + 'rem' },
-			data: e.target.bar,
-			backdropClass: 'dialog-remove-overlay'
-		});
-	}
-
 	private onLocationFound(e: any) {
 		var radius = e.accuracy / 2;
 		L.circle(e.latlng, radius).addTo(this.map);

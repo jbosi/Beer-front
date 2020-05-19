@@ -1,42 +1,74 @@
-import { LatLngExpression } from 'leaflet';
-
-export interface barProperties {
-	id: number,
-	name: string,
-	address: string,
-	coordinates: LatLngExpression,
-	minPrice?: number,
-	// hhTime: weekDaysOpeningHours,
-	// openingTime: weekDaysOpeningHours,
-	beers: beerInfo[]
+export interface IBarProperties {
+	id: string;
+	name: string;
+	address: string;
+	location: {
+		latitude: number;
+		longitude: number;
+	};
+	tags: string[];
+	opened: boolean;
+	inHappy: boolean;
+	cheapestBeer?: number;
 }
 
-export interface weekDaysOpeningHours {
-	monday: DayOpeningHours,
-	tuesday: DayOpeningHours,
-	wednesday: DayOpeningHours,
-	thursday: DayOpeningHours,
-	friday: DayOpeningHours,
-	saturday: DayOpeningHours,
-	sunday: DayOpeningHours
+export interface IWeekDaysOpeningHours {
+	monday: IDayOpeningHours;
+	tuesday: IDayOpeningHours;
+	wednesday: IDayOpeningHours;
+	thursday: IDayOpeningHours;
+	friday: IDayOpeningHours;
+	saturday: IDayOpeningHours;
+	sunday: IDayOpeningHours;
 }
 
-export interface DayOpeningHours {
-	start: string,
-	end: string,
-	isOpen: boolean
+export interface IDayOpeningHours {
+	opening: string;
+	closing: string;
 }
 
-export interface beerInfo {
-	id: number,
+export interface IBeerInfo {
+	name: string;
+	id: number;
 	pricing: [
 		{
-			quantity: number,
-			price: number,
+			quantity: number;
+			priceBeer: number;
+			volume: number;
 		}
-	]
-	name: string,
-	image: string,
-	degré: number,
-	type: string,
+	];
+	type: string;
+	volume: number;
+	picture: string;
+	brewery: string;
+	alcohol: number;
+	description: string;
+	ibu: number;
+	descriptionObject: {
+		eye: string;
+		mouth: string;
+		nose: string;
+	};
+}
+
+export interface IDetailedBarProperties {
+	id: string;
+	address: string;
+	name: string;
+	location: {
+		latitude: number;
+		longitude: number;
+	};
+	tags: string[];
+	type: string;
+	characteristics: Object;
+	happyHourTime: IDayOpeningHours;
+	openingTime: IDayOpeningHours;
+	privateaserBookingUrl: string;
+	privateaserId: string;
+	beers: IBeerInfo[];
+	keywords: string;
+	opened: boolean;
+	inHappy: boolean;
+	cheapestBeer: number;
 }

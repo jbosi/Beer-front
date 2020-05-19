@@ -1,8 +1,8 @@
-import { beerInfo } from '../../models';
-import { BeerPropertiesService } from '../../services/beer-properties.service';
 import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormGroup, FormControl, NG_VALIDATORS } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { BeerPropertiesService } from './../../services/beer-properties.service';
+import { IBeerInfo } from './../../models';
 
 
 @Component({
@@ -31,11 +31,11 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 	onChange: any = () => {};
 	onTouched: any = () => {};
 	
-	get value(): beerInfo {
+	get value(): IBeerInfo {
 		return this.form.value;
 	}
 	
-	set value(value: beerInfo) {
+	set value(value: IBeerInfo) {
 		this.form.setValue(value);
 		this.onChange(value);
 		this.onTouched();

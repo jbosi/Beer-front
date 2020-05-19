@@ -16,6 +16,12 @@
 	justify-content: space-between;
 }
 
+.map-left-element-container {
+	position: absolute;
+	top: 100px;
+	left: 10px;
+}
+
 .map-filter {
 	color: _theme("primary");
 }

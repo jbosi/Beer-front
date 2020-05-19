@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, 
-	MatFormFieldModule,MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+
+import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
@@ -34,7 +34,9 @@ const MATERIAL_MODULES = [
 	MatTableModule,
 	MatPaginatorModule,
 	MatSortModule,
+	MatTableModule,
 ];
+
 @NgModule({
 	declarations: [
 		AppComponent,

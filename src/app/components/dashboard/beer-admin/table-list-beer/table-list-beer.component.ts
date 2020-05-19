@@ -1,6 +1,6 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import { BeerPropertiesService } from '../../../../services';
-import { beerInfo } from '../../../../models';
+import { IBeerInfo } from '../../../../models';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
@@ -10,7 +10,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 })
 export class TableListBeerComponent implements AfterViewInit {
 	public displayedColumns: string[] = ['name'];
-	public beers: MatTableDataSource<beerInfo>;
+	public beers: MatTableDataSource<IBeerInfo>;
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
 	public isLoadingResults = false;
