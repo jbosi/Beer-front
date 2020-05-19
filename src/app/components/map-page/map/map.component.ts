@@ -4,8 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BarPropertiesService } from '../../../services/';
 import { IBarProperties } from '../../../models/';
-import { MapPopupComponent } from '../../map-popup';
-
+import { MapPopupComponent } from '../map-popup';
 
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
@@ -13,7 +12,6 @@ import 'leaflet.markercluster';
 declare var require: any;
 const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
 const blueMarker: string = require('./../../../../icons/markers/marker-blue.svg');
-// const blueMarkerPng: string = require('./../../../../icons/markers/marker-blue.png');
 const customMarker: string = require('./../../../../icons/markers/custom-marker.svg');
 
 @Component({
