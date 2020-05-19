@@ -11,7 +11,7 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
-import { HomeComponent, MapComponent, AlgoliaSearchComponent, ButtonFilterComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, BarPropertiesModalComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent} from './components';
+import { HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, BarPropertiesModalComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent} from './components';
 import { BarPropertiesService } from './services';
 
 // Keep these dependencies ?
@@ -41,7 +41,6 @@ const MATERIAL_MODULES = [
 	declarations: [
 		AppComponent,
 		MapComponent,
-		ButtonFilterComponent,
 		AutoCompleteComponent,
 		MapPageComponent,
 		BarPropertiesModalComponent,
@@ -49,7 +48,6 @@ const MATERIAL_MODULES = [
 		BeerFormComponent,
 		PageNotFoundComponent,
 		MapPopupComponent,
-		AlgoliaSearchComponent,
 		HomeComponent,
 		DashboardComponent,
 		BarAdminComponent,

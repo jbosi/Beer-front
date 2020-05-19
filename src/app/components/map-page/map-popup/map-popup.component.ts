@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 declare var require: any;
-const blondBeerIcon = require('./../../../icons/beers/beer-blond.png')
+const blondBeerIcon = require('./../../../../icons/beers/beer-blond.png')
 
 @Component({
 	selector: 'app-map-popup',

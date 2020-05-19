@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, DashboardComponent ,NavBarComponent} from '../components';
-
+import { MapResolver } from './resolvers';
 
 const routes: Routes = [
 	{
@@ -25,6 +25,7 @@ const routes: Routes = [
 			{
 				path: 'map',
 				component: MapPageComponent,
+				resolve: { mapData: MapResolver }
 			},
 		]
 	},
