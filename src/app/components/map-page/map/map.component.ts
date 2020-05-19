@@ -100,9 +100,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			iconAnchor: [13, 46],
 			popupAnchor: [1, -45],
 		});
-				
-		this.barPropertiesService.getBarsProperties().subscribe((bars: IBarProperties[]) => {
-			bars.map((bar: IBarProperties) => {
+		this.activatedRoute.data.subscribe((response: {mapData: IBarProperties[]}) => {
+			response.mapData.map((bar: IBarProperties) => {
 				const cheapestBeer = bar.cheapestBeer ? bar.cheapestBeer.toString() : 'NA';
 				const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
 					icon: icon,
