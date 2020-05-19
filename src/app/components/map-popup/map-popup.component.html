@@ -1,7 +1,50 @@
-<mat-card class="mat-elevation-z">
-	<img mat-card-image src="https://www.materiel-horeca.com/guide/wp-content/uploads/2019/03/5b1a672d151be0b94d705bde_5b18f53d16e13e49c2253517_obica-mozzarella-bar-takanawa-1024x642.jpg" alt="Photo bar">
+<mat-card >
+	<mat-card-title>
+		{{ barName }}
+	</mat-card-title>
 	<mat-card-content>
-		<h3>{{ barData.name }}</h3>
-		<p>{{ barData.address }}</p>
+		<div *ngIf="dataSource?.length; else empty" class="barDetails-container mat-elevation-z8">
+			<table mat-table [dataSource]="dataSource">
+				
+				<!-- Name Column -->
+				<ng-container matColumnDef="name">
+					<th mat-header-cell *matHeaderCellDef> BIERES </th>
+					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.name}} </td>
+				</ng-container>
+				
+				<!-- Price Column -->
+				<ng-container matColumnDef="price">
+					<th mat-header-cell *matHeaderCellDef> € </th>
+					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.price}} </td>
+				</ng-container>
+				
+				
+				<!-- priceHH Column -->
+				<ng-container matColumnDef="priceHH">
+					<th mat-header-cell *matHeaderCellDef> € (HH) </th>
+					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.priceHH}} </td>
+				</ng-container>
+				
+				<!-- priceHH Column -->
+				<ng-container matColumnDef="icon">
+					<th mat-header-cell *matHeaderCellDef>  </th>
+					<td class="barDetails-cell" mat-cell *matCellDef="let element"><img class="barDetails-beer-icon" src="{{element.icon}}"></td>
+				</ng-container>
+				
+				<!-- quantity Column -->
+				<ng-container matColumnDef="quantity">
+					<th mat-header-cell *matHeaderCellDef> Qte </th>
+					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+				</ng-container>
+				
+				<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+		</div>
+		<ng-template #empty>
+			<p class="mapPopup-empty">
+				Les bières de ce bar n'ont pas été renseignées !
+			</p>
+		</ng-template>
 	</mat-card-content>
 </mat-card>

@@ -1,7 +1,7 @@
 import { BarPropertiesService } from '../../../services';
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { barProperties } from '../../../models';
+import { IBarProperties } from '../../../models';
 
 @Component({
 	selector: 'app-bar-admin',
@@ -10,7 +10,7 @@ import { barProperties } from '../../../models';
 })
 export class BarAdminComponent implements AfterViewInit {
 	public displayedColumns: string[] = ['name'];
-	public bars: MatTableDataSource<barProperties>;
+	public bars: MatTableDataSource<IBarProperties>;
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
 	public isLoadingResults = false;
@@ -21,7 +21,7 @@ export class BarAdminComponent implements AfterViewInit {
 
 	ngAfterViewInit() {
 		this.isLoadingResults = true;
-		this.barPropertiesService.getBars().subscribe(data => {
+		this.barPropertiesService.getBarsProperties().subscribe(data => {
 			this.bars = new MatTableDataSource(data);
 			this.bars.paginator = this.paginator;
 			this.bars.sort = this.sort;

@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-import { barProperties } from '../../models/bar-properties.model';
+import { IBarProperties } from '../../models/bar-properties.model';
 import { BarPropertiesService } from '../../services/bar-properties.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
@@ -19,16 +19,16 @@ export class AutoCompleteComponent implements AutocompleteLibModule, OnInit {
 	@Output() itemChanged = new EventEmitter<number>();
 	
 	public keyword = 'name';
-	public data: Observable<barProperties[]>;
+	public data: Observable<IBarProperties[]>;
 
 	ngOnInit() {
-		this.data = this.barPropertiesService.getMarkers().pipe(
+		this.data = this.barPropertiesService.getBarsProperties().pipe(
 			map(bars => bars)
 		);
 	}
 	
-	selectEvent(item : barProperties) {
-		this.itemChanged.emit(item.id);
+	selectEvent(item : IBarProperties) {
+		// this.itemChanged.emit(item.id);
 	}
 	
 	onChangeSearch(val: string) {
