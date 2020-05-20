@@ -11,6 +11,8 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, BarPropertiesModalComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent} from './components';
 import { BarPropertiesService } from './services';
 
@@ -65,7 +67,8 @@ const MATERIAL_MODULES = [
 		DynamicFormsMaterialUIModule,
 		AppRoutingModule,
 		NgAisModule.forRoot(),
-		FlexLayoutModule
+		FlexLayoutModule,
+		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 	],
 	providers: [
 		BarPropertiesService,
