@@ -38,6 +38,7 @@ const MATERIAL_MODULES = [
 	MatPaginatorModule,
 	MatSortModule,
 	MatTableModule,
+	MatProgressSpinnerModule,
 ];
 
 @NgModule({
