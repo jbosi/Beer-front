@@ -9,7 +9,12 @@
 			
 			<p>Une application mobile simple pour trouver les bars à votre goût</p>
 			
-			<button color="primary" routerLink="map" mat-stroked-button>Démarrer</button>
+			<button (click)="loading=true" [disabled]="loading" color="primary" routerLink="map" mat-stroked-button>
+				<ng-container *ngIf="!loading; else spinner">Démarrer</ng-container>
+				<ng-template #spinner>
+					<mat-spinner diameter="35" class="home-spinner"></mat-spinner>
+				</ng-template>
+			</button>
 		</div>
 	</div>
 	<div fxFlex="50" fxFlex.xs="10" fxFlexOrder.xs="1">
