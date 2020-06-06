@@ -45,7 +45,7 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 		return this.form.controls.name;
 	}
 	
-	constructor( private beerPropertiesService: BeerPropertiesService, private formBuilder: FormBuilder) {
+	constructor(private beerPropertiesService: BeerPropertiesService, private formBuilder: FormBuilder) {
 		this.form = this.formBuilder.group({
 			name: [],
 			brewery: [],
@@ -60,7 +60,6 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 			})
 		);
 	}
-		
 		
 	ngOnDestroy() {
 		this.subscriptions.forEach(s => s.unsubscribe());

@@ -1,5 +1,5 @@
 <div class="map-container" >
-	<app-map [iconChangeId]="iconChangeId"></app-map>
+	<app-map [data]="barProperties"></app-map>
 </div>
 
 <div class="content" 
@@ -17,6 +17,7 @@
 	</div>
 
 	<div *ngIf="!isMobile" class="map-left-element-container">
-		<app-map-filters></app-map-filters>
+		{{ barProperties.length }}
+		<app-map-filters [(data)]="barProperties"></app-map-filters>
 	</div>
 </div>

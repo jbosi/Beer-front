@@ -1,0 +1,13 @@
+<mat-card>
+	<mat-card-title>
+		<h3>Filtrer Les bars</h3>
+	</mat-card-title>
+	<mat-card-content>
+		<div [formGroup]="form" class="filters-form">
+			<mat-checkbox matInput formControlName="isOpened">Ouvert</mat-checkbox>
+			<mat-checkbox matInput formControlName="containsBeer">A des bières</mat-checkbox>
+			<mat-checkbox matInput formControlName="isHappyHour">Est en HH</mat-checkbox>
+		</div>
+
+	</mat-card-content>
+</mat-card>

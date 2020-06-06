@@ -1,1 +1,0 @@
-export * from './bar-properties-modal.component';

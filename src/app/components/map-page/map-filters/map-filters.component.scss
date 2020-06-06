@@ -10,3 +10,16 @@ h3 {
 	margin-left: 1rem;
 	font-weight: normal;
 }
+
+.full-width {
+	width: 100%;
+}
+
+.half-width {
+	width: 45%;
+}
+
+.filters-form {
+	display: flex;
+	justify-content: space-around;
+}
