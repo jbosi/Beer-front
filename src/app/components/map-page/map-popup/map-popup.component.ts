@@ -16,29 +16,23 @@ export class MapPopupComponent implements OnInit {
 	public dataSource: IBarBeerDetail[] = [];
 	public barName: string;
 	public displayedColumns: string[] = ['name', 'price', 'priceHH', 'icon', 'quantity'];
+	public isLoading = true;
 	
 	ngOnInit() {
 		this.barData$.subscribe(bar => {
 			this.barName = bar.name;
 			bar.beers.map(beer => {
-				// TODO: wainting for the back to provide data in the right format
-				// beer.pricing.map(item => {
-				// 	this.dataSource.push({
-				// 		name: beer.name,
-				// 		price: item.priceBeer,
-				// 		priceHH: item.priceHappy,
-				// 		icon: blondBeerIcon,
-				// 		quantity: item.volume + ' cl'
-				// 	});
-				// });
-				this.dataSource.push({
-					name: beer.name,
-					price: beer.priceBeer,
-					priceHH: beer.priceHappy,
-					icon: blondBeerIcon,
-					quantity: beer.volume + ' cl'
+				beer.pricing.map(item => {
+					this.dataSource.push({
+						name: beer.name,
+						price: item.priceBeer,
+						priceHH: item.priceHappy,
+						icon: blondBeerIcon,
+						quantity: item.volume + ' cl'
+					});
 				});
 			});
+			this.isLoading = false;
 		})
 	}
 	

@@ -1,50 +1,55 @@
 <mat-card >
-	<mat-card-title>
+	<mat-card-title class="mod-textCenter">
 		{{ barName }}
 	</mat-card-title>
 	<mat-card-content>
-		<div *ngIf="dataSource?.length; else empty" class="barDetails-container mat-elevation-z8">
-			<table mat-table [dataSource]="dataSource">
-				
-				<!-- Name Column -->
-				<ng-container matColumnDef="name">
-					<th mat-header-cell *matHeaderCellDef> BIERES </th>
-					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.name}} </td>
-				</ng-container>
-				
-				<!-- Price Column -->
-				<ng-container matColumnDef="price">
-					<th mat-header-cell *matHeaderCellDef> € </th>
-					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.price}} </td>
-				</ng-container>
-				
-				
-				<!-- priceHH Column -->
-				<ng-container matColumnDef="priceHH">
-					<th mat-header-cell *matHeaderCellDef> € (HH) </th>
-					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.priceHH}} </td>
-				</ng-container>
-				
-				<!-- priceHH Column -->
-				<ng-container matColumnDef="icon">
-					<th mat-header-cell *matHeaderCellDef>  </th>
-					<td class="barDetails-cell" mat-cell *matCellDef="let element"><img class="barDetails-beer-icon" src="{{element.icon}}"></td>
-				</ng-container>
-				
-				<!-- quantity Column -->
-				<ng-container matColumnDef="quantity">
-					<th mat-header-cell *matHeaderCellDef> Qte </th>
-					<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-				</ng-container>
-				
-				<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-			</table>
+		<div *ngIf="!isLoading ; else spinner">
+			<div *ngIf="dataSource?.length; else empty" class="barDetails-container mat-elevation-z8">
+				<table mat-table [dataSource]="dataSource">
+					
+					<!-- Name Column -->
+					<ng-container matColumnDef="name">
+						<th mat-header-cell *matHeaderCellDef> BIERES </th>
+						<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.name}} </td>
+					</ng-container>
+					
+					<!-- Price Column -->
+					<ng-container matColumnDef="price">
+						<th mat-header-cell *matHeaderCellDef> € </th>
+						<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.price}} </td>
+					</ng-container>
+					
+					
+					<!-- priceHH Column -->
+					<ng-container matColumnDef="priceHH">
+						<th mat-header-cell *matHeaderCellDef> € (HH) </th>
+						<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.priceHH}} </td>
+					</ng-container>
+					
+					<!-- priceHH Column -->
+					<ng-container matColumnDef="icon">
+						<th mat-header-cell *matHeaderCellDef>  </th>
+						<td class="barDetails-cell" mat-cell *matCellDef="let element"><img class="barDetails-beer-icon" src="{{element.icon}}"></td>
+					</ng-container>
+					
+					<!-- quantity Column -->
+					<ng-container matColumnDef="quantity">
+						<th mat-header-cell *matHeaderCellDef> Qte </th>
+						<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+					</ng-container>
+					
+					<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+				</table>
+			</div>
+			<ng-template #empty>
+				<p class="mapPopup-empty">
+					Les bières de ce bar n'ont pas été renseignées !
+				</p>
+			</ng-template>
 		</div>
-		<ng-template #empty>
-			<p class="mapPopup-empty">
-				Les bières de ce bar n'ont pas été renseignées !
-			</p>
-		</ng-template>
+		<ng-template #spinner>
+			<mat-spinner class="centered-spinner"></mat-spinner>
+		</ng-template> 
 	</mat-card-content>
 </mat-card>
