@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./map-page.component.scss']
 })
 export class MapPageComponent implements OnInit {
-	public iconChangeId: number
-	constructor() { }
+	private isMobile: boolean;
 	
 	ngOnInit() {
+		window.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
 	}
-	
-	iconIdChanged(id: number) {
-		this.iconChangeId = id;
+
+	public getIsMobile(): boolean {
+		return this.isMobile;
 	}
 }

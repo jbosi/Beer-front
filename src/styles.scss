@@ -36,8 +36,19 @@ app-root {
 	right: 0;
 }
 
+mat-card-title {
+	padding: 0 !important;
+}
 
 mat-card-title.mat-card-title {
-	text-align: center;
-	padding: 0 !important;
+	padding-left: 24px;
+	color: #676767;
+	font-size: larger;
+	text-align: left;
+}
+
+// Mods
+
+.mod-textCenter {
+	text-align: center !important;
 }

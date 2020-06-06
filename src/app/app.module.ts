@@ -21,6 +21,7 @@ import { BarPropertiesService } from './services';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
 import { NgAisModule } from 'angular-instantsearch';
+import { MapFiltersComponent } from './components/map-filters/map-filters.component';
 
 
 const MATERIAL_MODULES = [
@@ -57,7 +58,8 @@ const MATERIAL_MODULES = [
 		BarAdminComponent,
 		BeerAdminComponent,
 		AddBeerComponent,
-		TableListBeerComponent
+		TableListBeerComponent,
+		MapFiltersComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
