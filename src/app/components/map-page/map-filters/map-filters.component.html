@@ -1,6 +1,7 @@
 <mat-card>
 	<mat-card-title>
-		<h3>Filtrer Les bars</h3>
+		<h3 class="mod-marginBottomReset">Filtrer Les bars</h3>
+		<span class="mod-textSmall mapFilters-small-text">{{ data.length }} bars correspondent à votre recherche</span>
 	</mat-card-title>
 	<mat-card-content>
 		<div [formGroup]="form" class="filters-form">
@@ -8,6 +9,5 @@
 			<mat-checkbox matInput formControlName="containsBeer">A des bières</mat-checkbox>
 			<mat-checkbox matInput formControlName="isHappyHour">Est en HH</mat-checkbox>
 		</div>
-
 	</mat-card-content>
 </mat-card>

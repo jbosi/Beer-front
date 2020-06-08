@@ -21,6 +21,8 @@ import { BarPropertiesService } from './services';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { NgAisModule } from 'angular-instantsearch';
+import { BeerListComponent } from './components/beer-list/beer-list.component';
+import { BeerListCardComponent } from './components/beer-list/beer-list-card/beer-list-card.component';
 
 
 const MATERIAL_MODULES = [
@@ -58,7 +60,9 @@ const MATERIAL_MODULES = [
 		BeerAdminComponent,
 		AddBeerComponent,
 		TableListBeerComponent,
-		MapFiltersComponent
+		MapFiltersComponent,
+		BeerListComponent,
+		BeerListCardComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,

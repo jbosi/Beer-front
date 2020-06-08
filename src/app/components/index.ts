@@ -5,3 +5,4 @@ export * from './page-not-found';
 export * from './search-auto-complete';
 export * from './home';
 export * from './dashboard';
+export * from './beer-list';
