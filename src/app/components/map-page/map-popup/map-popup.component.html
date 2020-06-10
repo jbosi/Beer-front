@@ -29,7 +29,9 @@
 					<!-- priceHH Column -->
 					<ng-container matColumnDef="icon">
 						<th mat-header-cell *matHeaderCellDef>  </th>
-						<td class="barDetails-cell" mat-cell *matCellDef="let element"><img class="barDetails-beer-icon" src="{{element.icon}}"></td>
+						<td class="barDetails-cell" mat-cell *matCellDef="let element">
+							<app-beer-rounded-icon [backgroundColor]="'#DA686F'" [iconColor]="'#FFFFFF'"></app-beer-rounded-icon>
+						</td>
 					</ng-container>
 					
 					<!-- quantity Column -->

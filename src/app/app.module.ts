@@ -23,6 +23,7 @@ import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { NgAisModule } from 'angular-instantsearch';
 import { BeerListComponent } from './components/beer-list/beer-list.component';
 import { BeerListCardComponent } from './components/beer-list/beer-list-card/beer-list-card.component';
+import { BeerRoundedIconComponent } from './components/beer-rounded-icon/beer-rounded-icon.component';
 
 
 const MATERIAL_MODULES = [
@@ -62,7 +63,8 @@ const MATERIAL_MODULES = [
 		TableListBeerComponent,
 		MapFiltersComponent,
 		BeerListComponent,
-		BeerListCardComponent
+		BeerListCardComponent,
+		BeerRoundedIconComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
