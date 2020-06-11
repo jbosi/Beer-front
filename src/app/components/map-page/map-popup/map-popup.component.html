@@ -3,6 +3,8 @@
 		{{ barName }}
 	</mat-card-title>
 	<mat-card-content>
+		<p class="mod-textSmall mod-marginBottomReset">{{ barAddress }}</p>
+		<p class="mod-textSmall mod-marginTopReset mod-marginBottomReset">Happy hours : {{ happyHourStart }} - {{ happyHourEnd }}</p>
 		<div *ngIf="!isLoading ; else spinner">
 			<div *ngIf="dataSource?.length; else empty" class="barDetails-container mat-elevation-z8">
 				<table mat-table [dataSource]="dataSource">
@@ -28,9 +30,9 @@
 					
 					<!-- priceHH Column -->
 					<ng-container matColumnDef="icon">
-						<th mat-header-cell *matHeaderCellDef>  </th>
+						<th mat-header-cell *matHeaderCellDef> </th>
 						<td class="barDetails-cell" mat-cell *matCellDef="let element">
-							<app-beer-rounded-icon [backgroundColor]="'#DA686F'" [iconColor]="'#FFFFFF'"></app-beer-rounded-icon>
+							<app-beer-rounded-icon [backgroundColor]="element.icon" [iconColor]="'#FFFFFF'"></app-beer-rounded-icon>
 						</td>
 					</ng-container>
 					

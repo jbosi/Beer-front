@@ -58,8 +58,12 @@ mat-card-title.mat-card-title {
 	color: #D9D9D9;
 }
 
+.mod-marginTopReset {
+	margin-top: 0 !important;
+}
+
 .mod-marginBottomReset {
-	margin-bottom: 0;
+	margin-bottom: 0 !important;
 }
 
 .mod-paddingReset {
