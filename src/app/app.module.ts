@@ -64,7 +64,8 @@ const MATERIAL_MODULES = [
 		MapFiltersComponent,
 		BeerListComponent,
 		BeerListCardComponent,
-		BeerRoundedIconComponent
+		BeerRoundedIconComponent,
+		MapFiltersComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
@@ -84,7 +85,7 @@ const MATERIAL_MODULES = [
 		BarPropertiesService,
 		BeerPropertiesService,
 	],
-	entryComponents: [MapPopupComponent],
+	entryComponents: [MapPopupComponent, MapFiltersComponent],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

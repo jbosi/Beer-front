@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBarProperties } from 'src/app/models';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MapFiltersComponent } from './map-filters';
 
 @Component({
 	selector: 'app-map-page',
@@ -10,20 +12,28 @@ import { IBarProperties } from 'src/app/models';
 export class MapPageComponent implements OnInit {
 	public isMobile: boolean;
 	public barProperties: IBarProperties[];
+	public dialogData: IBarProperties[];
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
+		private modal: MatDialog
 	) {}
 	
 	ngOnInit() {
 		window.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
-
+		
 		this.activatedRoute.data.subscribe((response: {mapData: IBarProperties[]}) => {
 			this.barProperties = response.mapData;
+			this.dialogData = this.barProperties;
 		});
+
 	}
 
 	public getIsMobile(): boolean {
 		return this.isMobile;
+	}
+
+	public openModal() {
+		this.modal.open(MapFiltersComponent, {data: this.dialogData});
 	}
 }

@@ -30,3 +30,9 @@
 	display: flex;
 	height: calc(100vh - 50px);
 }
+
+.mapPage-button {
+	position: absolute;
+	bottom: 10px;
+	left: calc(50% - 28px);
+}

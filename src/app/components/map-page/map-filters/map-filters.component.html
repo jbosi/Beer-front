@@ -1,7 +1,7 @@
 <mat-card>
 	<mat-card-title>
 		<h3 class="mod-marginBottomReset">Filtrer Les bars</h3>
-		<span class="mod-textSmall mapFilters-small-text">{{ data.length }} bars correspondent à votre recherche</span>
+		<p class="mod-textSmall mapFilters-small-text">{{ data.length }} bars correspondent à votre recherche</p>
 	</mat-card-title>
 	<mat-card-content>
 		<div [formGroup]="form" class="filters-form">
@@ -11,3 +11,7 @@
 		</div>
 	</mat-card-content>
 </mat-card>
+<div mat-dialog-actions *ngIf="modalMapFilter">
+	<button mat-button (click)="onCancel()">Annuler</button>
+	<button mat-button [mat-dialog-close]="data" cdkFocusInitial>Valider</button>
+</div>

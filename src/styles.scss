@@ -69,3 +69,21 @@ mat-card-title.mat-card-title {
 .mod-paddingReset {
 	padding: 0 !important;
 }
+
+.mat-dialog-container {
+	padding: 0;
+}
+
+.modalMapFilter {
+	width: inherit !important;
+	height: inherit !important;
+
+	.mat-card {
+		.mat-card-content {
+			.filters-form {
+				flex-direction: column;
+				margin-left: 1rem;
+			}
+		}
+	}
+}

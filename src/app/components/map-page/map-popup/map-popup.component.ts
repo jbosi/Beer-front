@@ -79,7 +79,7 @@ export class MapPopupComponent implements OnInit {
 			case 6: {
 				return 'saturday';
 			}
-			case 7: {
+			case 0: {
 				return 'sunday';
 			}
 		
