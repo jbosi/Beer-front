@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
 import { BarPropertiesService } from '../../../services/';
 import { IBarProperties } from '../../../models/';
 import { MapPopupComponent } from '../map-popup';
@@ -40,9 +39,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	ngAfterViewInit(): void {
 		this.initMap();
 
-		const tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+		const tiles = L.tileLayer('https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/{z}/{x}/{y}.png?access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP', {
 			maxZoom: 20,
-			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
 		});
 		tiles.addTo(this.map);
 

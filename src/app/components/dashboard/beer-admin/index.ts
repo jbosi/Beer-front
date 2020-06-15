@@ -1,3 +1,3 @@
-export * from './beer-admin.component';
-export * from './add-beer';
-export * from './table-list-beer';
+export * from "./add-beer";
+export * from "./beer-admin.component";
+export * from "./table-list-beer";

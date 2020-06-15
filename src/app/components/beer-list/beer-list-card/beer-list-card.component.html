@@ -1,0 +1,24 @@
+<mat-card class="mod-paddingReset">
+	<div class="beerListCard-container">
+		<div class="beerListCard-image" [style.background-color]="getBeerIconColor(beerInfo.type)">
+			<app-beer-icon></app-beer-icon>
+		</div>
+		<div class="beerListCard-content">
+			<mat-card-title>
+				<h4 class="mod-marginBottomReset">{{ beerInfo.name | uppercase }}</h4>
+			</mat-card-title>
+			<mat-card-content>
+				<div class="beerListCard-title-column">
+					<p>TYPE</p>
+					<p>DEGRE</p>
+					<p>BRASSERIE</p>
+				</div>
+				<div class="beerListCard-info-column">
+					<p>{{ beerInfo.type }}</p>
+					<p>{{ beerInfo.alcohol }}</p>
+					<p>{{ beerInfo.brewery }}</p>
+				</div>
+			</mat-card-content>
+		</div>
+	</div>
+</mat-card>

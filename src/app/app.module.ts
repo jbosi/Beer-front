@@ -14,14 +14,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent} from './components';
+import { BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, MapFiltersMobileComponent} from './components';
 import { BarPropertiesService } from './services';
 
 // Keep these dependencies ?
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { NgAisModule } from 'angular-instantsearch';
-
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -58,7 +57,11 @@ const MATERIAL_MODULES = [
 		BeerAdminComponent,
 		AddBeerComponent,
 		TableListBeerComponent,
-		MapFiltersComponent
+		MapFiltersComponent,
+		BeerListComponent,
+		BeerListCardComponent,
+		BeerIconComponent,
+		MapFiltersMobileComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
@@ -78,7 +81,7 @@ const MATERIAL_MODULES = [
 		BarPropertiesService,
 		BeerPropertiesService,
 	],
-	entryComponents: [MapPopupComponent],
+	entryComponents: [MapPopupComponent, MapFiltersMobileComponent],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

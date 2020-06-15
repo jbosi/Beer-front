@@ -1,0 +1,8 @@
+<div class="beerList-container">
+	<section class="beerListFilters-section">
+		<h2>Bières</h2>
+	</section>
+	<section  class="beerListCards-section">
+		<app-beer-list-card *ngFor="let beer of beers$ | async" [beerInfo]="beer"></app-beer-list-card>
+	</section>
+</div>

@@ -1,1 +1,1 @@
-export * from './bar-admin.component';
+export * from "./bar-admin.component";

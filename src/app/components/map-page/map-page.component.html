@@ -16,8 +16,12 @@
 	<div fxFlex="10">
 	</div>
 
-	<div *ngIf="!isMobile" class="map-left-element-container">
-		{{ barProperties.length }}
+	<div *ngIf="!isMobile; else mobile" class="map-left-element-container">
 		<app-map-filters [(data)]="barProperties"></app-map-filters>
 	</div>
+	<ng-template #mobile>
+		<button mat-fab (click)="openModal()" color="primary" class="mapPage-button">
+			<mat-icon>menu</mat-icon>
+		</button>
+	</ng-template>
 </div>

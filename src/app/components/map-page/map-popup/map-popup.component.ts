@@ -1,10 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBarProperties, IDetailedBarProperties, IBeerInfo } from 'src/app/models';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
-declare var require: any;
-const blondBeerIcon = require('./../../../../icons/beers/beer-blond.png')
+import { IDetailedBarProperties, IBarBeerDetail } from '../../../models';
+import { getCurrentDay, formatDateToHoursMinutes, BEER_ICON_COLORS } from '../../../utils';
 
 @Component({
 	selector: 'app-map-popup',
@@ -15,19 +12,30 @@ export class MapPopupComponent implements OnInit {
 	@Input() public barData$: Observable<any>;
 	public dataSource: IBarBeerDetail[] = [];
 	public barName: string;
+	public barAddress: string;
+	public happyHourStart: string;
+	public happyHourEnd: string;
 	public displayedColumns: string[] = ['name', 'price', 'priceHH', 'icon', 'quantity'];
 	public isLoading = true;
 	
 	ngOnInit() {
-		this.barData$.subscribe(bar => {
+		const currentDay: string = getCurrentDay();
+		this.barData$.subscribe((bar: IDetailedBarProperties) => {
 			this.barName = bar.name;
+			this.barAddress = bar.address;
+			this.happyHourStart = formatDateToHoursMinutes(bar.happyHourTime[currentDay].start);
+			this.happyHourEnd = formatDateToHoursMinutes(bar.happyHourTime[currentDay].end);
+			if (this.happyHourStart === this.happyHourEnd) {
+				this.happyHourStart = 'NA';
+				this.happyHourEnd = 'NA';
+			}
 			bar.beers.map(beer => {
 				beer.pricing.map(item => {
 					this.dataSource.push({
 						name: beer.name,
 						price: item.priceBeer,
 						priceHH: item.priceHappy,
-						icon: blondBeerIcon,
+						icon: this.getBeerIconColor(beer.type),
 						quantity: item.volume + ' cl'
 					});
 				});
@@ -35,13 +43,8 @@ export class MapPopupComponent implements OnInit {
 			this.isLoading = false;
 		})
 	}
-	
-}
 
-export interface IBarBeerDetail {
-	name: string;
-	price: number;
-	priceHH: number;
-	icon: string;
-	quantity: string;
+	private getBeerIconColor(type: string): string {
+		return BEER_ICON_COLORS[type] || '#FFFFFF';
+	}
 }

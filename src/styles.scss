@@ -4,7 +4,11 @@
 @import "~leaflet/dist/leaflet.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	background-color: #FBFBFB;
+}
 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: lighter;
@@ -51,4 +55,48 @@ mat-card-title.mat-card-title {
 
 .mod-textCenter {
 	text-align: center !important;
+}
+
+.mod-textSmall {
+	font-size: 0.813rem;
+	color: #D9D9D9;
+}
+
+.mod-marginTopReset {
+	margin-top: 0 !important;
+}
+
+.mod-marginBottomReset {
+	margin-bottom: 0 !important;
+}
+
+.mod-paddingReset {
+	padding: 0 !important;
+}
+
+.mat-dialog-container {
+	padding: 0;
+}
+
+.modalMapFilterMobile {
+	width: inherit !important;
+	height: inherit !important;
+
+	.mat-card {
+		.mat-card-content {
+			.filters-form {
+				flex-direction: column;
+				margin-left: 1rem;
+			}
+		}
+	}
+}
+
+.beer-icon-rounded {
+	text-align: center;
+	app-beer-icon {
+		svg {
+			width: 55%;
+		}
+	}
 }

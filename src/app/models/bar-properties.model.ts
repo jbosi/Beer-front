@@ -34,6 +34,7 @@ export interface IBeerInfo {
 		{
 			quantity: number;
 			priceBeer: number;
+			priceHappy: number;
 			volume: number;
 		}
 	];
@@ -62,8 +63,8 @@ export interface IDetailedBarProperties {
 	tags: string[];
 	type: string;
 	characteristics: Object;
-	happyHourTime: IDayOpeningHours;
-	openingTime: IDayOpeningHours;
+	happyHourTime: IWeekDaysOpeningHours;
+	openingTime: IWeekDaysOpeningHours;
 	privateaserBookingUrl: string;
 	privateaserId: string;
 	beers: IBeerInfo[];
@@ -71,4 +72,12 @@ export interface IDetailedBarProperties {
 	opened: boolean;
 	inHappy: boolean;
 	cheapestBeer: number;
+}
+
+export interface IBarBeerDetail {
+	name: string;
+	price: number;
+	priceHH: number;
+	icon: string;
+	quantity: string;
 }

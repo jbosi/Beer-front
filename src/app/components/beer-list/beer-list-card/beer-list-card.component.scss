@@ -1,0 +1,42 @@
+mat-card {
+	max-width: 450px;
+	min-width: 320px;
+}
+
+mat-card-content {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.beerListCard-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.beerListCard-image {
+	background-color: #EECC60;
+	width: 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.beerListCard-content {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+.mat-card-title {
+	font-weight: bold;
+}
+
+.beerListCard-title-column, .beerListCard-info-column {
+	font-size: 12px;
+}
+
+.beerListCard-title-column {
+	color: #888888;
+	font-weight: 500;
+}

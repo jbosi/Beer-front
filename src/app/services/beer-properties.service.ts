@@ -1,8 +1,8 @@
-import { IBeerInfo } from './../models/bar-properties.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { IBeerInfo } from './../models';
 
 @Injectable()
 export class BeerPropertiesService {
@@ -11,17 +11,17 @@ export class BeerPropertiesService {
 		private http: HttpClient,
 	) { }
 
-	getBeers() : Observable<IBeerInfo[]> {
+	public getBeers() : Observable<IBeerInfo[]> {
 		return this.http.get<IBeerInfo[]>('https://aleforall.herokuapp.com/beers');
 	}
 
-	addBeer(payload: any): Observable<any> {
+	public addBeer(payload: any): Observable<any> {
 		return this.http.post('URL', payload).pipe(
 			map(response => response)
 		);
 	}
 
-	removeBeer(payload: any): Observable<any> {
+	public removeBeer(payload: any): Observable<any> {
 		return this.http.post('URL', payload).pipe(
 			map(response => response)
 		);

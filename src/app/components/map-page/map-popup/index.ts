@@ -1,1 +1,1 @@
-export * from './map-popup.component';
+export * from "./map-popup.component";
