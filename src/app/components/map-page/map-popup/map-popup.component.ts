@@ -1,14 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDetailedBarProperties } from 'src/app/models';
-
-const beerIconColors = {
-	blond: '#EECC60',
-	fruity: '#DA686F',
-	brown: '#622F0A',
-	white: '#D9D9D9',
-	amber: '#A76B12'
-}
+import { IDetailedBarProperties, IBarBeerDetail } from '../../../models';
+import { getCurrentDay, formatDateToHoursMinutes, BEER_ICON_COLORS } from '../../../utils';
 
 @Component({
 	selector: 'app-map-popup',
@@ -26,12 +19,16 @@ export class MapPopupComponent implements OnInit {
 	public isLoading = true;
 	
 	ngOnInit() {
-		const currentDay: string = this.getCurrentDay();
+		const currentDay: string = getCurrentDay();
 		this.barData$.subscribe((bar: IDetailedBarProperties) => {
 			this.barName = bar.name;
 			this.barAddress = bar.address;
-			this.happyHourStart = this.formatDate(bar.happyHourTime[currentDay].opening);
-			this.happyHourEnd = this.formatDate(bar.happyHourTime[currentDay].closing);
+			this.happyHourStart = formatDateToHoursMinutes(bar.happyHourTime[currentDay].start);
+			this.happyHourEnd = formatDateToHoursMinutes(bar.happyHourTime[currentDay].end);
+			if (this.happyHourStart === this.happyHourEnd) {
+				this.happyHourStart = 'NA';
+				this.happyHourEnd = 'NA';
+			}
 			bar.beers.map(beer => {
 				beer.pricing.map(item => {
 					this.dataSource.push({
@@ -48,50 +45,6 @@ export class MapPopupComponent implements OnInit {
 	}
 
 	private getBeerIconColor(type: string): string {
-		return beerIconColors[type] || '#EECC60';
+		return BEER_ICON_COLORS[type] || '#FFFFFF';
 	}
-
-	private formatDate(date: Date): string {
-		if (date == null) {
-			return 'NA';
-		}
-		return `${date.getHours()}:${date.getMinutes()}`;
-	}
-
-	private getCurrentDay(): string {
-		const currentDay = new Date().getDay();
-		switch (currentDay) {
-			case 1: {
-				return 'monday';
-			}
-			case 2: {
-				return 'thusday';
-			}
-			case 3: {
-				return 'wednesday';
-			}
-			case 4: {
-				return 'thursday';
-			}
-			case 5: {
-				return 'friday';
-			}
-			case 6: {
-				return 'saturday';
-			}
-			case 0: {
-				return 'sunday';
-			}
-		
-		}
-	}
-	
-}
-
-export interface IBarBeerDetail {
-	name: string;
-	price: number;
-	priceHH: number;
-	icon: string;
-	quantity: string;
 }

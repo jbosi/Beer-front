@@ -32,7 +32,9 @@
 					<ng-container matColumnDef="icon">
 						<th mat-header-cell *matHeaderCellDef> </th>
 						<td class="barDetails-cell" mat-cell *matCellDef="let element">
-							<app-beer-rounded-icon [backgroundColor]="element.icon" [iconColor]="'#FFFFFF'"></app-beer-rounded-icon>
+							<div class="beer-icon-rounded" [style.background-color]="element.icon">
+								<app-beer-icon></app-beer-icon>
+							</div>
 						</td>
 					</ng-container>
 					

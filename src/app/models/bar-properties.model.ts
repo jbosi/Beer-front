@@ -73,3 +73,11 @@ export interface IDetailedBarProperties {
 	inHappy: boolean;
 	cheapestBeer: number;
 }
+
+export interface IBarBeerDetail {
+	name: string;
+	price: number;
+	priceHH: number;
+	icon: string;
+	quantity: string;
+}

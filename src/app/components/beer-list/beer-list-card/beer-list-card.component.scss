@@ -1,5 +1,12 @@
 mat-card {
-	max-width: 400px;
+	max-width: 450px;
+	min-width: 320px;
+}
+
+mat-card-content {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
 }
 
 .beerListCard-container {
@@ -18,4 +25,18 @@ mat-card {
 .beerListCard-content {
 	display: flex;
 	flex-direction: column;
+	margin-left: 10px;
+}
+
+.mat-card-title {
+	font-weight: bold;
+}
+
+.beerListCard-title-column, .beerListCard-info-column {
+	font-size: 12px;
+}
+
+.beerListCard-title-column {
+	color: #888888;
+	font-weight: 500;
 }

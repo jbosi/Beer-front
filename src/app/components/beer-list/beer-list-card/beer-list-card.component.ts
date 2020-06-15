@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IBeerInfo } from '../../../models';
+import { BEER_ICON_COLORS } from '../../../utils';
+
 declare var require: any;
 
 @Component({
@@ -8,11 +11,13 @@ declare var require: any;
 })
 
 export class BeerListCardComponent implements OnInit {
-	public beerIcon = require('./../../../../icons/beers/beerIcon.svg');
-
-	constructor() { }
+	@Input() public beerInfo: IBeerInfo;
 	
 	ngOnInit() {
+	}
+
+	public getBeerIconColor(type: string): string {
+		return BEER_ICON_COLORS[type] || '#FFFFFF';
 	}
 	
 }

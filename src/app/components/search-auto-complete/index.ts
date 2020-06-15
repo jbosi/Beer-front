@@ -1,1 +1,1 @@
-export * from './search-auto-complete.component';
+export * from "./search-auto-complete.component";

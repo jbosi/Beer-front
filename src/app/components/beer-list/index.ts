@@ -1,1 +1,2 @@
-export * from './beer-list.component';
+export * from "./beer-list-card";
+export * from "./beer-list.component";

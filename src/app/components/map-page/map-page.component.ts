@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBarProperties } from 'src/app/models';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { MapFiltersComponent } from './map-filters';
+import { MatDialog } from '@angular/material';
+import { MapFiltersMobileComponent } from './map-filters-mobile';
 
 @Component({
 	selector: 'app-map-page',
@@ -34,6 +34,6 @@ export class MapPageComponent implements OnInit {
 	}
 
 	public openModal() {
-		this.modal.open(MapFiltersComponent, {data: this.dialogData});
+		this.modal.open(MapFiltersMobileComponent, {data: this.dialogData});
 	}
 }
