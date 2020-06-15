@@ -1,7 +1,6 @@
 export * from "./beer-form";
 export * from "./beer-icon";
 export * from "./beer-list";
-export * from "./beer-rounded-icon";
 export * from "./dashboard";
 export * from "./home";
 export * from "./map-page";
