@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule } from '@angular/material';
@@ -14,13 +14,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, MapFiltersMobileComponent} from './components';
+import { RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, MapFiltersMobileComponent} from './components';
 import { BarPropertiesService } from './services';
+import { JwtInterceptor } from './utils/jwt.interceptor';
 
 // Keep these dependencies ?
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { NgAisModule } from 'angular-instantsearch';
+import { UserAdminComponent } from './components/dashboard/user-admin/user-admin.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -61,7 +63,10 @@ const MATERIAL_MODULES = [
 		BeerListComponent,
 		BeerListCardComponent,
 		BeerIconComponent,
-		MapFiltersMobileComponent
+		MapFiltersMobileComponent,
+		LoginComponent,
+		RegisterComponent,
+		UserAdminComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
@@ -77,6 +82,7 @@ const MATERIAL_MODULES = [
 		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 	],
 	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: LocationStrategy, useClass: HashLocationStrategy },
 		BarPropertiesService,
 		BeerPropertiesService,

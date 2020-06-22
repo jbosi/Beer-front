@@ -1,1 +1,1 @@
-export * from './bar-properties.model';
+export * from "./bar-properties.model";

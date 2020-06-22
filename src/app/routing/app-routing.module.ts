@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, BeerListComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, DashboardComponent ,NavBarComponent} from '../components';
+import { PageNotFoundComponent, BeerListComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, DashboardComponent ,NavBarComponent, LoginComponent, RegisterComponent} from '../components';
 import { MapResolver } from './resolvers';
+import { AuthGuard } from './guards/auth.guard';
+import { UserAdminComponent } from '../components/dashboard/user-admin/user-admin.component';
 
 const routes: Routes = [
 	{
@@ -16,10 +18,12 @@ const routes: Routes = [
 			{
 				path: 'dashboard',
 				component: DashboardComponent,
+				canActivate: [AuthGuard],
 				children: [
 					{ path: '', component: BarAdminComponent},
 					{ path: 'bar', component: BarAdminComponent },
-					{ path: 'biere', component: BeerAdminComponent }
+					{ path: 'biere', component: BeerAdminComponent },
+					{ path: 'user', component: UserAdminComponent }
 				]
 			},
 			{
@@ -32,12 +36,20 @@ const routes: Routes = [
 				component: BeerListComponent,
 				resolve: { mapData: MapResolver }
 			},
+			{
+				path: 'login',
+				component: LoginComponent
+			},
+			{
+				path: 'register',
+				component: RegisterComponent
+			}, 
 		]
 	},
 	{
 		path: '**',
 		component: PageNotFoundComponent
-	}, 
+	},
 ];
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
