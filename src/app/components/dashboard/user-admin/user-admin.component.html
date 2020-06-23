@@ -1,3 +1,14 @@
 <section>
+	<h1>Users</h1>
 	<div *ngFor="let user of userList$ | async">{{ user | json }}</div>
+</section>
+
+<section>
+	<h1>Owners</h1>
+	<div *ngFor="let user of ownersList$ | async">{{ user | json }}</div>
+</section>
+
+<section>
+	<h1>Ownership requests</h1>
+	<div *ngFor="let user of ownershipRequestList$ | async">{{ user | json }}</div>
 </section>

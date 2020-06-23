@@ -4,9 +4,14 @@
 		<span><a routerLink="/map" routerLinkActive="active">MAP</a></span>
 		<span><a routerLink="/dashboard" routerLinkActive="active">DASHBOARD</a></span>
 		<span><a routerLink="/beers" routerLinkActive="active">BIERES</a></span>
-		<span><a routerLink="/login" routerLinkActive="active">LOGIN</a></span>
-		<span><a routerLink="/register" routerLinkActive="active">REGISTER</a></span>
-		<span><a (click)="logout()">LOGOUT</a></span>
+	</div>
+	<div class="nav-icons">
+		<a routerLink="/login" routerLinkActive="active">
+			<mat-icon aria-hidden="false" aria-label="Login">person</mat-icon>
+		</a>
+		<a (click)="logout()">
+			<mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
+		</a>
 	</div>
 </mat-toolbar>
 

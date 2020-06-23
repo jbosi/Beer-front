@@ -1,3 +1,31 @@
+:host {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.register-card {
+	max-width: 500px;
+	margin: 1rem;
+	flex: auto;
+	box-sizing: border-box;
+	padding: 25px 50px;
+}
+
+.register-button, .cancel-link {
+	text-align: center;
+}
+
+.register-header {
+	margin-bottom: 2rem;
+}
+
+.register-title {
+	font-weight: 500;
+	text-align: left;
+	font-size: x-large;
+}
+
 .error-message-container {
 	display: flex;
 }

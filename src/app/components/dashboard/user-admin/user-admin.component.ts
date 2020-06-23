@@ -9,13 +9,19 @@ import { Observable } from 'rxjs';
 })
 export class UserAdminComponent implements OnInit {
 	public userList$: Observable<any>;
+	public ownersList$: Observable<any>;
+	public ownershipRequestList$: Observable<any>;
 	
 	constructor(
 		private userService: UserService
 	) { }
 	
 	ngOnInit() {
-		this.userList$ = this.userService.getAll();
+		this.userList$ = this.userService.getAllUsers();
+
+		this.ownersList$ = this.userService.getAllOwnership();
+		// TODO: wait for back
+		// this.ownershipRequestList$ = this.userService.getAllOwnershipRequests();
 	}
 	
 }

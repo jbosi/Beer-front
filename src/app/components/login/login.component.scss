@@ -1,0 +1,27 @@
+:host {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-card {
+	max-width: 500px;
+	margin: 1rem;
+	flex: auto;
+	box-sizing: border-box;
+	padding: 25px 50px;
+}
+
+.login-button, .register-link {
+	text-align: center;
+}
+
+.login-header {
+	margin-bottom: 2rem;
+}
+
+.login-title {
+	font-weight: 500;
+	text-align: left;
+	font-size: x-large;
+}
