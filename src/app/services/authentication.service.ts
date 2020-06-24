@@ -9,10 +9,12 @@ import { API_URL } from '../app.config';
 export class AuthenticationService {
 	private currentUserSubject: BehaviorSubject<{token: string}>;
 	public currentUser: Observable<{token: string}>;
+	public isLogged: Observable<boolean>;
 	
 	constructor(private http: HttpClient) {
 		this.currentUserSubject = new BehaviorSubject<{token: string}>(JSON.parse(localStorage.getItem('token_id')));
 		this.currentUser = this.currentUserSubject.asObservable();
+		this.isLogged = this.currentUserSubject.asObservable().pipe(map(token => token != null));
 	}
 	
 	public get currentUserToken(): string {
