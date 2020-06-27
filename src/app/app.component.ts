@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './services';
 
 @Component({
 	selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'Ale for all';
+	title = 'Drinks for all';
+	currentUserToken: {token: string};
+	
+	constructor(
+		private authenticationService: AuthenticationService
+	) {
+		this.authenticationService.currentUser.subscribe(userToken => this.currentUserToken = userToken);
+	}
 }

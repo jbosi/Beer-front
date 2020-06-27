@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { IBeerInfo } from './../models';
+import { API_URL } from '../app.config';
 
 @Injectable()
 export class BeerPropertiesService {
@@ -12,17 +13,17 @@ export class BeerPropertiesService {
 	) { }
 
 	public getBeers() : Observable<IBeerInfo[]> {
-		return this.http.get<IBeerInfo[]>('https://aleforall.herokuapp.com/beers');
+		return this.http.get<IBeerInfo[]>(`${API_URL}/beers`);
 	}
 
 	public addBeer(payload: any): Observable<any> {
-		return this.http.post('URL', payload).pipe(
+		return this.http.post(`${API_URL}/beers`, payload).pipe(
 			map(response => response)
 		);
 	}
 
 	public removeBeer(payload: any): Observable<any> {
-		return this.http.post('URL', payload).pipe(
+		return this.http.post(`${API_URL}/beers`, payload).pipe(
 			map(response => response)
 		);
 	}

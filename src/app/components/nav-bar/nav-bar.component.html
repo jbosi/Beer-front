@@ -5,6 +5,16 @@
 		<span><a routerLink="/dashboard" routerLinkActive="active">DASHBOARD</a></span>
 		<span><a routerLink="/beers" routerLinkActive="active">BIERES</a></span>
 	</div>
+	<div class="nav-icons">
+		<a *ngIf="isLogged; else login" (click)="logout()">
+			<mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
+		</a>
+		<ng-template #login>
+			<a routerLink="/login" routerLinkActive="active">
+				<mat-icon aria-hidden="false" aria-label="Login">person</mat-icon>
+			</a>
+		</ng-template>
+	</div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
