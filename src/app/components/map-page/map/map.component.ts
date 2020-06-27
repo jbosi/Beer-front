@@ -24,7 +24,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 	private cluster = L.markerClusterGroup({
 		showCoverageOnHover: false,
-		disableClusteringAtZoom: 18,
+		spiderfyOnMaxZoom: false,
+		disableClusteringAtZoom: 17,
 		maxClusterRadius: 100
 	});
 	
@@ -106,7 +107,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
 				icon: icon,
 			})
-			// .on('click', (e) => this.router.navigate([bar.id], {relativeTo: this.activatedRoute}))
+			.on('click', (e) => {console.log(e.target, e.target.getLatLng()); this.map.panTo(e.target.getLatLng())})
 			.bindTooltip(cheapestBeer, {
 				permanent: true,
 				direction: 'center',
