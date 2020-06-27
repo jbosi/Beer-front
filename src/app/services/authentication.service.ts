@@ -24,19 +24,28 @@ export class AuthenticationService {
 		return null;
 	}
 	
-	login(email, password) {
+	public login(email, password) {
 		return this.http.post<any>(`${API_URL}/users/signin`, { email, password })
 		.pipe(map(token => {
 			// store token details and jwt token in local storage to keep token logged in between page refreshes
 			localStorage.setItem('token_id', JSON.stringify(token));
+			const tokenExpiration = Date.now() + 1000 * 60 * 60;
+			localStorage.setItem('expires_at', JSON.stringify(tokenExpiration.valueOf()))
 			this.currentUserSubject.next(token);
 			return token;
 		}));
 	}
 	
-	logout() {
-		// remove user from local storage and set current user to null
+	public logout() {
+		// remove token from local storage and set current user to null
 		localStorage.removeItem('token_id');
+		localStorage.removeItem("expires_at");
 		this.currentUserSubject.next(null);
+	}
+
+	public isExpired() {
+		const expiration = localStorage.getItem("expires_at");
+		const expiresAt = JSON.parse(expiration);
+		return Date.now() > expiresAt;
 	}
 }
