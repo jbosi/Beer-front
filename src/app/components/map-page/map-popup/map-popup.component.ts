@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDetailedBarProperties, IBarBeerDetail } from '../../../models';
-import { getCurrentDay, formatDateToHoursMinutes, BEER_ICON_COLORS } from '../../../utils';
+import { getCurrentDay, formatDateToHoursMinutes, BEER_ICON_TYPES_COLORS } from '../../../utils';
 
 @Component({
 	selector: 'app-map-popup',
@@ -45,6 +45,6 @@ export class MapPopupComponent implements OnInit {
 	}
 
 	private getBeerIconColor(type: string): string {
-		return BEER_ICON_COLORS[type] || '#FFFFFF';
+		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
 	}
 }

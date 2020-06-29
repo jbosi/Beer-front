@@ -5,12 +5,24 @@
 	</mat-card-title>
 	<mat-card-content>
 		<div [formGroup]="form" class="filters-form">
-			<mat-checkbox matInput formControlName="isOpened">Ouvert</mat-checkbox>
-			<mat-checkbox matInput formControlName="containsBeer">A des bières</mat-checkbox>
-			<mat-checkbox matInput formControlName="isHappyHour">Est en HH</mat-checkbox>
-			<div>
-				<label>Prix</label>
-				<mat-slider matInput formControlName="price" min="2" max="10" step="0.5" value="4" thumbLabel="true"></mat-slider>
+			<div class="filters-form-row">
+				<mat-checkbox matInput formControlName="isOpened">Ouvert</mat-checkbox>
+				<mat-checkbox matInput formControlName="isHappyHour">Est en HH</mat-checkbox>
+			</div>
+			<div class="filters-form-row">
+				<div>
+					<label>Prix</label>
+					<mat-slider matInput formControlName="price" min="2" max="10" step="0.5" thumbLabel="true"></mat-slider>
+				</div>
+			</div>
+			<div class="filters-form-row">
+				<mat-form-field>
+					<mat-select formControlName="type" placeholder="Type de bière">
+						<mat-option *ngFor="let beerType of beerTypes" [value]="beerType.value">
+							{{ beerType.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 			</div>
 		</div>
 	</mat-card-content>

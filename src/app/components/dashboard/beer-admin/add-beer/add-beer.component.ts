@@ -21,7 +21,6 @@ export class AddBeerComponent implements OnInit {
 	}
 
 	submit() {
-		console.log(this.addBeerForm.value);
 		this.beerPropertiesService.addBeer(this.addBeerForm.value);
 	}
 

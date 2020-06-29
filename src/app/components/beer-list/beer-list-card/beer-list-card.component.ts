@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IBeerInfo } from '../../../models';
-import { BEER_ICON_COLORS } from '../../../utils';
+import { BEER_ICON_TYPES_COLORS } from '../../../utils';
 
 declare var require: any;
 
@@ -17,7 +17,7 @@ export class BeerListCardComponent implements OnInit {
 	}
 
 	public getBeerIconColor(type: string): string {
-		return BEER_ICON_COLORS[type] || '#FFFFFF';
+		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
 	}
 	
 }

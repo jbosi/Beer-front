@@ -107,7 +107,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
 				icon: icon,
 			})
-			.on('click', (e) => {console.log(e.target, e.target.getLatLng()); this.map.panTo(e.target.getLatLng())})
+			.on('click', (e) => this.map.panTo(e.target.getLatLng()))
 			.bindTooltip(cheapestBeer, {
 				permanent: true,
 				direction: 'center',
