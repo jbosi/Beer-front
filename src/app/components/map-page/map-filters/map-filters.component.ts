@@ -4,6 +4,7 @@ import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
 import { IBarProperties } from '../../../models';
 import { BarPropertiesService } from 'src/app/services';
 import { Observable, of } from 'rxjs';
+import { BEER_ICON_TYPES } from '../../../utils';
 
 @Component({
 	selector: 'app-map-filters',
@@ -31,6 +32,8 @@ export class MapFiltersComponent implements OnInit {
 	private filters = {};
 	private previousResponse: IBarProperties[];
 	private allData: IBarProperties[];
+	public beerTypes = BEER_ICON_TYPES;
+	public value = 10;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -41,9 +44,9 @@ export class MapFiltersComponent implements OnInit {
 		this.allData = [...this.data];
 		this.form = this.formBuilder.group({
 			isOpened: undefined,
-			containsBeer: undefined,
 			isHappyHour: undefined,
-			price: undefined
+			price: 10,
+			type: undefined
 		});
 
 		this.form.valueChanges.pipe(
@@ -62,9 +65,6 @@ export class MapFiltersComponent implements OnInit {
 		if (model.opened) {
 			filteredData = filteredData.filter(bar => bar.opened);
 		}
-		if (model.containsBeer) {
-			filteredData = filteredData.filter(bar => bar.cheapestBeer);
-		}
 		if (model.isHappyHour) {
 			filteredData = filteredData.filter(bar => bar.inHappy);
 		}
@@ -75,10 +75,17 @@ export class MapFiltersComponent implements OnInit {
 		let backFiltersChanged = false;
 		const filteredData = [...this.allData];
 		const priceField = this.form.get('price');
+		const beerTypeField = this.form.get('type');
 
 		if (priceField.dirty) {
 			this.filters['price'] = model.price;
 			priceField.markAsPristine();
+			backFiltersChanged = true;
+		}
+
+		if (beerTypeField.dirty) {
+			this.filters['type'] = model.type;
+			beerTypeField.markAsPristine();
 			backFiltersChanged = true;
 		}
 

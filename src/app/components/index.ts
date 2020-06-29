@@ -8,4 +8,3 @@ export * from "./map-page";
 export * from "./nav-bar";
 export * from "./page-not-found";
 export * from "./register";
-export * from "./search-auto-complete";

@@ -1,7 +1,7 @@
 :host {
 	display: block;
 	height: 230px;
-	width: 480px;
+	width: 400px;
 	border-radius: 12px;
 }
 
@@ -21,7 +21,17 @@ h3 {
 
 .filters-form {
 	display: flex;
-	justify-content: space-around;
+	flex-direction: column;
+	margin-left: 1rem;
+
+	.filters-form-row {
+		display: flex;
+		padding: 0.8rem 0;
+
+		.mat-checkbox:first-child {
+			margin-right: 4rem;;
+		}
+	}
 }
 
 .mapFilters-small-text {
