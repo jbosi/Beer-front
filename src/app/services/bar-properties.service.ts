@@ -17,4 +17,8 @@ export class BarPropertiesService {
 	public getBarPropertiesById(id: string): Observable<IDetailedBarProperties> {
 		return this.http.get<IDetailedBarProperties>(`${API_URL}/bars/${id}`);
 	}
+
+	public getFilteredBarsProperties(filters: string): Observable<IBarProperties[]> {
+		return this.http.get<IBarProperties[]>(`${API_URL}/bars?${filters}`)
+	}
 }

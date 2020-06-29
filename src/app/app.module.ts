@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSliderModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
@@ -14,7 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, MapFiltersMobileComponent} from './components';
+import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, AutoCompleteComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, MapFiltersMobileComponent} from './components';
 import { BarPropertiesService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 
@@ -22,7 +22,6 @@ import { JwtInterceptor } from './utils/jwt.interceptor';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { NgAisModule } from 'angular-instantsearch';
-import { UserAdminComponent } from './components/dashboard/user-admin/user-admin.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -41,6 +40,7 @@ const MATERIAL_MODULES = [
 	MatTableModule,
 	MatProgressSpinnerModule,
 	MatCheckboxModule,
+	MatSliderModule
 ];
 
 @NgModule({
