@@ -6,17 +6,17 @@
 	fxLayout="row"
 	fxLayoutGap="15px"
 	fxFlexFill >
-
-	<div fxFlex="30" class="map-filter" fxFlexOffset="10">
-	</div>
-
-	<div fxFlex="50">
-	</div>
-
-	<div fxFlex="10">
-	</div>
-
+	
 	<div *ngIf="!isMobile; else mobile" class="map-left-element-container">
+		<!-- <mat-form-field class="auto-complete">
+			<input type="text" placeholder="Rechercher un bar" aria-label="Name" matInput [formControl]="barSearcher" [matAutocomplete]="auto">
+			<mat-autocomplete #auto="matAutocomplete">
+				<mat-option *ngFor="let bar of barProperties" [value]="bar.name">
+					{{ bar.name }}
+				</mat-option>
+			</mat-autocomplete>
+		</mat-form-field> -->
+
 		<app-map-filters [(data)]="barProperties"></app-map-filters>
 	</div>
 	<ng-template #mobile>

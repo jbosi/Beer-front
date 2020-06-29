@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IBarProperties } from 'src/app/models';
 import { MatDialog } from '@angular/material';
 import { MapFiltersMobileComponent } from './map-filters-mobile';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-map-page',
@@ -13,6 +14,7 @@ export class MapPageComponent implements OnInit {
 	public isMobile: boolean;
 	public barProperties: IBarProperties[];
 	public dialogData: IBarProperties[];
+	public barSearcher = new FormControl();
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -27,6 +29,7 @@ export class MapPageComponent implements OnInit {
 			this.dialogData = this.barProperties;
 		});
 
+		this.barSearcher.valueChanges
 	}
 
 	public getIsMobile(): boolean {
