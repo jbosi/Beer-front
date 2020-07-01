@@ -14,7 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, MapFiltersMobileComponent} from './components';
+import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , DashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent} from './components';
 import { BarPropertiesService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
@@ -59,7 +59,6 @@ const MATERIAL_MODULES = [
 		BeerListComponent,
 		BeerListCardComponent,
 		BeerIconComponent,
-		MapFiltersMobileComponent,
 		LoginComponent,
 		RegisterComponent,
 		UserAdminComponent
@@ -81,7 +80,7 @@ const MATERIAL_MODULES = [
 		BarPropertiesService,
 		BeerPropertiesService,
 	],
-	entryComponents: [MapPopupComponent, MapFiltersMobileComponent],
+	entryComponents: [MapPopupComponent],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

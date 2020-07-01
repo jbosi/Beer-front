@@ -26,7 +26,10 @@ import { BEER_ICON_TYPES } from '../../../utils';
 })
 export class MapFiltersComponent implements OnInit {
 	@Input() public data: IBarProperties[] = [];
+	@Input() public isMobile: boolean;
+	@Input() public showFilters: boolean;
 	@Output() public dataChange = new EventEmitter<IBarProperties[]>();
+	@Output() public showFiltersChanged = new EventEmitter<Boolean>();
 
 	public form: FormGroup;
 	private filters = {};
@@ -78,15 +81,18 @@ export class MapFiltersComponent implements OnInit {
 		const beerTypeField = this.form.get('type');
 
 		if (priceField.dirty) {
-			this.filters['price'] = model.price;
+			this.filters['price'] = model['price'];
 			priceField.markAsPristine();
 			backFiltersChanged = true;
 		}
 
 		if (beerTypeField.dirty) {
-			this.filters['type'] = model.type;
+			this.filters['type'] = model['type'];
 			beerTypeField.markAsPristine();
 			backFiltersChanged = true;
+			if (model['type'] === undefined) {
+				delete this.filters['type'];
+			}
 		}
 
 		if (!backFiltersChanged && this.previousResponse != null) {
@@ -109,5 +115,10 @@ export class MapFiltersComponent implements OnInit {
 			result += `${filter}=${filters[filter]}&`
 		}
 		return result.slice(0, -1);
+	}
+
+	public toggleShowFilters(): void {
+		this.showFiltersChanged.emit(!this.showFilters);
+		this.showFilters = !this.showFilters;
 	}
 }
