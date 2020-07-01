@@ -20,8 +20,11 @@
 		<app-map-filters [(data)]="barProperties"></app-map-filters>
 	</div>
 	<ng-template #mobile>
-		<button mat-fab (click)="openModal()" color="primary" class="mapPage-button">
+		<button *ngIf="!showFilters; else filters" mat-fab (click)="toggleShowFilters()" color="primary" class="mapPage-button">
 			<mat-icon>menu</mat-icon>
 		</button>
+		<ng-template #filters>
+			<app-map-filters class="map-mobile-filters" [(data)]="barProperties" [isMobile]="isMobile" [(showFilters)]="showFilters"></app-map-filters>
+		</ng-template>
 	</ng-template>
 </div>

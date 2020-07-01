@@ -18,6 +18,7 @@
 			<div class="filters-form-row">
 				<mat-form-field>
 					<mat-select formControlName="type" placeholder="Type de bière">
+						<mat-option>Reset</mat-option>
 						<mat-option *ngFor="let beerType of beerTypes" [value]="beerType.value">
 							{{ beerType.name }}
 						</mat-option>
@@ -26,4 +27,7 @@
 			</div>
 		</div>
 	</mat-card-content>
+	<mat-card-footer class="filters-hide-button" *ngIf="isMobile">
+		<button mat-flat-button color="primary" (click)="toggleShowFilters()">Cacher</button>
+	</mat-card-footer>
 </mat-card>

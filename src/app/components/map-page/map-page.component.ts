@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBarProperties } from 'src/app/models';
-import { MatDialog } from '@angular/material';
-import { MapFiltersMobileComponent } from './map-filters-mobile';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -13,12 +11,11 @@ import { FormControl } from '@angular/forms';
 export class MapPageComponent implements OnInit {
 	public isMobile: boolean;
 	public barProperties: IBarProperties[];
-	public dialogData: IBarProperties[];
 	public barSearcher = new FormControl();
+	public showFilters = false;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		private modal: MatDialog
 	) {}
 	
 	ngOnInit() {
@@ -26,7 +23,6 @@ export class MapPageComponent implements OnInit {
 		
 		this.activatedRoute.data.subscribe((response: {mapData: IBarProperties[]}) => {
 			this.barProperties = response.mapData;
-			this.dialogData = this.barProperties;
 		});
 
 		this.barSearcher.valueChanges
@@ -36,7 +32,7 @@ export class MapPageComponent implements OnInit {
 		return this.isMobile;
 	}
 
-	public openModal() {
-		this.modal.open(MapFiltersMobileComponent, {data: this.dialogData});
+	public toggleShowFilters(): void {
+		this.showFilters = !this.showFilters;
 	}
 }
