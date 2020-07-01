@@ -29,7 +29,7 @@ export class MapFiltersComponent implements OnInit {
 	@Input() public isMobile: boolean;
 	@Input() public showFilters: boolean;
 	@Output() public dataChange = new EventEmitter<IBarProperties[]>();
-	@Output() public showFiltersChanged = new EventEmitter<Boolean>();
+	@Output() public showFiltersChange = new EventEmitter<Boolean>();
 
 	public form: FormGroup;
 	private filters = {};
@@ -118,7 +118,7 @@ export class MapFiltersComponent implements OnInit {
 	}
 
 	public toggleShowFilters(): void {
-		this.showFiltersChanged.emit(!this.showFilters);
 		this.showFilters = !this.showFilters;
+		this.showFiltersChange.emit(this.showFilters);
 	}
 }
