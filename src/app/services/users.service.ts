@@ -15,20 +15,20 @@ export class UserService {
 		return this.http.get<any[]>(`${API_URL}/users`);
 	}
 	
-	getAllOwnershipRequests() {
-		return this.http.get<any[]>(`${API_URL}/users/list-user-ask-responsabilities`);
-	}
-
-	getAllOwnershipRequestsById(id: number) {
-		return this.http.get<any[]>(`${API_URL}/users/list-user-ask-responsabilities/${id}`);
-	}
-
 	getAllOwnership() {
 		return this.http.get<any[]>(`${API_URL}/users/list-user-responsabilities`);
 	}
 
 	getAllOwnershipById(id: number) {
 		return this.http.get<any[]>(`${API_URL}/users/list-user-responsabilities/${id}`);
+	}
+
+	getAllOwnershipRequests() {
+		return this.http.get<any[]>(`${API_URL}/users/list-user-ask-responsabilities`);
+	}
+
+	getAllOwnershipRequestsById(id: number) {
+		return this.http.get<any[]>(`${API_URL}/users/list-user-ask-responsabilities/${id}`);
 	}
 	
 	register(user: any) {

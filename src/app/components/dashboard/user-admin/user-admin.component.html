@@ -1,14 +1,47 @@
 <section>
 	<h1>Users</h1>
-	<div *ngFor="let user of userList$ | async">{{ user | json }}</div>
+	<div *ngIf="userList?.length; else empty" class="user-admin-table-container mat-elevation-z8">
+		<table mat-table [dataSource]="userList" class="user-admin-table">
+			
+			<ng-container *ngFor="let column of userColumns.columnsProperties" [matColumnDef]="column.columnName">
+				<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
+				<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
+			</ng-container>
+			
+			<tr mat-header-row *matHeaderRowDef="userColumns.columnsNames; sticky: true"></tr>
+			<tr mat-row *matRowDef="let row; columns: userColumns.columnsNames;"></tr>
+		</table>
+	</div>
 </section>
 
 <section>
 	<h1>Owners</h1>
-	<div *ngFor="let user of ownersList$ | async">{{ user | json }}</div>
+	<div *ngIf="ownersList?.length; else empty" class="user-admin-table-container mat-elevation-z8">
+		<table mat-table [dataSource]="ownersList" class="user-admin-table">
+			
+			<ng-container *ngFor="let column of userOwnersColumns.columnsProperties" [matColumnDef]="column.columnName">
+				<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
+				<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
+			</ng-container>
+			
+			<tr mat-header-row *matHeaderRowDef="userOwnersColumns.columnsNames; sticky: true"></tr>
+			<tr mat-row *matRowDef="let row; columns: userOwnersColumns.columnsNames;"></tr>
+		</table>
+	</div>
 </section>
 
 <section>
 	<h1>Ownership requests</h1>
-	<div *ngFor="let user of ownershipRequestList$ | async">{{ user | json }}</div>
+	<div *ngIf="ownershipRequestList?.length; else empty" class="user-admin-table-container mat-elevation-z8">
+		<table mat-table [dataSource]="ownershipRequestList" class="user-admin-table">
+			
+			<ng-container *ngFor="let column of userOwnersRequestsColumns.columnsProperties" [matColumnDef]="column.columnName">
+				<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
+				<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
+			</ng-container>
+			
+			<tr mat-header-row *matHeaderRowDef="userOwnersRequestsColumns.columnsNames; sticky: true"></tr>
+			<tr mat-row *matRowDef="let row; columns: userOwnersRequestsColumns.columnsNames;"></tr>
+		</table>
+	</div>
 </section>
