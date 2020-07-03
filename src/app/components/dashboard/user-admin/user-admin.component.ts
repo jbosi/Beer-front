@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material';
 	styleUrls: ['./user-admin.component.scss']
 })
 export class UserAdminComponent implements OnInit {
-	public userList = new MatTableDataSource<any[]>([]);
+	public userList: any[];
 	public ownersList: any[];
 	public ownershipRequestList: any[];
 	public userData: any;
@@ -29,7 +29,7 @@ export class UserAdminComponent implements OnInit {
 			this.userService.getAllOwnership(),
 			this.userService.getAllOwnershipRequests()
 		).subscribe(([users, owners, ownersRequests]) => {
-			this.userList.data = users;
+			this.userList = users;
 			this.ownersList = owners;
 			this.ownershipRequestList = ownersRequests;
 		});
