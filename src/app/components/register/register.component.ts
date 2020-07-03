@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { UserService } from '../../services/users.service';
-import { AuthenticationService } from '../../services';
+import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { AuthenticationService, UserService } from '../../services';
 
 
 @Component({
@@ -37,6 +36,15 @@ export class RegisterComponent implements OnInit {
 			password: ['', [Validators.required, Validators.minLength(6)]],
 			passwordConfirmed: ['', Validators.required]
 		});
+
+		this.registerForm.get("username").valueChanges.pipe(
+			debounceTime(250),
+			distinctUntilChanged(),
+			switchMap(username => this.userService.checkUserName(username))
+		).subscribe(
+			_ => { return; },
+			error => this.handleError(error)
+		);
 	}
 	
 	// convenience getter for easy access to form fields
@@ -54,14 +62,15 @@ export class RegisterComponent implements OnInit {
 		this.userService.register(this.registerForm.value)
 		.pipe(first())
 		.subscribe(
-			data => {
-				this.router.navigate(['/login']);
-			},
-			error => {
-				this.hasError = true
-				this.loading = false;
-				const message = error.error.message;
-				this.errorsMessage = Array.isArray(message) ? message : [message] ;
-		});
+			data => this.router.navigate(['/login']),
+			error => this.handleError(error)
+		);
+	}
+
+	private handleError(error) {
+		this.hasError = true;
+		this.loading = false;
+		const message = error.error.message;
+		this.errorsMessage = Array.isArray(message) ? message : [message];
 	}
 }
