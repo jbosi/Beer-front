@@ -30,6 +30,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	});
 	
 	@Input() data: IBarProperties[];
+	@Input() highlightedMarker: any;
 
 	constructor(
 		private barPropertiesService: BarPropertiesService,
@@ -114,7 +115,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				offset: [0,27],
 				className: 'map-marker-tooltip-price'
 			})
-
 			.bindPopup(() => {	
 				const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
 				// Listen to the close event
@@ -124,9 +124,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				
 				document.body.appendChild(popupEl);
 				return popupEl;
-			})
+			});
 			
-			marker.bar = bar;
+			marker.id = bar.id;
 			
 			this.markers.push(marker);
 		})
