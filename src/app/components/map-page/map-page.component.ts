@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { IBarProperties } from 'src/app/models';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { MatOption } from '@angular/material';
 
 @Component({
 	selector: 'app-map-page',
@@ -15,7 +16,7 @@ export class MapPageComponent implements OnInit {
 	public barProperties: IBarProperties[];
 	public bars: Observable<IBarProperties[]>;
 	public barSearcher = new FormControl();
-	public highlightedMarker;
+	public highlightedMarkerId = new Subject<number>();
 	public showFilters = false;
 
 	constructor(
@@ -32,8 +33,8 @@ export class MapPageComponent implements OnInit {
 		this.bars = this.barSearcher.valueChanges.pipe(
 			debounceTime(300),
 			distinctUntilChanged(),
-			map(value => this.filterBarSearch(value))
-		)
+			map(value => typeof(value) === "string" ? this.filterBarSearch(value) : this.filterBarSearch(value.name))
+		);
 	}
 
 	public getIsMobile(): boolean {
@@ -59,5 +60,13 @@ export class MapPageComponent implements OnInit {
 		const filterValue = value.toLowerCase();
 	
 		return this.barProperties.filter(bar => bar.name.toLowerCase().includes(filterValue));
+	}
+
+	public setHighlightedBar(option: MatOption) {
+		this.highlightedMarkerId.next(option.value.id);
+	}
+
+	public displayFn(bar?: IBarProperties): string | undefined {
+		return bar ? bar.name : undefined;
 	}
 }

@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
 import { BarPropertiesService } from '../../../services/';
 import { IBarProperties } from '../../../models/';
 import { MapPopupComponent } from '../map-popup';
@@ -9,8 +10,7 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
 declare var require: any;
-const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
-const blueMarker: string = require('./../../../../icons/markers/marker-blue.svg');
+const blueMarker: string = require('./../../../../icons/markers/blueMarker.svg');
 const customMarker: string = require('./../../../../icons/markers/custom-marker.svg');
 
 @Component({
@@ -19,7 +19,7 @@ const customMarker: string = require('./../../../../icons/markers/custom-marker.
 	styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
-	public markers: L.Layer[] = [];
+	public markers: any[] = [];
 	private map: any;
 	private highlight = null;
 
@@ -31,7 +31,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	});
 	
 	@Input() data: IBarProperties[];
-	@Input() highlightedMarker: any;
+	@Input() highlightedMarkerId: Subject<number>;
 
 	constructor(
 		private barPropertiesService: BarPropertiesService,
@@ -41,6 +41,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 	ngAfterViewInit(): void {
 		this.initMap();
+
+		this.highlightedMarkerId.subscribe(markerId => {
+			const marker = this.markers.find(marker => marker.id === markerId);
+			marker.setIcon(this.getHighlightIcon());
+			this.highlight = marker;
+			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < 17 ? 17 : this.map.getZoom());
+		});
 
 		const tiles = L.tileLayer('https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/{z}/{x}/{y}.png?access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP', {
 			maxZoom: 20,
@@ -67,36 +74,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		// const iconId = changes.iconChangeId;
-		// if (iconId.currentValue != iconId.previousValue) {
-			// 	this.changeIconColor(iconId.currentValue, true);
-			// 	this.centerLeafletMapOnMarker(iconId.currentValue);
-			// }
-			// if (iconId.previousValue != null) {
-				// 	this.changeIconColor(iconId.previousValue, false);
-				// }
 		const dataChange = changes.data;
 		if (dataChange.currentValue != dataChange.previousValue && dataChange.previousValue !== undefined) {
 			this.onDataChange();
 		}
 	}
-	
-	// public changeIconColor(id: number, isSelected?: boolean) {
-	// 	const icon = L.icon({
-	// 		iconUrl: isSelected ? lightRedMarker : blueMarker,
-	// 		iconSize: [25, 45],
-	// 		iconAnchor: [12, 44],
-	// 		popupAnchor: [1, -45],
-	// 	});
-
-	// 	const marker = this.markers.find(marker => marker.bar.id === id);
-	// 	marker.setIcon(icon);
-	// }
-	
-	// private centerLeafletMapOnMarker(id: number) {
-	// 	const marker = this.markers.find(marker => marker.bar.id === id)
-	// 	this.map.setView(marker.getLatLng(), 14);
-	// }
 	
 	private addMarkers(): void {
 		const icon = this.getDefaultIcon();
@@ -110,7 +92,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				marker.setIcon(this.getHighlightIcon());
 				this.highlight = marker;
 
-				this.map.setView(e.target.getLatLng(), 17);
+				this.map.flyTo(e.target.getLatLng(), this.map.getZoom());
 			})
 			.bindTooltip(cheapestBeer, {
 				permanent: true,
@@ -118,18 +100,17 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				offset: [0,27],
 				className: 'map-marker-tooltip-price'
 			}).bindPopup(() => {	
-				const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
-				// Listen to the close event
-				popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
+					const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
+					// Listen to the close event
+					popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
 
-				popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
-				
-				document.body.appendChild(popupEl);
-				return popupEl;
+					popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
+					
+					document.body.appendChild(popupEl);
+					return popupEl;
 			});
 			
 			marker.id = bar.id;
-			
 			this.markers.push(marker);
 		})
 		
