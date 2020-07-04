@@ -21,6 +21,7 @@ const customMarker: string = require('./../../../../icons/markers/custom-marker.
 export class MapComponent implements AfterViewInit, OnChanges {
 	public markers: L.Layer[] = [];
 	private map: any;
+	private highlight = null;
 
 	private cluster = L.markerClusterGroup({
 		showCoverageOnHover: false,
@@ -48,8 +49,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		tiles.addTo(this.map);
 
 		this.addMarkers();
-		this.map.locate({setView: true, maxZoom: 15});
-		this.map.on('locationfound', (e: any) => this.onLocationFound(e));
+		this.map
+			.locate({setView: true, maxZoom: 15})
+			.on('locationfound', (e: any) => this.onLocationFound(e))
+			.on('click', () => this.highlight ? this.removeHighlight() : null);
 	}
 
 	private initMap(): void {
@@ -96,26 +99,25 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	// }
 	
 	private addMarkers(): void {
-		const icon = L.icon({
-			iconUrl: customMarker,
-			iconSize: [25, 45],
-			iconAnchor: [13, 46],
-			popupAnchor: [1, -45],
-		});
+		const icon = this.getDefaultIcon();
 
 		this.data.map((bar: IBarProperties) => {
 			const cheapestBeer = bar.cheapestBeer ? bar.cheapestBeer.toString() : 'NA';
 			const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
 				icon: icon,
+			}).on('click', (e) => {
+				this.removeHighlight();
+				marker.setIcon(this.getHighlightIcon());
+				this.highlight = marker;
+
+				this.map.setView(e.target.getLatLng(), 17);
 			})
-			.on('click', (e) => this.map.panTo(e.target.getLatLng()))
 			.bindTooltip(cheapestBeer, {
 				permanent: true,
 				direction: 'center',
 				offset: [0,27],
 				className: 'map-marker-tooltip-price'
-			})
-			.bindPopup(() => {	
+			}).bindPopup(() => {	
 				const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
 				// Listen to the close event
 				popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
@@ -148,5 +150,30 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	private onLocationFound(e: any) {
 		var radius = e.accuracy / 2;
 		L.circle(e.latlng, radius).addTo(this.map);
+	}
+
+	private removeHighlight() {
+		if (this.highlight !== null) {
+			this.highlight.setIcon(this.getDefaultIcon());
+			this.highlight = null;
+		}
+	}
+
+	private getHighlightIcon(): L.Icon<L.IconOptions> {
+		return L.icon({
+			iconUrl: blueMarker,
+			iconSize: [25, 45],
+			iconAnchor: [13, 46],
+			popupAnchor: [1, -45],
+		});
+	}
+
+	private getDefaultIcon(): L.Icon<L.IconOptions> {
+		return L.icon({
+			iconUrl: customMarker,
+			iconSize: [25, 45],
+			iconAnchor: [13, 46],
+			popupAnchor: [1, -45],
+		});
 	}
 }
