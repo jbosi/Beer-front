@@ -18,6 +18,7 @@ import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponen
 import { BarPropertiesService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -72,7 +73,8 @@ const MATERIAL_MODULES = [
 		DynamicFormsMaterialUIModule,
 		AppRoutingModule,
 		FlexLayoutModule,
-		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+		ScrollDispatchModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

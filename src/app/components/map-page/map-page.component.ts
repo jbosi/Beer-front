@@ -14,10 +14,11 @@ import { MatOption } from '@angular/material';
 export class MapPageComponent implements OnInit {
 	public isMobile: boolean;
 	public barProperties: IBarProperties[];
-	public bars: Observable<IBarProperties[]>;
+	public bars: Observable<IBarNames[]>;
 	public barSearcher = new FormControl();
-	public highlightedMarkerId = new Subject<number>();
+	public highlightedMarkerId = new Subject<string>();
 	public showFilters = false;
+	public barNames: IBarNames[] = [];
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -28,6 +29,12 @@ export class MapPageComponent implements OnInit {
 		
 		this.activatedRoute.data.subscribe((response: { mapData: IBarProperties[] }) => {
 			this.barProperties = response.mapData;
+			this.barNames = this.barProperties.map(bar => {
+				return {
+					name: bar.name,
+					id: bar.id
+				};
+			});
 		});
 
 		this.bars = this.barSearcher.valueChanges.pipe(
@@ -45,21 +52,16 @@ export class MapPageComponent implements OnInit {
 		this.showFilters = !this.showFilters;
 	}
 
-	private filterBarSearch(value: string): IBarProperties[] {
-		if (value.length < 3) {
+	private filterBarSearch(value: string): IBarNames[] {
+		if (value.length < 4) {
 			return [{
 				name: 'Continuez à écrire',
-				address: null,
 				id: null,
-				inHappy: null,
-				location: null,
-				opened: null,
-				tags: null
 			}];
 		}
 		const filterValue = value.toLowerCase();
 	
-		return this.barProperties.filter(bar => bar.name.toLowerCase().includes(filterValue));
+		return this.barNames.filter(bar => bar.name.toLowerCase().includes(filterValue));
 	}
 
 	public setHighlightedBar(option: MatOption) {
@@ -69,4 +71,9 @@ export class MapPageComponent implements OnInit {
 	public displayFn(bar?: IBarProperties): string | undefined {
 		return bar ? bar.name : undefined;
 	}
+}
+
+export interface IBarNames {
+	name: string;
+	id: string;
 }

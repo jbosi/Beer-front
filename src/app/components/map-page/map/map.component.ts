@@ -31,7 +31,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	});
 	
 	@Input() data: IBarProperties[];
-	@Input() highlightedMarkerId: Subject<number>;
+	@Input() highlightedMarkerId: Subject<string>;
 
 	constructor(
 		private barPropertiesService: BarPropertiesService,
@@ -43,7 +43,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		this.initMap();
 
 		this.highlightedMarkerId.subscribe(markerId => {
-			const marker = this.markers.find(marker => marker.id === markerId);
+			const marker = this.markers.find(marker => marker.id == markerId);
 			marker.setIcon(this.getHighlightIcon());
 			this.highlight = marker;
 			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < 17 ? 17 : this.map.getZoom());
