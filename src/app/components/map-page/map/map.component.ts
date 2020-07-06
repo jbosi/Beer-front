@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
 import { BarPropertiesService } from '../../../services/';
 import { IBarProperties } from '../../../models/';
 import { MapPopupComponent } from '../map-popup';
@@ -9,8 +10,7 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
 declare var require: any;
-const lightRedMarker: string = require('./../../../../icons/markers/marker-light-red.svg');
-const blueMarker: string = require('./../../../../icons/markers/marker-blue.svg');
+const blueMarker: string = require('./../../../../icons/markers/blueMarker.svg');
 const customMarker: string = require('./../../../../icons/markers/custom-marker.svg');
 
 @Component({
@@ -19,8 +19,9 @@ const customMarker: string = require('./../../../../icons/markers/custom-marker.
 	styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
-	public markers: L.Layer[] = [];
+	public markers: any[] = [];
 	private map: any;
+	private highlight = null;
 
 	private cluster = L.markerClusterGroup({
 		showCoverageOnHover: false,
@@ -30,6 +31,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	});
 	
 	@Input() data: IBarProperties[];
+	@Input() highlightedMarkerId: Subject<string>;
 
 	constructor(
 		private barPropertiesService: BarPropertiesService,
@@ -40,6 +42,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	ngAfterViewInit(): void {
 		this.initMap();
 
+		this.highlightedMarkerId.subscribe(markerId => {
+			const marker = this.markers.find(marker => marker.id == markerId);
+			marker.setIcon(this.getHighlightIcon());
+			this.highlight = marker;
+			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < 17 ? 17 : this.map.getZoom());
+		});
+
 		const tiles = L.tileLayer('https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/{z}/{x}/{y}.png?access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP', {
 			maxZoom: 20,
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
@@ -47,8 +56,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		tiles.addTo(this.map);
 
 		this.addMarkers();
-		this.map.locate({setView: true, maxZoom: 15});
-		this.map.on('locationfound', (e: any) => this.onLocationFound(e));
+		this.map
+			.locate({setView: true, maxZoom: 15})
+			.on('locationfound', (e: any) => this.onLocationFound(e))
+			.on('click', () => this.highlight ? this.removeHighlight() : null);
 	}
 
 	private initMap(): void {
@@ -63,71 +74,43 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		// const iconId = changes.iconChangeId;
-		// if (iconId.currentValue != iconId.previousValue) {
-			// 	this.changeIconColor(iconId.currentValue, true);
-			// 	this.centerLeafletMapOnMarker(iconId.currentValue);
-			// }
-			// if (iconId.previousValue != null) {
-				// 	this.changeIconColor(iconId.previousValue, false);
-				// }
 		const dataChange = changes.data;
 		if (dataChange.currentValue != dataChange.previousValue && dataChange.previousValue !== undefined) {
 			this.onDataChange();
 		}
 	}
 	
-	// public changeIconColor(id: number, isSelected?: boolean) {
-	// 	const icon = L.icon({
-	// 		iconUrl: isSelected ? lightRedMarker : blueMarker,
-	// 		iconSize: [25, 45],
-	// 		iconAnchor: [12, 44],
-	// 		popupAnchor: [1, -45],
-	// 	});
-
-	// 	const marker = this.markers.find(marker => marker.bar.id === id);
-	// 	marker.setIcon(icon);
-	// }
-	
-	// private centerLeafletMapOnMarker(id: number) {
-	// 	const marker = this.markers.find(marker => marker.bar.id === id)
-	// 	this.map.setView(marker.getLatLng(), 14);
-	// }
-	
 	private addMarkers(): void {
-		const icon = L.icon({
-			iconUrl: customMarker,
-			iconSize: [25, 45],
-			iconAnchor: [13, 46],
-			popupAnchor: [1, -45],
-		});
+		const icon = this.getDefaultIcon();
 
 		this.data.map((bar: IBarProperties) => {
 			const cheapestBeer = bar.cheapestBeer ? bar.cheapestBeer.toString() : 'NA';
 			const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
 				icon: icon,
+			}).on('click', (e) => {
+				this.removeHighlight();
+				marker.setIcon(this.getHighlightIcon());
+				this.highlight = marker;
+
+				this.map.flyTo(e.target.getLatLng(), this.map.getZoom());
 			})
-			.on('click', (e) => this.map.panTo(e.target.getLatLng()))
 			.bindTooltip(cheapestBeer, {
 				permanent: true,
 				direction: 'center',
 				offset: [0,27],
 				className: 'map-marker-tooltip-price'
-			})
+			}).bindPopup(() => {	
+					const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
+					// Listen to the close event
+					popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
 
-			.bindPopup(() => {	
-				const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
-				// Listen to the close event
-				popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
-
-				popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
-				
-				document.body.appendChild(popupEl);
-				return popupEl;
-			})
+					popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
+					
+					document.body.appendChild(popupEl);
+					return popupEl;
+			});
 			
-			marker.bar = bar;
-			
+			marker.id = bar.id;
 			this.markers.push(marker);
 		})
 		
@@ -148,5 +131,30 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	private onLocationFound(e: any) {
 		var radius = e.accuracy / 2;
 		L.circle(e.latlng, radius).addTo(this.map);
+	}
+
+	private removeHighlight() {
+		if (this.highlight !== null) {
+			this.highlight.setIcon(this.getDefaultIcon());
+			this.highlight = null;
+		}
+	}
+
+	private getHighlightIcon(): L.Icon<L.IconOptions> {
+		return L.icon({
+			iconUrl: blueMarker,
+			iconSize: [25, 45],
+			iconAnchor: [13, 46],
+			popupAnchor: [1, -45],
+		});
+	}
+
+	private getDefaultIcon(): L.Icon<L.IconOptions> {
+		return L.icon({
+			iconUrl: customMarker,
+			iconSize: [25, 45],
+			iconAnchor: [13, 46],
+			popupAnchor: [1, -45],
+		});
 	}
 }
