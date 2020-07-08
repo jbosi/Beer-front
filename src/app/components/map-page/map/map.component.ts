@@ -26,7 +26,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	private cluster = L.markerClusterGroup({
 		showCoverageOnHover: false,
 		spiderfyOnMaxZoom: false,
-		disableClusteringAtZoom: 17,
+		disableClusteringAtZoom: 18,
 		maxClusterRadius: 100
 	});
 	
@@ -91,8 +91,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				this.removeHighlight();
 				marker.setIcon(this.getHighlightIcon());
 				this.highlight = marker;
-
-				this.map.flyTo(e.target.getLatLng(), this.map.getZoom());
+				
+				const targetPoint = this.map.project(e.target.getLatLng(), this.map.getZoom()).subtract([0, 200]);
+				const targetLatLng = this.map.unproject(targetPoint, this.map.getZoom());
+				this.map.flyTo(targetLatLng, this.map.getZoom());
 			})
 			.bindTooltip(cheapestBeer, {
 				permanent: true,
