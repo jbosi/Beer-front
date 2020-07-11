@@ -19,8 +19,8 @@ const customMarker: string = require('./../../../../icons/markers/custom-marker.
 	styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
-	public markers: any[] = [];
-	private map: any;
+	public markers: IMarker[] = [];
+	private map: L.Map;
 	private highlight = null;
 
 	private cluster = L.markerClusterGroup({
@@ -86,7 +86,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 		this.data.map((bar: IBarProperties) => {
 			const cheapestBeer = bar.cheapestBeer ? bar.cheapestBeer.toString() : 'NA';
-			const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
+			const marker: IMarker = L.marker([bar.location.latitude, bar.location.longitude], {
 				icon: icon,
 			}).on('click', (e) => {
 				this.removeHighlight();
@@ -160,4 +160,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			popupAnchor: [1, -45],
 		});
 	}
+}
+
+export interface IMarker extends L.Marker {
+	id?: string;
 }
