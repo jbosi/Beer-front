@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
@@ -27,7 +27,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		showCoverageOnHover: false,
 		spiderfyOnMaxZoom: false,
 		disableClusteringAtZoom: 18,
-		maxClusterRadius: 100
+		maxClusterRadius: 100,
+		chunkedLoading: true
 	});
 	
 	@Input() data: IBarProperties[];
@@ -36,7 +37,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	constructor(
 		private barPropertiesService: BarPropertiesService,
 		public dialog: MatDialog,
-		private cd: ChangeDetectorRef,
 	) { }
 
 	ngAfterViewInit(): void {
@@ -66,8 +66,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		this.map = L.map('map', {
 			zoomControl: false,
 			center: [ 48.8534, 2.3488 ],
-			zoom: 14
-		})
+			zoom: 14,
+			preferCanvas: true
+		});
 		L.control.zoom({
 			position:'topright'
 		}).addTo(this.map);
@@ -102,19 +103,19 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				offset: [0,27],
 				className: 'map-marker-tooltip-price'
 			}).bindPopup(() => {	
-					const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
-					// Listen to the close event
-					popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
+				const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
+				// Listen to the close event
+				popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
 
-					popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
-					
-					document.body.appendChild(popupEl);
-					return popupEl;
+				popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
+				
+				document.body.appendChild(popupEl);
+				return popupEl;
 			});
 			
 			marker.id = bar.id;
 			this.markers.push(marker);
-		})
+		});
 		
 		this.cluster.addLayers(this.markers);
 		this.map.addLayer(this.cluster);
