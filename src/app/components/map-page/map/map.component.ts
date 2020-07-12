@@ -10,8 +10,6 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
 declare var require: any;
-const blueMarker: string = require('./../../../../icons/markers/blueMarker.svg');
-const customMarker: string = require('./../../../../icons/markers/custom-marker.svg');
 
 @Component({
 	selector: 'app-map',
@@ -19,9 +17,9 @@ const customMarker: string = require('./../../../../icons/markers/custom-marker.
 	styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
-	public markers: any[] = [];
-	private map: any;
-	private highlight = null;
+	public markers: IMarker[] = [];
+	private map: L.Map;
+	private highlight: IMarker = null;
 
 	private cluster = L.markerClusterGroup({
 		showCoverageOnHover: false,
@@ -44,7 +42,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 		this.highlightedMarkerId.subscribe(markerId => {
 			const marker = this.markers.find(marker => marker.id == markerId);
-			marker.setIcon(this.getHighlightIcon());
+			marker.setStyle(this.getHighlightOptions());
 			this.highlight = marker;
 			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < 17 ? 17 : this.map.getZoom());
 		});
@@ -82,15 +80,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	}
 	
 	private addMarkers(): void {
-		const icon = this.getDefaultIcon();
-
 		this.data.map((bar: IBarProperties) => {
 			const cheapestBeer = bar.cheapestBeer ? bar.cheapestBeer.toString() : 'NA';
-			const marker: any = L.marker([bar.location.latitude, bar.location.longitude], {
-				icon: icon,
-			}).on('click', (e) => {
+			const marker: IMarker = L.circleMarker([bar.location.latitude, bar.location.longitude], this.getDefaultOptions())
+			.on('click', (e) => {
 				this.removeHighlight();
-				marker.setIcon(this.getHighlightIcon());
+				marker.setStyle(this.getHighlightOptions());
 				this.highlight = marker;
 				
 				const targetPoint = this.map.project(e.target.getLatLng(), this.map.getZoom()).subtract([0, 200]);
@@ -100,7 +95,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			.bindTooltip(cheapestBeer, {
 				permanent: true,
 				direction: 'center',
-				offset: [0,27],
 				className: 'map-marker-tooltip-price'
 			}).bindPopup(() => {	
 				const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
@@ -138,26 +132,28 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 	private removeHighlight() {
 		if (this.highlight !== null) {
-			this.highlight.setIcon(this.getDefaultIcon());
+			this.highlight.setStyle(this.getDefaultOptions());
 			this.highlight = null;
 		}
 	}
 
-	private getHighlightIcon(): L.Icon<L.IconOptions> {
-		return L.icon({
-			iconUrl: blueMarker,
-			iconSize: [25, 45],
-			iconAnchor: [13, 46],
-			popupAnchor: [1, -45],
-		});
+	private getHighlightOptions(): L.CircleMarkerOptions {
+		return {
+			fillColor: '#DA686F',
+			color: '#DA686F',
+			fillOpacity: 1
+		};
 	}
 
-	private getDefaultIcon(): L.Icon<L.IconOptions> {
-		return L.icon({
-			iconUrl: customMarker,
-			iconSize: [25, 45],
-			iconAnchor: [13, 46],
-			popupAnchor: [1, -45],
-		});
+	private getDefaultOptions(): L.CircleMarkerOptions {
+		return {
+			fillColor: '#5C9CE6',
+			color: '#5C9CE6',
+			fillOpacity: 1
+		};
 	}
+}
+
+export interface IMarker extends L.CircleMarker {
+	id?: string;
 }
