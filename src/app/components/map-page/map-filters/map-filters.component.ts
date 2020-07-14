@@ -1,10 +1,9 @@
 import { Component, OnInit, forwardRef, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 import { FormGroup, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormBuilder } from '@angular/forms';
 import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
-import { IBarProperties } from '../../../models';
-import { BarPropertiesService } from 'src/app/services';
 import { Observable, of } from 'rxjs';
-import { BEER_ICON_TYPES } from '../../../utils';
+import { BarPropertiesService } from '../../../services';
+import { IBarProperties } from '../../../models';
 
 @Component({
 	selector: 'app-map-filters',
@@ -26,19 +25,16 @@ import { BEER_ICON_TYPES } from '../../../utils';
 })
 export class MapFiltersComponent implements OnInit {
 	@Input() public data: IBarProperties[] = [];
+
 	@Input() public isMobile: boolean;
 	@Input() public showFilters: boolean;
-	@Input() public filtersModel: any;
 	@Output() public dataChange = new EventEmitter<IBarProperties[]>();
 	@Output() public showFiltersChange = new EventEmitter<Boolean>();
-	@Output() public filtersModelChange = new EventEmitter<any>();
 
 	public form: FormGroup;
 	private filters = {};
-	private previousResponse: IBarProperties[];
+	private previousResponse: IBarProperties[] = [];
 	private allData: IBarProperties[];
-	public beerTypes = BEER_ICON_TYPES;
-	public value = 10;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -47,24 +43,19 @@ export class MapFiltersComponent implements OnInit {
 
 	ngOnInit() {
 		this.allData = [...this.data];
-		let initModel = {
+
+		this.form = this.formBuilder.group({
 			isOpened: null,
 			isHappyHour: null,
 			price: 10,
-			type: null
-		};
-
-		if (Object.keys(this.filtersModel).length) {
-			initModel = this.filtersModel;
-		}
-
-		this.form = this.formBuilder.group(initModel);
+			type: null,
+			hasTerrace: null
+		});
 
 		this.form.valueChanges.pipe(
 			debounceTime(350),
 			distinctUntilChanged()
 		).subscribe((model) => {
-			this.filtersModelChange.emit(model);
 			this.onFormChange(model);
 		});
 	}
@@ -73,25 +64,22 @@ export class MapFiltersComponent implements OnInit {
 		this.getFilteredData(model).subscribe(data => this.dataChange.emit(data));
 	}
 
-	private addFrontFilters(model, filteredData: IBarProperties[]): IBarProperties[] {
-		if (model.opened) {
-			filteredData = filteredData.filter(bar => bar.opened);
-		}
-		if (model.isHappyHour) {
-			filteredData = filteredData.filter(bar => bar.inHappy);
-		}
-		return filteredData;
-	}
-
 	private getFilteredData(model): Observable<IBarProperties[]> {
 		let backFiltersChanged = false;
 		const filteredData = [...this.allData];
 		const priceField = this.form.get('price');
 		const beerTypeField = this.form.get('type');
+		const hasTerraceField = this.form.get('hasTerrace');
 
 		if (priceField.dirty) {
 			this.filters['price'] = model['price'];
 			priceField.markAsPristine();
+			backFiltersChanged = true;
+		}
+
+		if (hasTerraceField.dirty) {
+			model['hasTerrace'] ? this.filters['tag'] = 'Terrasse' : delete this.filters['tag'];
+			hasTerraceField.markAsPristine();
 			backFiltersChanged = true;
 		}
 
@@ -103,8 +91,7 @@ export class MapFiltersComponent implements OnInit {
 				delete this.filters['type'];
 			}
 		}
-
-		if (!backFiltersChanged && this.previousResponse != null) {
+		if (!backFiltersChanged) {
 			return of(this.addFrontFilters(model, this.previousResponse));
 		}
 
@@ -116,6 +103,16 @@ export class MapFiltersComponent implements OnInit {
 		}
 
 		return of(this.addFrontFilters(model, filteredData));
+	}
+
+	private addFrontFilters(model, filteredData: IBarProperties[]): IBarProperties[] {
+		if (model.isOpened) {
+			filteredData = filteredData.filter(bar => bar.opened);
+		}
+		if (model.isHappyHour) {
+			filteredData = filteredData.filter(bar => bar.inHappy);
+		}
+		return filteredData;
 	}
 
 	private processFilters(filters): string {

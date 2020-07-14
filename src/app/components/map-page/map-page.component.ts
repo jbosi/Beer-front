@@ -19,7 +19,6 @@ export class MapPageComponent implements OnInit {
 	public highlightedMarkerId = new Subject<string>();
 	public showFilters = false;
 	public barNames: IBarNames[] = [];
-	public filtersModel: any = {};
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
