@@ -50,6 +50,12 @@ mat-card-title.mat-card-title {
 	text-align: left;
 }
 
+.auto-complete {
+	.mat-form-field-wrapper {
+		padding-bottom: 0.75em !important;
+	}
+}
+
 .callout-error {
 	background-color: rgb(228, 63, 77);
 	padding: 0.3rem 1rem;
