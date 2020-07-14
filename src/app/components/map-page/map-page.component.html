@@ -25,11 +25,11 @@
 	</div>
 
 	<div *ngIf="isMobile">
-		<button *ngIf="!showFilters; else filters" mat-fab (click)="toggleShowFilters()" color="primary" class="mapPage-button">
+		<button *ngIf="!showFilters" mat-fab (click)="toggleShowFilters()" color="primary" class="mapPage-button">
 			<mat-icon>menu</mat-icon>
 		</button>
-		<ng-template #filters>
+		<div [hidden]="!showFilters">
 			<app-map-filters class="map-mobile-filters" [(data)]="barProperties" [isMobile]="isMobile" [(showFilters)]="showFilters"></app-map-filters>
-		</ng-template>
+		</div>
 	</div>
 </div>

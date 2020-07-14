@@ -1,6 +1,6 @@
 mat-card {
-	max-width: 450px;
-	min-width: 320px;
+	max-width: 500px;
+	min-width: 350px;
 }
 
 mat-card-content {
@@ -20,6 +20,7 @@ mat-card-content {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-shrink: 0;
 }
 
 .beerListCard-content {

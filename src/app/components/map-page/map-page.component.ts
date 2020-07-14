@@ -53,7 +53,7 @@ export class MapPageComponent implements OnInit {
 	}
 
 	private filterBarSearch(value: string): IBarNames[] {
-		if (value.length < 4) {
+		if (value.length < 2) {
 			return [{
 				name: 'Continuez à écrire',
 				id: null,
