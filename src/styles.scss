@@ -1,5 +1,4 @@
 @import './scss/_custom.scss';
-@import './scss/_autocomplete.scss';
 @import './scss/_leaflet.scss';
 @import "~leaflet/dist/leaflet.css";
 
@@ -51,36 +50,12 @@ mat-card-title.mat-card-title {
 	text-align: left;
 }
 
-
 .callout-error {
 	background-color: rgb(228, 63, 77);
 	padding: 0.3rem 1rem;
 	border-radius: 0.3rem;
 	color: #FFFFFF;
 	margin: 1rem;
-}
-
-// Mods
-
-.mod-textCenter {
-	text-align: center !important;
-}
-
-.mod-textSmall {
-	font-size: 0.813rem;
-	color: #D9D9D9;
-}
-
-.mod-marginTopReset {
-	margin-top: 0 !important;
-}
-
-.mod-marginBottomReset {
-	margin-bottom: 0 !important;
-}
-
-.mod-paddingReset {
-	padding: 0 !important;
 }
 
 .mat-dialog-container {
@@ -108,4 +83,27 @@ mat-card-title.mat-card-title {
 			width: 55%;
 		}
 	}
+}
+
+// Mods
+
+.mod-textCenter {
+	text-align: center !important;
+}
+
+.mod-textSmall {
+	font-size: 0.813rem;
+	color: #D9D9D9;
+}
+
+.mod-marginTopReset {
+	margin-top: 0 !important;
+}
+
+.mod-marginBottomReset {
+	margin-bottom: 0 !important;
+}
+
+.mod-paddingReset {
+	padding: 0 !important;
 }

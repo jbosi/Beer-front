@@ -9,8 +9,6 @@ import { MapPopupComponent } from '../map-popup';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
-declare var require: any;
-
 @Component({
 	selector: 'app-map',
 	templateUrl: './map.component.html',
