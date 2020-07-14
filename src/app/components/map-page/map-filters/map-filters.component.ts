@@ -28,8 +28,10 @@ export class MapFiltersComponent implements OnInit {
 	@Input() public data: IBarProperties[] = [];
 	@Input() public isMobile: boolean;
 	@Input() public showFilters: boolean;
+	@Input() public filtersModel: any;
 	@Output() public dataChange = new EventEmitter<IBarProperties[]>();
 	@Output() public showFiltersChange = new EventEmitter<Boolean>();
+	@Output() public filtersModelChange = new EventEmitter<any>();
 
 	public form: FormGroup;
 	private filters = {};
@@ -41,21 +43,28 @@ export class MapFiltersComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private barService: BarPropertiesService
-	) {	}
+	) {}
 
 	ngOnInit() {
 		this.allData = [...this.data];
-		this.form = this.formBuilder.group({
-			isOpened: undefined,
-			isHappyHour: undefined,
+		let initModel = {
+			isOpened: null,
+			isHappyHour: null,
 			price: 10,
-			type: undefined
-		});
+			type: null
+		};
+
+		if (Object.keys(this.filtersModel).length) {
+			initModel = this.filtersModel;
+		}
+
+		this.form = this.formBuilder.group(initModel);
 
 		this.form.valueChanges.pipe(
 			debounceTime(350),
 			distinctUntilChanged()
 		).subscribe((model) => {
+			this.filtersModelChange.emit(model);
 			this.onFormChange(model);
 		});
 	}
