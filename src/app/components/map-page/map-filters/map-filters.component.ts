@@ -4,6 +4,7 @@ import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { BarPropertiesService } from '../../../services';
 import { IBarProperties } from '../../../models';
+import { BEER_ICON_TYPES } from '../../../utils';
 
 @Component({
 	selector: 'app-map-filters',
@@ -35,6 +36,7 @@ export class MapFiltersComponent implements OnInit {
 	private filters = {};
 	private previousResponse: IBarProperties[] = [];
 	private allData: IBarProperties[];
+	public beerTypes = BEER_ICON_TYPES;
 
 	constructor(
 		private formBuilder: FormBuilder,
