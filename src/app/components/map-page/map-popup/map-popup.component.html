@@ -1,7 +1,14 @@
 <mat-card >
-	<mat-card-title class="mod-textCenter">
-		{{ barName }}
+	<mat-card-title>
+		<div class="mod-textCenter">{{ barName }}</div>
+		<div (click)="toggleIsFavorite()">
+			<mat-icon *ngIf="isFavorite; else unfavorite" class="favorite-icon">favorite_border</mat-icon>
+			<ng-template #unfavorite>
+				<mat-icon class="favorite-icon" color="primary">favorite</mat-icon>
+			</ng-template>
+		</div>
 	</mat-card-title>
+
 	<mat-card-content>
 		<p class="mod-textSmall mod-marginBottomReset">{{ barAddress }}</p>
 		<p class="mod-textSmall mod-marginTopReset mod-marginBottomReset">Happy hours : {{ happyHourStart }} - {{ happyHourEnd }}</p>

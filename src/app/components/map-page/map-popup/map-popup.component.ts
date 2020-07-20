@@ -17,6 +17,7 @@ export class MapPopupComponent implements OnInit {
 	public happyHourEnd: string;
 	public displayedColumns: string[] = ['name', 'price', 'priceHH', 'icon', 'quantity'];
 	public isLoading = true;
+	public isFavorite: boolean;
 	
 	ngOnInit() {
 		const currentDay: string = getCurrentDay();
@@ -46,5 +47,9 @@ export class MapPopupComponent implements OnInit {
 
 	private getBeerIconColor(type: string): string {
 		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
+	}
+
+	public toggleIsFavorite(): void {
+		this.isFavorite = !this.isFavorite;
 	}
 }

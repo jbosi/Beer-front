@@ -54,3 +54,11 @@ td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:la
 td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
 	padding: 0;
 }
+
+.favorite-icon {
+	position: absolute;
+	left: 16px;
+	top: 13px;
+	cursor: pointer;
+	user-select: none;
+}
