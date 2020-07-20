@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSliderModule, MatAutocompleteModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSliderModule, MatAutocompleteModule, MatSnackBarModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
@@ -38,7 +38,8 @@ const MATERIAL_MODULES = [
 	MatProgressSpinnerModule,
 	MatCheckboxModule,
 	MatSliderModule,
-	MatAutocompleteModule
+	MatAutocompleteModule,
+	MatSnackBarModule
 ];
 
 @NgModule({

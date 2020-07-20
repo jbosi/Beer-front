@@ -34,7 +34,15 @@ export class UserService {
 	register(user: any) {
 		return this.http.post(`${API_URL}/users/signup`, user);
 	}
+
+	favorites(id: string) {
+		return this.http.post(`${API_URL}/users/favourites`, id);
+	}
 	
+	unfavorites(id: string) {
+		return this.http.delete(`${API_URL}/users/favourites${id}`);
+	}
+
 	delete(email: string) {
 		return this.http.delete(`${API_URL}/users/${email}`);
 	}
