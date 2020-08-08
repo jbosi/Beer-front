@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBarProperties } from 'src/app/models';
-import { Observable, Subject } from 'rxjs';
-import { MatOption } from '@angular/material';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-map-page',
@@ -42,13 +41,12 @@ export class MapPageComponent implements OnInit {
 		this.showFilters = !this.showFilters;
 	}
 
-	public onSelectedItemChanged(id: string) {
-		console.log(id)
-		this.highlightedMarkerId.next(id);
+	public onSelectedItemChanged(bar: IBarNames): void {
+		this.highlightedMarkerId.next(bar.id);
 	}
 }
 
-export interface IBarNames {
+declare interface IBarNames {
 	name: string;
 	id: string;
 }

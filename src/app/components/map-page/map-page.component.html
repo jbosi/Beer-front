@@ -9,9 +9,10 @@
 	
 	<div class="map-left-element-container">
 		<div app-input-autocomplete class="auto-complete"
-		[itemNames]="barNames"
-		placeHolder="Recherchez un bar"
-		(selectedItemChanged)="onSelectedItemChanged($event)"></div>
+			[itemNames]="barNames"
+			placeHolder="Recherchez un bar"
+			(selectedItemChanged)="onSelectedItemChanged($event)">
+		</div>
 		
 		<div *ngIf="!isMobile">
 			<app-map-filters [(data)]="barProperties"></app-map-filters>
