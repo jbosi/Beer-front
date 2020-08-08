@@ -86,7 +86,7 @@ export class MapFiltersComponent implements OnInit {
 		if (hasTerraceField.dirty) {
 			model['hasTerrace'] ? this.filters['tag'] = 'Terrasse' : delete this.filters['tag'];
 			hasTerraceField.markAsPristine();
-			backFiltersChanged = true;
+			this.backFiltersChanged = true;
 		}
 
 		if (beerTypeField.dirty) {
