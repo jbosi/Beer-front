@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, BeerListComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, DashboardComponent ,NavBarComponent, LoginComponent, RegisterComponent} from '../components';
+import { PageNotFoundComponent, BeerListComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, AdminDashboardComponent ,NavBarComponent, LoginComponent, RegisterComponent, UserAdminComponent} from '../components';
 import { MapResolver } from './resolvers';
 import { AuthGuard } from './guards/auth.guard';
-import { UserAdminComponent } from '../components/dashboard/user-admin/user-admin.component';
 
 const routes: Routes = [
 	{
@@ -16,8 +15,8 @@ const routes: Routes = [
 		component: NavBarComponent,
 		children: [
 			{
-				path: 'dashboard',
-				component: DashboardComponent,
+				path: 'admin-dashboard',
+				component: AdminDashboardComponent,
 				canActivate: [AuthGuard],
 				children: [
 					{ path: '', component: BarAdminComponent},

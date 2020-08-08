@@ -6,6 +6,9 @@
 		<span><a routerLink="/beers" routerLinkActive="active">BIERES</a></span>
 	</div>
 	<div class="nav-icons">
+		<a routerLink="/admin-dashboard">
+			<mat-icon aria-hidden="false" aria-label="Logout">settings</mat-icon>
+		</a>
 		<a *ngIf="isLogged; else login" (click)="logout()">
 			<mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
 		</a>
