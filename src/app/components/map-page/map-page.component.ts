@@ -42,7 +42,9 @@ export class MapPageComponent implements OnInit {
 	}
 
 	public onSelectedItemChanged(bar: IBarNames): void {
-		this.highlightedMarkerId.next(bar.id);
+		if (bar != null && bar.id) {
+			this.highlightedMarkerId.next(bar.id);
+		}
 	}
 }
 

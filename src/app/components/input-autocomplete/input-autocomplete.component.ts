@@ -32,6 +32,9 @@ export class InputAutocompleteComponent implements OnInit {
 	}
 
 	public setSelectedItemChanged(option: MatOption): void {
+		if (option.value && option.value.id === null) {
+			return;
+		}
 		this.selectedItemChanged.emit(option.value);
 	}
 
