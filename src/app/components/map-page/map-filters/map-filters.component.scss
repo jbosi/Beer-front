@@ -27,10 +27,7 @@ h3 {
 	.filters-form-row {
 		display: flex;
 		padding: 0.8rem 0 0 0;
-
-		.mat-checkbox:first-child {
-			margin-right: 4rem;;
-		}
+		justify-content: space-between;
 	}
 }
 
