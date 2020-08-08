@@ -19,6 +19,7 @@ import { BarPropertiesService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { InputAutocompleteComponent } from './components/input-autocomplete/input-autocomplete.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -62,7 +63,8 @@ const MATERIAL_MODULES = [
 		BeerIconComponent,
 		LoginComponent,
 		RegisterComponent,
-		UserAdminComponent
+		UserAdminComponent,
+		InputAutocompleteComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,

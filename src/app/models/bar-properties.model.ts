@@ -1,3 +1,5 @@
+import { IBeerInfo } from './beer-properties.model';
+
 export interface IBarProperties {
 	id: string;
 	name: string;
@@ -25,31 +27,6 @@ export interface IWeekDaysOpeningHours {
 export interface IDayOpeningHours {
 	opening: string;
 	closing: string;
-}
-
-export interface IBeerInfo {
-	name: string;
-	id: number;
-	pricing: [
-		{
-			quantity: number;
-			priceBeer: number;
-			priceHappy: number;
-			volume: number;
-		}
-	];
-	type: string;
-	volume: number;
-	picture: string;
-	brewery: string;
-	alcohol: number;
-	description: string;
-	ibu: number;
-	descriptionObject: {
-		eye: string;
-		mouth: string;
-		nose: string;
-	};
 }
 
 export interface IDetailedBarProperties {

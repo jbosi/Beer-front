@@ -2,7 +2,7 @@ import { Component, OnInit, forwardRef, ChangeDetectionStrategy, Input, Output, 
 import { FormGroup, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormBuilder } from '@angular/forms';
 import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { BarPropertiesService } from '../../../services';
+import { BarPropertiesService, BeerPropertiesService } from '../../../services';
 import { IBarProperties } from '../../../models';
 import { BEER_ICON_TYPES } from '../../../utils';
 
@@ -36,12 +36,15 @@ export class MapFiltersComponent implements OnInit {
 	private filters = {};
 	private previousResponse: IBarProperties[] = [];
 	private allData: IBarProperties[];
+	private backFiltersChanged = false;
 	public beerTypes = BEER_ICON_TYPES;
+	public beerNames: string[] = [];
 
 	constructor(
-		private formBuilder: FormBuilder,
-		private barService: BarPropertiesService
-	) {}
+		private readonly formBuilder: FormBuilder,
+		private readonly barService: BarPropertiesService,
+		private readonly beerService: BeerPropertiesService
+	) {	}
 
 	ngOnInit() {
 		this.allData = [...this.data];
@@ -60,6 +63,8 @@ export class MapFiltersComponent implements OnInit {
 		).subscribe((model) => {
 			this.onFormChange(model);
 		});
+
+		this.beerService.getBeerNames().subscribe(names => this.beerNames = names);
 	}
 
 	private onFormChange(model: any): void {
@@ -67,7 +72,6 @@ export class MapFiltersComponent implements OnInit {
 	}
 
 	private getFilteredData(model): Observable<IBarProperties[]> {
-		let backFiltersChanged = false;
 		const filteredData = [...this.allData];
 		const priceField = this.form.get('price');
 		const beerTypeField = this.form.get('type');
@@ -76,24 +80,25 @@ export class MapFiltersComponent implements OnInit {
 		if (priceField.dirty) {
 			this.filters['price'] = model['price'];
 			priceField.markAsPristine();
-			backFiltersChanged = true;
+			this.backFiltersChanged = true;
 		}
 
 		if (hasTerraceField.dirty) {
 			model['hasTerrace'] ? this.filters['tag'] = 'Terrasse' : delete this.filters['tag'];
 			hasTerraceField.markAsPristine();
-			backFiltersChanged = true;
+			this.backFiltersChanged = true;
 		}
 
 		if (beerTypeField.dirty) {
 			this.filters['type'] = model['type'];
 			beerTypeField.markAsPristine();
-			backFiltersChanged = true;
+			this.backFiltersChanged = true;
 			if (model['type'] === undefined) {
 				delete this.filters['type'];
 			}
 		}
-		if (!backFiltersChanged) {
+    
+		if (!this.backFiltersChanged && this.previousResponse != null) {
 			return of(this.addFrontFilters(model, this.previousResponse));
 		}
 
@@ -103,6 +108,8 @@ export class MapFiltersComponent implements OnInit {
 				map(response => this.addFrontFilters(model, [...response]))
 			);
 		}
+
+		this.backFiltersChanged = false;
 
 		return of(this.addFrontFilters(model, filteredData));
 	}
@@ -128,5 +135,16 @@ export class MapFiltersComponent implements OnInit {
 	public toggleShowFilters(): void {
 		this.showFilters = !this.showFilters;
 		this.showFiltersChange.emit(this.showFilters);
+	}
+
+	public onSelectedItemChanged(beerName: string) {
+		if (beerName != null) {
+			this.filters['beer'] = beerName;
+		}
+		else {
+			delete this.filters['beer'];
+		}
+		this.backFiltersChanged = true;
+		this.form.updateValueAndValidity();
 	}
 }
