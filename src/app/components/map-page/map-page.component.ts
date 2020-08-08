@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBarProperties } from 'src/app/models';
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { MatOption } from '@angular/material';
 
@@ -14,8 +12,6 @@ import { MatOption } from '@angular/material';
 export class MapPageComponent implements OnInit {
 	public isMobile: boolean;
 	public barProperties: IBarProperties[];
-	public bars: Observable<IBarNames[]>;
-	public barSearcher = new FormControl();
 	public highlightedMarkerId = new Subject<string>();
 	public showFilters = false;
 	public barNames: IBarNames[] = [];
@@ -36,12 +32,6 @@ export class MapPageComponent implements OnInit {
 				};
 			});
 		});
-
-		this.bars = this.barSearcher.valueChanges.pipe(
-			debounceTime(300),
-			distinctUntilChanged(),
-			map(value => typeof(value) === "string" ? this.filterBarSearch(value) : this.filterBarSearch(value.name))
-		);
 	}
 
 	public getIsMobile(): boolean {
@@ -52,24 +42,9 @@ export class MapPageComponent implements OnInit {
 		this.showFilters = !this.showFilters;
 	}
 
-	private filterBarSearch(value: string): IBarNames[] {
-		if (value.length < 4) {
-			return [{
-				name: 'Continuez à écrire',
-				id: null,
-			}];
-		}
-		const filterValue = value.toLowerCase();
-	
-		return this.barNames.filter(bar => bar.name.toLowerCase().includes(filterValue));
-	}
-
-	public setHighlightedBar(option: MatOption) {
-		this.highlightedMarkerId.next(option.value.id);
-	}
-
-	public displayFn(bar?: IBarProperties): string | undefined {
-		return bar ? bar.name : undefined;
+	public onSelectedItemChanged(id: string) {
+		console.log(id)
+		this.highlightedMarkerId.next(id);
 	}
 }
 
