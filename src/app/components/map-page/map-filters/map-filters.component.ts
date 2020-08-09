@@ -58,7 +58,7 @@ export class MapFiltersComponent implements OnInit {
 			isOpened: null,
 			isHappyHour: null,
 			price: 10,
-			showfavorites: undefined
+			showfavorites: null,
 			type: null,
 			hasTerrace: null
 		});

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
-import { MatOption } from '@angular/material';
 import { IBarProperties, IFavoriteBar, IBarNames } from '../../models';
 import { AuthenticationService, UserService } from '../../services';
 
@@ -67,9 +64,4 @@ export class MapPageComponent implements OnInit {
 		}
 		return of(null);
 	}
-}
-
-declare interface IBarNames {
-	name: string;
-	id: string;
 }
