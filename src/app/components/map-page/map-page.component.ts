@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, of } from 'rxjs';
 import { IBarProperties, IFavoriteBar, IBarNames } from '../../models';
 import { AuthenticationService, UserService } from '../../services';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-map-page',
@@ -22,7 +23,8 @@ export class MapPageComponent implements OnInit {
 	constructor(
 		private readonly activatedRoute: ActivatedRoute,
 		private readonly authenticationService: AuthenticationService,
-		private readonly userService: UserService
+		private readonly userService: UserService,
+		private readonly snackBar: MatSnackBar
 	) {}
 	
 	ngOnInit() {
@@ -54,7 +56,13 @@ export class MapPageComponent implements OnInit {
 
 	public onSelectedItemChanged(bar: IBarNames): void {
 		if (bar != null && bar.id) {
-			this.highlightedMarkerId.next(bar.id);
+			if (this.barProperties.some(item => item.id == bar.id)) {
+				this.highlightedMarkerId.next(bar.id);
+				return;
+			}
+			this.snackBar.open('Veuillez Réinitialiser les filtres', '', {
+				duration: 2000,
+			});
 		}
 	}
 

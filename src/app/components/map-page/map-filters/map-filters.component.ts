@@ -104,7 +104,7 @@ export class MapFiltersComponent implements OnInit {
 			}
 		}
     
-		if (!this.backFiltersChanged && this.previousResponse != null) {
+		if (!this.backFiltersChanged && this.previousResponse != null && this.previousResponse.length) {
 			return of(this.addFrontFilters(model, this.previousResponse));
 		}
 
