@@ -2,7 +2,7 @@
 	<mat-card-title>
 		<div class="mod-textCenter">{{ barName }}</div>
 		<div (click)="toggleIsFavorite()">
-			<mat-icon *ngIf="isFavorite; else unfavorite" class="favorite-icon">favorite_border</mat-icon>
+			<mat-icon *ngIf="!isFavorite; else unfavorite" class="favorite-icon">favorite_border</mat-icon>
 			<ng-template #unfavorite>
 				<mat-icon class="favorite-icon" color="primary">favorite</mat-icon>
 			</ng-template>

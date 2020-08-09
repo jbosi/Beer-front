@@ -81,3 +81,12 @@ export interface IBarBeerDetail {
 	icon: string;
 	quantity: string;
 }
+
+export interface IBarNames {
+	name: string;
+	id: string;
+}
+
+export interface IFavoriteBar {
+	barId: string;
+}

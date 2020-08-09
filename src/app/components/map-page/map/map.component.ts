@@ -3,13 +3,11 @@ import { NgElement, WithProperties } from '@angular/elements';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { BarPropertiesService } from '../../../services/';
-import { IBarProperties } from '../../../models/';
+import { IBarProperties, IFavoriteBar } from '../../../models/';
 import { MapPopupComponent } from '../map-popup';
 
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-
-declare var require: any;
 
 @Component({
 	selector: 'app-map',
@@ -17,6 +15,7 @@ declare var require: any;
 	styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
+	@Input() public favorites: IFavoriteBar[];
 	public markers: IMarker[] = [];
 	private map: L.Map;
 	private highlight: IMarker = null;
@@ -39,7 +38,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 	ngAfterViewInit(): void {
 		this.initMap();
-
 		this.highlightedMarkerId.subscribe(markerId => {
 			const marker = this.markers.find(marker => marker.id == markerId);
 			marker.setStyle(this.getHighlightOptions());
@@ -52,7 +50,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
 		});
 		tiles.addTo(this.map);
-
+		
 		this.addMarkers();
 		this.map
 			.locate({setView: true, maxZoom: 15})
@@ -74,7 +72,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		const dataChange = changes.data;
-		if (dataChange.currentValue != dataChange.previousValue && dataChange.previousValue !== undefined) {
+		if (dataChange != null && dataChange.currentValue != dataChange.previousValue && dataChange.previousValue !== undefined) {
 			this.onDataChange();
 		}
 	}
@@ -102,6 +100,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
 
 				popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
+				popupEl.favorites = this.favorites;
 				
 				document.body.appendChild(popupEl);
 				return popupEl;

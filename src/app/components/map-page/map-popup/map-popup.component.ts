@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDetailedBarProperties, IBarBeerDetail } from '../../../models';
+import { IDetailedBarProperties, IBarBeerDetail, IFavoriteBar } from '../../../models';
 import { getCurrentDay, formatDateToHoursMinutes, BEER_ICON_TYPES_COLORS } from '../../../utils';
-import { UserService } from 'src/app/services';
+import { UserService } from '../../../services';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -12,8 +12,10 @@ import { MatSnackBar } from '@angular/material';
 })
 export class MapPopupComponent implements OnInit {
 	@Input() public barData$: Observable<any>;
-	public dataSource: IBarBeerDetail[] = [];
+	@Input() public favorites: IFavoriteBar[];
+
 	private barId: string;
+	public dataSource: IBarBeerDetail[] = [];
 	public barName: string;
 	public barAddress: string;
 	public happyHourStart: string;
@@ -39,6 +41,7 @@ export class MapPopupComponent implements OnInit {
 				this.happyHourStart = 'NA';
 				this.happyHourEnd = 'NA';
 			}
+			this.isFavorite = this.checkIsFavorites();
 			bar.beers.map(beer => {
 				beer.pricing.map(item => {
 					this.dataSource.push({
@@ -51,7 +54,7 @@ export class MapPopupComponent implements OnInit {
 				});
 			});
 			this.isLoading = false;
-		})
+		});
 	}
 
 	private getBeerIconColor(type: string): string {
@@ -61,13 +64,20 @@ export class MapPopupComponent implements OnInit {
 	public toggleIsFavorite(): void {
 		if (!this.isFavorite) {
 			this.userService.favorites(this.barId).subscribe(
-				(_) => this.isFavorite = !this.isFavorite,
+				(_) => {
+					this.isFavorite = !this.isFavorite;
+					this.favorites.push({ barId: this.barId })
+				},
 				error => this.handleError(error)
 			);
 		}
 		else {
 			this.userService.unfavorites(this.barId).subscribe(
-				(_) => this.isFavorite = !this.isFavorite,
+				(_) => {
+					this.isFavorite = !this.isFavorite
+					const index = this.favorites.findIndex(favorite => favorite.barId === this.barId);
+					this.favorites.splice(index, 1);
+				},
 				error => this.handleError(error)
 			);
 		}
@@ -81,5 +91,12 @@ export class MapPopupComponent implements OnInit {
 				duration: 2000,
 			});
 		}
+	}
+
+	private checkIsFavorites(): boolean {
+		if (this.favorites == null) {
+			return false;
+		}
+		return this.favorites.some(bar => bar.barId === this.barId);
 	}
 }

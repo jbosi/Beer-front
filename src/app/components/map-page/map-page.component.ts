@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IBarProperties } from 'src/app/models';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { MatOption } from '@angular/material';
+import { IBarProperties, IFavoriteBar, IBarNames } from '../../models';
+import { AuthenticationService, UserService } from '../../services';
 
 @Component({
 	selector: 'app-map-page',
@@ -19,13 +20,20 @@ export class MapPageComponent implements OnInit {
 	public highlightedMarkerId = new Subject<string>();
 	public showFilters = false;
 	public barNames: IBarNames[] = [];
+	private isLogged = false;
+	public favorites: IFavoriteBar[] = [];
+	public favorites$: Observable<IFavoriteBar[]>;
 
 	constructor(
-		private activatedRoute: ActivatedRoute,
+		private readonly activatedRoute: ActivatedRoute,
+		private readonly authenticationService: AuthenticationService,
+		private readonly userService: UserService
 	) {}
 	
 	ngOnInit() {
 		window.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
+
+		this.authenticationService.isLogged.subscribe(isLogged => this.isLogged = isLogged);
 		
 		this.activatedRoute.data.subscribe((response: { mapData: IBarProperties[] }) => {
 			this.barProperties = response.mapData;
@@ -42,6 +50,9 @@ export class MapPageComponent implements OnInit {
 			distinctUntilChanged(),
 			map(value => typeof(value) === "string" ? this.filterBarSearch(value) : this.filterBarSearch(value.name))
 		);
+
+		this.favorites$ = this.getfavorites();
+		this.favorites$.subscribe(favorites => this.favorites = favorites);
 	}
 
 	public getIsMobile(): boolean {
@@ -71,9 +82,11 @@ export class MapPageComponent implements OnInit {
 	public displayFn(bar?: IBarProperties): string | undefined {
 		return bar ? bar.name : undefined;
 	}
-}
 
-export interface IBarNames {
-	name: string;
-	id: string;
+	private getfavorites(): Observable<IFavoriteBar[]> {
+		if (this.isLogged) {
+			return this.userService.getfavoritesByUserId(localStorage.getItem('user_id'));
+		}
+		return of(null);
+	}
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit, forwardRef, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 import { FormGroup, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormBuilder } from '@angular/forms';
 import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
-import { IBarProperties } from '../../../models';
-import { BarPropertiesService } from 'src/app/services';
+import { IBarProperties, IFavoriteBar } from '../../../models';
+import { BarPropertiesService, AuthenticationService } from 'src/app/services';
 import { Observable, of } from 'rxjs';
 import { BEER_ICON_TYPES } from '../../../utils';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-map-filters',
@@ -28,6 +29,7 @@ export class MapFiltersComponent implements OnInit {
 	@Input() public data: IBarProperties[] = [];
 	@Input() public isMobile: boolean;
 	@Input() public showFilters: boolean;
+	@Input() public favorites: IFavoriteBar[] = [];
 	@Output() public dataChange = new EventEmitter<IBarProperties[]>();
 	@Output() public showFiltersChange = new EventEmitter<Boolean>();
 
@@ -36,11 +38,13 @@ export class MapFiltersComponent implements OnInit {
 	private previousResponse: IBarProperties[];
 	private allData: IBarProperties[];
 	public beerTypes = BEER_ICON_TYPES;
-	public value = 10;
+	public isLogged: boolean;
 
 	constructor(
-		private formBuilder: FormBuilder,
-		private barService: BarPropertiesService
+		private readonly formBuilder: FormBuilder,
+		private readonly barService: BarPropertiesService,
+		private readonly snackBar: MatSnackBar,
+		private readonly authenticationService: AuthenticationService
 	) {	}
 
 	ngOnInit() {
@@ -49,29 +53,20 @@ export class MapFiltersComponent implements OnInit {
 			isOpened: undefined,
 			isHappyHour: undefined,
 			price: 10,
-			type: undefined
+			type: undefined,
+			showfavorites: undefined
 		});
 
 		this.form.valueChanges.pipe(
 			debounceTime(350),
 			distinctUntilChanged()
-		).subscribe((model) => {
-			this.onFormChange(model);
-		});
+		).subscribe(model => this.onFormChange(model));
+
+		this.authenticationService.isLogged.subscribe(isLogged => this.isLogged = isLogged);
 	}
 
 	private onFormChange(model: any): void {
 		this.getFilteredData(model).subscribe(data => this.dataChange.emit(data));
-	}
-
-	private addFrontFilters(model, filteredData: IBarProperties[]): IBarProperties[] {
-		if (model.opened) {
-			filteredData = filteredData.filter(bar => bar.opened);
-		}
-		if (model.isHappyHour) {
-			filteredData = filteredData.filter(bar => bar.inHappy);
-		}
-		return filteredData;
 	}
 
 	private getFilteredData(model): Observable<IBarProperties[]> {
@@ -107,6 +102,27 @@ export class MapFiltersComponent implements OnInit {
 		}
 
 		return of(this.addFrontFilters(model, filteredData));
+	}
+
+	private addFrontFilters(model, filteredData: IBarProperties[]): IBarProperties[] {
+		if (model.opened) {
+			filteredData = filteredData.filter(bar => bar.opened);
+		}
+		if (model.isHappyHour) {
+			filteredData = filteredData.filter(bar => bar.inHappy);
+		}
+		if (model.showfavorites) {
+			if (!this.isLogged) {
+				this.form.get("showfavorites").setValue(!model.showfavorites, { emitEvent: false })
+				this.snackBar.open('Veuillez vous connecter', '', {
+					duration: 2000,
+				});
+			}
+			else if (this.favorites != null) {
+				filteredData = filteredData.filter(bar => this.favorites.some(favorite => favorite.barId === bar.id));
+			}
+		}
+		return filteredData;
 	}
 
 	private processFilters(filters): string {

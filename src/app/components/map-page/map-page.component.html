@@ -1,5 +1,5 @@
 <div class="map-container" >
-	<app-map [data]="barProperties" [highlightedMarkerId]="highlightedMarkerId"></app-map>
+	<app-map [data]="barProperties" [highlightedMarkerId]="highlightedMarkerId" [favorites]="favorites"></app-map>
 </div>
 
 <div class="content" 
@@ -20,7 +20,7 @@
 		</mat-form-field>
 		
 		<div *ngIf="!isMobile">
-			<app-map-filters [(data)]="barProperties"></app-map-filters>
+			<app-map-filters [(data)]="barProperties" [favorites]="favorites"></app-map-filters>
 		</div>
 	</div>
 
