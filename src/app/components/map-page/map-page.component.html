@@ -8,16 +8,11 @@
 	fxFlexFill >
 	
 	<div class="map-left-element-container">
-		<mat-form-field class="auto-complete">
-			<input type="text" placeholder="Rechercher un bar" matInput [formControl]="barSearcher" [matAutocomplete]="auto">
-			<mat-autocomplete #auto="matAutocomplete" (optionSelected)="setHighlightedBar($event.option)" [displayWith]="displayFn">
-				<cdk-virtual-scroll-viewport itemSize="48" style="height: 256px">
-					<mat-option *cdkVirtualFor="let bar of bars" [value]="bar">
-					  {{ bar.name }}
-					</mat-option>
-				</cdk-virtual-scroll-viewport>
-			</mat-autocomplete>
-		</mat-form-field>
+		<div app-input-autocomplete class="auto-complete"
+			[itemNames]="barNames"
+			placeHolder="Recherchez un bar"
+			(selectedItemChanged)="onSelectedItemChanged($event)">
+		</div>
 		
 		<div *ngIf="!isMobile">
 			<app-map-filters [(data)]="barProperties" [favorites]="favorites"></app-map-filters>
@@ -25,11 +20,11 @@
 	</div>
 
 	<div *ngIf="isMobile">
-		<button *ngIf="!showFilters; else filters" mat-fab (click)="toggleShowFilters()" color="primary" class="mapPage-button">
+		<button *ngIf="!showFilters" mat-fab (click)="toggleShowFilters()" color="primary" class="mapPage-button">
 			<mat-icon>menu</mat-icon>
 		</button>
-		<ng-template #filters>
+		<div [hidden]="!showFilters">
 			<app-map-filters class="map-mobile-filters" [(data)]="barProperties" [isMobile]="isMobile" [(showFilters)]="showFilters"></app-map-filters>
-		</ng-template>
+		</div>
 	</div>
 </div>

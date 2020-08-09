@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { IBeerInfo } from './../models';
 import { API_URL } from '../app.config';
@@ -17,14 +16,14 @@ export class BeerPropertiesService {
 	}
 
 	public addBeer(payload: any): Observable<any> {
-		return this.http.post(`${API_URL}/beers`, payload).pipe(
-			map(response => response)
-		);
+		return this.http.post(`${API_URL}/beers`, payload);
 	}
 
 	public removeBeer(payload: any): Observable<any> {
-		return this.http.post(`${API_URL}/beers`, payload).pipe(
-			map(response => response)
-		);
+		return this.http.post(`${API_URL}/beers`, payload);
+	}
+
+	public getBeerNames(): Observable<string[]> {
+		return this.http.get<string[]>(`${API_URL}/beers/list-names`);
 	}
 }

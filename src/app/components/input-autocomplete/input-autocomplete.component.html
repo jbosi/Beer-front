@@ -1,0 +1,15 @@
+<div class="auto-complete-container">
+	<mat-form-field class="auto-complete-field">
+		<input type="text" [placeholder]="placeHolder" matInput [formControl]="itemSearcher" [matAutocomplete]="auto">
+		<mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSelectedItemChanged($event.option)" [displayWith]="displayFn">
+			<cdk-virtual-scroll-viewport itemSize="48" style="height: 256px">
+				<mat-option *cdkVirtualFor="let item of items" [value]="item">
+					{{ item.name || item }}
+				</mat-option>
+			</cdk-virtual-scroll-viewport>
+		</mat-autocomplete>
+	</mat-form-field>
+	<button mat-icon-button (click)="clearInput()" class="button-icon" color="primary" aria-label="clear button">
+		<mat-icon class="clear-icon" aria-hidden="false" aria-label="clear">clear</mat-icon>
+	</button>
+</div>

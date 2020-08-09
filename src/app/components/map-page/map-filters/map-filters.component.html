@@ -5,9 +5,15 @@
 	</mat-card-title>
 	<mat-card-content>
 		<div [formGroup]="form" class="filters-form">
+			<div app-input-autocomplete class="filters-form-row"
+				[itemNames]="beerNames"
+				placeHolder="Recherchez une Bière"
+				(selectedItemChanged)="onSelectedItemChanged($event)">
+			</div>
 			<div class="filters-form-row">
 				<mat-checkbox matInput formControlName="isOpened">Ouvert</mat-checkbox>
 				<mat-checkbox matInput formControlName="isHappyHour">Est en HH</mat-checkbox>
+				<mat-checkbox matInput formControlName="hasTerrace">Terrasse</mat-checkbox>
 			</div>
 			<div class="filters-form-row">
 				<mat-checkbox matInput formControlName="showfavorites">Afficher les favoris</mat-checkbox>

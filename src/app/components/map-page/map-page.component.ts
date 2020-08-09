@@ -15,8 +15,6 @@ import { AuthenticationService, UserService } from '../../services';
 export class MapPageComponent implements OnInit {
 	public isMobile: boolean;
 	public barProperties: IBarProperties[];
-	public bars: Observable<IBarNames[]>;
-	public barSearcher = new FormControl();
 	public highlightedMarkerId = new Subject<string>();
 	public showFilters = false;
 	public barNames: IBarNames[] = [];
@@ -45,12 +43,6 @@ export class MapPageComponent implements OnInit {
 			});
 		});
 
-		this.bars = this.barSearcher.valueChanges.pipe(
-			debounceTime(300),
-			distinctUntilChanged(),
-			map(value => typeof(value) === "string" ? this.filterBarSearch(value) : this.filterBarSearch(value.name))
-		);
-
 		this.favorites$ = this.getfavorites();
 		this.favorites$.subscribe(favorites => this.favorites = favorites);
 	}
@@ -63,30 +55,21 @@ export class MapPageComponent implements OnInit {
 		this.showFilters = !this.showFilters;
 	}
 
-	private filterBarSearch(value: string): IBarNames[] {
-		if (value.length < 4) {
-			return [{
-				name: 'Continuez à écrire',
-				id: null,
-			}];
+	public onSelectedItemChanged(bar: IBarNames): void {
+		if (bar != null && bar.id) {
+			this.highlightedMarkerId.next(bar.id);
 		}
-		const filterValue = value.toLowerCase();
-	
-		return this.barNames.filter(bar => bar.name.toLowerCase().includes(filterValue));
 	}
 
-	public setHighlightedBar(option: MatOption) {
-		this.highlightedMarkerId.next(option.value.id);
-	}
-
-	public displayFn(bar?: IBarProperties): string | undefined {
-		return bar ? bar.name : undefined;
-	}
-
-	private getfavorites(): Observable<IFavoriteBar[]> {
+  private getfavorites(): Observable<IFavoriteBar[]> {
 		if (this.isLogged) {
 			return this.userService.getfavoritesByUserId(localStorage.getItem('user_id'));
 		}
 		return of(null);
 	}
+}
+
+declare interface IBarNames {
+	name: string;
+	id: string;
 }

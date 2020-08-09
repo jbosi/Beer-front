@@ -9,6 +9,8 @@ import { MapPopupComponent } from '../map-popup';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
+const clustersDiabledZoom = 18;
+
 @Component({
 	selector: 'app-map',
 	templateUrl: './map.component.html',
@@ -23,7 +25,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	private cluster = L.markerClusterGroup({
 		showCoverageOnHover: false,
 		spiderfyOnMaxZoom: false,
-		disableClusteringAtZoom: 18,
+		disableClusteringAtZoom: clustersDiabledZoom,
 		maxClusterRadius: 100,
 		chunkedLoading: true
 	});
@@ -42,7 +44,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			const marker = this.markers.find(marker => marker.id == markerId);
 			marker.setStyle(this.getHighlightOptions());
 			this.highlight = marker;
-			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < 17 ? 17 : this.map.getZoom());
+			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < clustersDiabledZoom ? clustersDiabledZoom : this.map.getZoom());
 		});
 
 		const tiles = L.tileLayer('https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/{z}/{x}/{y}.png?access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP', {
