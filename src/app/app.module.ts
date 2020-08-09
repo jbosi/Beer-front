@@ -14,12 +14,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , AdminDashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent} from './components';
+import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , AdminDashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, DashboardComponent, InputAutocompleteComponent, ProfileComponent, BarManagementComponent} from './components';
 import { BarPropertiesService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
-import { InputAutocompleteComponent } from './components/input-autocomplete/input-autocomplete.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -65,7 +64,10 @@ const MATERIAL_MODULES = [
 		LoginComponent,
 		RegisterComponent,
 		UserAdminComponent,
-		InputAutocompleteComponent
+		InputAutocompleteComponent,
+		DashboardComponent,
+		ProfileComponent,
+		BarManagementComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,

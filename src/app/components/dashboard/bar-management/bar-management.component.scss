@@ -1,0 +1,21 @@
+:host {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.theme-background-container {
+	height: 100px;
+	width: 100%;
+	background-color: #E9BC2F;
+}
+
+.header-card-white {
+	height: 110px;
+	width: 700px;
+	background-color: #FFFFFF;
+	transform: translateY(-55px);
+	border-radius: 10px;
+	max-width: 90%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+}
