@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, BeerListComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, AdminDashboardComponent ,NavBarComponent, LoginComponent, RegisterComponent, UserAdminComponent} from '../components';
+import { PageNotFoundComponent, BeerListComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, AdminDashboardComponent ,NavBarComponent, LoginComponent, RegisterComponent, UserAdminComponent, DashboardComponent, ProfileComponent, BarManagementComponent} from '../components';
 import { MapResolver } from './resolvers';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -19,10 +19,20 @@ const routes: Routes = [
 				component: AdminDashboardComponent,
 				canActivate: [AuthGuard],
 				children: [
-					{ path: '', component: BarAdminComponent},
+					{ path: '', component: BarAdminComponent },
 					{ path: 'bar', component: BarAdminComponent },
 					{ path: 'biere', component: BeerAdminComponent },
 					{ path: 'user', component: UserAdminComponent }
+				]
+			},
+			{
+				path: 'dashboard',
+				component: DashboardComponent,
+				canActivate: [AuthGuard],
+				children: [
+					{ path: '', pathMatch: 'full', redirectTo: 'profile' },
+					{ path: 'profile', component: ProfileComponent },
+					{ path: 'bar-management', component: BarManagementComponent },
 				]
 			},
 			{
