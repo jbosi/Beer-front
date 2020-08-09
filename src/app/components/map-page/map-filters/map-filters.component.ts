@@ -2,9 +2,10 @@ import { Component, OnInit, forwardRef, ChangeDetectionStrategy, Input, Output, 
 import { FormGroup, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormBuilder } from '@angular/forms';
 import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { BarPropertiesService, BeerPropertiesService } from '../../../services';
-import { IBarProperties } from '../../../models';
+import { BarPropertiesService, BeerPropertiesService, AuthenticationService } from '../../../services';
+import { IBarProperties, IFavoriteBar } from '../../../models';
 import { BEER_ICON_TYPES } from '../../../utils';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-map-filters',
@@ -29,6 +30,7 @@ export class MapFiltersComponent implements OnInit {
 
 	@Input() public isMobile: boolean;
 	@Input() public showFilters: boolean;
+	@Input() public favorites: IFavoriteBar[] = [];
 	@Output() public dataChange = new EventEmitter<IBarProperties[]>();
 	@Output() public showFiltersChange = new EventEmitter<Boolean>();
 
@@ -38,11 +40,14 @@ export class MapFiltersComponent implements OnInit {
 	private allData: IBarProperties[];
 	private backFiltersChanged = false;
 	public beerTypes = BEER_ICON_TYPES;
+	public isLogged: boolean;
 	public beerNames: string[] = [];
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly barService: BarPropertiesService,
+		private readonly snackBar: MatSnackBar,
+		private readonly authenticationService: AuthenticationService,
 		private readonly beerService: BeerPropertiesService
 	) {	}
 
@@ -53,6 +58,7 @@ export class MapFiltersComponent implements OnInit {
 			isOpened: null,
 			isHappyHour: null,
 			price: 10,
+			showfavorites: null,
 			type: null,
 			hasTerrace: null
 		});
@@ -60,9 +66,9 @@ export class MapFiltersComponent implements OnInit {
 		this.form.valueChanges.pipe(
 			debounceTime(350),
 			distinctUntilChanged()
-		).subscribe((model) => {
-			this.onFormChange(model);
-		});
+		).subscribe(model => this.onFormChange(model));
+
+		this.authenticationService.isLogged.subscribe(isLogged => this.isLogged = isLogged);
 
 		this.beerService.getBeerNames().subscribe(names => this.beerNames = names);
 	}
@@ -98,7 +104,7 @@ export class MapFiltersComponent implements OnInit {
 			}
 		}
     
-		if (!this.backFiltersChanged && this.previousResponse != null) {
+		if (!this.backFiltersChanged && this.previousResponse != null && this.previousResponse.length) {
 			return of(this.addFrontFilters(model, this.previousResponse));
 		}
 
@@ -120,6 +126,17 @@ export class MapFiltersComponent implements OnInit {
 		}
 		if (model.isHappyHour) {
 			filteredData = filteredData.filter(bar => bar.inHappy);
+		}
+		if (model.showfavorites) {
+			if (!this.isLogged) {
+				this.form.get("showfavorites").setValue(!model.showfavorites, { emitEvent: false })
+				this.snackBar.open('Veuillez vous connecter', '', {
+					duration: 2000,
+				});
+			}
+			else if (this.favorites != null) {
+				filteredData = filteredData.filter(bar => this.favorites.some(favorite => favorite.barId === bar.id));
+			}
 		}
 		return filteredData;
 	}
