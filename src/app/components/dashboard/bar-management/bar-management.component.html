@@ -95,7 +95,6 @@
 	<ng-template #requests>
 		<div class="bar-request-cards" *ngIf="ownershipRequests.length; else loader">
 			<div class="bar-request-card" *ngFor="let request of ownershipRequests">
-				<!-- {{ request | json }} -->
 				<div class="bar-request-card-header">
 					<h2 class="bar-name mod-marginTopReset mod-marginBottomReset">{{ request.name | uppercase }}</h2>
 					<span *ngIf="!request.accepted && request.studied; else studiedOrAccepted">Demande: Refusée</span>

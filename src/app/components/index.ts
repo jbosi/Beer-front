@@ -9,4 +9,4 @@ export * from "./nav-bar";
 export * from "./page-not-found";
 export * from "./register";
 export * from "./dashboard";
-export * from "./input-autocomplete";
+export * from "./shared";
