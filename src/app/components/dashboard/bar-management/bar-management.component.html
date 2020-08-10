@@ -22,70 +22,79 @@
 			NOUVELLE DEMANDE
 		</button>
 		<div class="bar-management-buttons-filter">
-			<button mat-flat-button class="margin-right">MES BARS</button>
-			<button mat-flat-button>MES DEMANDES</button>
+			<button mat-flat-button class="margin-right"
+				(click)="toggleOwnershipRequests(false)"
+				[ngClass]="{'is-active': !toggledOwnershipRequests}">MES BARS</button>
+			<button mat-flat-button
+				(click)="toggleOwnershipRequests(true)"
+				[ngClass]="{'is-active': toggledOwnershipRequests}">MES DEMANDES</button>
 		</div>
 	</div>
-	<div class="bar-management-cards" *ngIf="ownedBars.length; else loader">
-		<div class="bar-management-card" *ngFor="let ownedBar of ownedBars; let barIndex = index">
-			<div class="bar-management-card-header" (click)="toggleExpand(barIndex)">
-				<div class="container-left">
-					<mat-icon aria-hidden="false" aria-label="expand" *ngIf="!ownedBar.expand">expand_less</mat-icon>
-					<mat-icon aria-hidden="false" aria-label="collapse" *ngIf="ownedBar.expand">expand_more</mat-icon>
-					<h2 class="bar-name mod-marginTopReset mod-marginBottomReset">{{ ownedBar.name | uppercase }}</h2>
+	<ng-container *ngIf="!toggledOwnershipRequests; else requests">
+		<div class="bar-management-cards" *ngIf="ownedBars.length; else loader">
+			<div class="bar-management-card" *ngFor="let ownedBar of ownedBars; let barIndex = index">
+				<div class="bar-management-card-header" (click)="toggleExpand(barIndex)">
+					<div class="container-left">
+						<mat-icon aria-hidden="false" aria-label="expand" *ngIf="!ownedBar.expand">expand_less</mat-icon>
+						<mat-icon aria-hidden="false" aria-label="collapse" *ngIf="ownedBar.expand">expand_more</mat-icon>
+						<h2 class="bar-name mod-marginTopReset mod-marginBottomReset">{{ ownedBar.name | uppercase }}</h2>
+					</div>
+					<span>Favoris: {{ ownedBar.favouritesCount }}</span>
 				</div>
-				<span>Favoris: {{ ownedBar.favouritesCount }}</span>
-			</div>
-			<div class="bar-management-card-content" *ngIf="ownedBar.expand">
-				<div>Adresse : {{ ownedBar.address }}</div>
-
-				<div *ngIf="dataSource?.length" class="barDetails-container">
-					<table mat-table [dataSource]="dataSource">
-						
-						<!-- Name Column -->
-						<ng-container matColumnDef="name">
-							<th mat-header-cell *matHeaderCellDef> BIERES </th>
-							<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.name}} </td>
-						</ng-container>
-						
-						<!-- Price Column -->
-						<ng-container matColumnDef="price">
-							<th mat-header-cell *matHeaderCellDef> € </th>
-							<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.price}} </td>
-						</ng-container>
-						
-						
-						<!-- priceHH Column -->
-						<ng-container matColumnDef="priceHH">
-							<th mat-header-cell *matHeaderCellDef> € (HH) </th>
-							<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.priceHH}} </td>
-						</ng-container>
-						
-						<!-- priceHH Column -->
-						<ng-container matColumnDef="icon">
-							<th mat-header-cell *matHeaderCellDef> </th>
-							<td class="barDetails-cell" mat-cell *matCellDef="let element">
-								<div class="beer-icon-rounded" [style.background-color]="element.icon">
-									<app-beer-icon></app-beer-icon>
-								</div>
-							</td>
-						</ng-container>
-						
-						<!-- quantity Column -->
-						<ng-container matColumnDef="quantity">
-							<th mat-header-cell *matHeaderCellDef> Qte </th>
-							<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-						</ng-container>
-						
-						<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-						<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-					</table>
+				<div class="bar-management-card-content" *ngIf="ownedBar.expand">
+					<div>Adresse : {{ ownedBar.address }}</div>
+	
+					<div *ngIf="dataSource?.length" class="barDetails-container">
+						<table mat-table [dataSource]="dataSource">
+							
+							<!-- Name Column -->
+							<ng-container matColumnDef="name">
+								<th mat-header-cell *matHeaderCellDef> BIERES </th>
+								<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.name}} </td>
+							</ng-container>
+							
+							<!-- Price Column -->
+							<ng-container matColumnDef="price">
+								<th mat-header-cell *matHeaderCellDef> € </th>
+								<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.price}} </td>
+							</ng-container>
+							
+							
+							<!-- priceHH Column -->
+							<ng-container matColumnDef="priceHH">
+								<th mat-header-cell *matHeaderCellDef> € (HH) </th>
+								<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.priceHH}} </td>
+							</ng-container>
+							
+							<!-- priceHH Column -->
+							<ng-container matColumnDef="icon">
+								<th mat-header-cell *matHeaderCellDef> </th>
+								<td class="barDetails-cell" mat-cell *matCellDef="let element">
+									<div class="beer-icon-rounded" [style.background-color]="element.icon">
+										<app-beer-icon></app-beer-icon>
+									</div>
+								</td>
+							</ng-container>
+							
+							<!-- quantity Column -->
+							<ng-container matColumnDef="quantity">
+								<th mat-header-cell *matHeaderCellDef> Qte </th>
+								<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+							</ng-container>
+							
+							<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+							<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+						</table>
+					</div>
+	
+					<div>Bière la moins chère en HH : {{ ownedBar.cheapestBeer }}€</div>
 				</div>
-
-				<div>Bière la moins chère en HH : {{ ownedBar.cheapestBeer }}€</div>
 			</div>
 		</div>
-	</div>
+	</ng-container>
+	<ng-template #requests>
+		
+	</ng-template>
 </section>
 
 <ng-template #loader>

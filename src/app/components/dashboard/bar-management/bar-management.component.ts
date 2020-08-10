@@ -65,8 +65,8 @@ export class BarManagementComponent implements OnInit {
 		this.ownedBars[index].expand = !this.ownedBars[index].expand; 
 	}
 
-	public toggleOwnershipRequests(): void {
-		this.ownershipRequests = !this.ownershipRequests;
+	public toggleOwnershipRequests(toggle: boolean): void {
+		this.toggledOwnershipRequests = toggle;
 	}
 }
 
