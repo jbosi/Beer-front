@@ -15,7 +15,7 @@
 	</div>
 </section>
 
-<section class="bar-management-content">
+<section class="bar-content">
 	<div class="bar-management-header">
 		<button mat-flat-button>
 			<mat-icon class="add-icon" aria-hidden="false" aria-label="add" color="primary">add</mat-icon>
@@ -93,7 +93,18 @@
 		</div>
 	</ng-container>
 	<ng-template #requests>
-		
+		<div class="bar-request-cards" *ngIf="ownershipRequests.length; else loader">
+			<div class="bar-request-card" *ngFor="let request of ownershipRequests">
+				<!-- {{ request | json }} -->
+				<div class="bar-request-card-header">
+					<h2 class="bar-name mod-marginTopReset mod-marginBottomReset">{{ request.name | uppercase }}</h2>
+					<span *ngIf="!request.accepted && request.studied; else studiedOrAccepted">Demande: Refusée</span>
+					<ng-template #studiedOrAccepted>
+						<span>Etat de la demande: {{ request.accepted ? 'Acceptée' : request.studied ? 'étudiée' : 'en cours d étude' }}</span>
+					</ng-template>
+				</div>
+			</div>
+		</div>
 	</ng-template>
 </section>
 

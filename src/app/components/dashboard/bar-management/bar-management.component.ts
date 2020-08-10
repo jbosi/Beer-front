@@ -13,7 +13,7 @@ import { BEER_ICON_TYPES_COLORS } from '../../../utils';
 export class BarManagementComponent implements OnInit {
 	private userId: string;
 	public ownedBars: IDetailedBarPropertiesView[] = [];
-	public ownershipRequests: any;
+	public ownershipRequests: any[] = [];
 	public dataSource: IBarBeerDetail[] = [];
 	public displayedColumns: string[] = ['name', 'price', 'priceHH', 'icon', 'quantity'];
 	public toggledOwnershipRequests: boolean;
@@ -35,7 +35,6 @@ export class BarManagementComponent implements OnInit {
 			this.userService.getAllOwnershipByUserId(this.userId),
 			this.userService.getAllOwnershipRequestsByUserId(this.userId)
 		).subscribe(([ownerships, ownershipRequests]) => {
-			console.log(ownershipRequests, ownerships)
 			ownerships.forEach(ownership => {
 				this.barService.getBarPropertiesById(ownership.barId).subscribe(bar => {
 					this.ownedBars.push({ ...bar, expand: false });
@@ -52,8 +51,13 @@ export class BarManagementComponent implements OnInit {
 					});
 				});
 			});
-
-			this.ownershipRequests = ownershipRequests;
+			
+			
+			ownershipRequests.forEach(request => {
+				this.barService.getBarPropertiesById(request.barId).subscribe(bar => {
+					this.ownershipRequests.push({ ...request, ...bar });
+				});
+			});
 		});
 	}
 
