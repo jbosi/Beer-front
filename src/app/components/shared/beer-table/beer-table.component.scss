@@ -1,0 +1,33 @@
+
+table {
+	width: 100%;
+}
+
+.barDetails-cell {
+	font-weight: 300;
+	border: none;
+}
+
+.mat-row {
+	height: 40px;
+}
+
+.barDetails-cell {
+	min-width: 30px;
+}
+
+.mapPopup-empty {
+	padding: 50px 0;
+	text-align: center;
+}
+
+.beer-icon-rounded {
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+}
+
+td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type,
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+	padding: 0 ;
+}

@@ -1,0 +1,46 @@
+<table mat-table *ngIf="dataSource?.length; else empty" [dataSource]="dataSource" [ngClass]="{ 'no-table-margin': !hasMagin }">
+					
+	<!-- Name Column -->
+	<ng-container matColumnDef="name">
+		<th mat-header-cell *matHeaderCellDef> BIERES </th>
+		<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{ element.name }} </td>
+	</ng-container>
+	
+	<!-- Price Column -->	
+	<ng-container matColumnDef="price">
+		<th mat-header-cell *matHeaderCellDef> € </th>
+		<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{ element.price }} </td>
+	</ng-container>
+	
+	
+	<!-- priceHH Column -->
+	<ng-container matColumnDef="priceHH">
+		<th mat-header-cell *matHeaderCellDef> € (HH) </th>
+		<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{ element.priceHH }} </td>
+	</ng-container>
+	
+	<!-- priceHH Column -->
+	<ng-container matColumnDef="icon">
+		<th mat-header-cell *matHeaderCellDef> </th>
+		<td class="barDetails-cell" mat-cell *matCellDef="let element">
+			<div class="beer-icon-rounded" [style.background-color]="element.icon">
+				<app-beer-icon></app-beer-icon>
+			</div>
+		</td>
+	</ng-container>
+	
+	<!-- quantity Column -->
+	<ng-container matColumnDef="quantity">
+		<th mat-header-cell *matHeaderCellDef> Qte </th>
+		<td class="barDetails-cell" mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
+	</ng-container>
+	
+	<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-template #empty>
+	<p class="mapPopup-empty">
+		{{ labelEmpty }}
+	</p>
+</ng-template>

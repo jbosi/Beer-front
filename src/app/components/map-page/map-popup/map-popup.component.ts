@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDetailedBarProperties, IBarBeerDetail, IFavoriteBar } from '../../../models';
-import { getCurrentDay, formatDateToHoursMinutes, BEER_ICON_TYPES_COLORS } from '../../../utils';
+import { getCurrentDay, formatDateToHoursMinutes } from '../../../utils';
 import { UserService } from '../../../services';
 import { MatSnackBar } from '@angular/material';
 
@@ -23,6 +23,7 @@ export class MapPopupComponent implements OnInit {
 	public displayedColumns: string[] = ['name', 'price', 'priceHH', 'icon', 'quantity'];
 	public isLoading = true;
 	public isFavorite: boolean;
+	public barData: IDetailedBarProperties;
 
 	constructor(
 		private userService: UserService,
@@ -32,6 +33,7 @@ export class MapPopupComponent implements OnInit {
 	ngOnInit() {
 		const currentDay: string = getCurrentDay();
 		this.barData$.subscribe((bar: IDetailedBarProperties) => {
+			this.barData = bar;
 			this.barName = bar.name;
 			this.barAddress = bar.address;
 			this.barId = bar.id;
@@ -42,23 +44,8 @@ export class MapPopupComponent implements OnInit {
 				this.happyHourEnd = 'NA';
 			}
 			this.isFavorite = this.checkIsFavorites();
-			bar.beers.map(beer => {
-				beer.pricing.map(item => {
-					this.dataSource.push({
-						name: beer.name,
-						price: item.priceBeer,
-						priceHH: item.priceHappy,
-						icon: this.getBeerIconColor(beer.type),
-						quantity: item.volume + ' cl'
-					});
-				});
-			});
 			this.isLoading = false;
 		});
-	}
-
-	private getBeerIconColor(type: string): string {
-		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
 	}
 
 	public toggleIsFavorite(): void {

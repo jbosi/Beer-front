@@ -3,7 +3,6 @@ import { zip } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { UserService, BarPropertiesService } from '../../../services';
 import { IDetailedBarProperties, IBarBeerDetail } from '../../../models';
-import { BEER_ICON_TYPES_COLORS } from '../../../utils';
 
 @Component({
 	selector: 'app-bar-management',
@@ -14,9 +13,8 @@ export class BarManagementComponent implements OnInit {
 	private userId: string;
 	public ownedBars: IDetailedBarPropertiesView[] = [];
 	public ownershipRequests: any[] = [];
-	public dataSource: IBarBeerDetail[] = [];
-	public displayedColumns: string[] = ['name', 'price', 'priceHH', 'icon', 'quantity'];
 	public toggledOwnershipRequests: boolean;
+	public barData: IDetailedBarProperties;
 	
 	constructor(
 		private readonly userService: UserService,
@@ -38,20 +36,9 @@ export class BarManagementComponent implements OnInit {
 			ownerships.forEach(ownership => {
 				this.barService.getBarPropertiesById(ownership.barId).subscribe(bar => {
 					this.ownedBars.push({ ...bar, expand: false });
-					bar.beers.map(beer => {
-						beer.pricing.map(item => {
-							this.dataSource.push({
-								name: beer.name,
-								price: item.priceBeer,
-								priceHH: item.priceHappy,
-								icon: this.getBeerIconColor(beer.type),
-								quantity: item.volume + ' cl'
-							});
-						});
-					});
+					this.barData = bar;
 				});
 			});
-			
 			
 			ownershipRequests.forEach(request => {
 				this.barService.getBarPropertiesById(request.barId).subscribe(bar => {
@@ -59,10 +46,6 @@ export class BarManagementComponent implements OnInit {
 				});
 			});
 		});
-	}
-
-	private getBeerIconColor(type: string): string {
-		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
 	}
 
 	public toggleExpand(index: number) {

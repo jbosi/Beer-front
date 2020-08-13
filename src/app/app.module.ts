@@ -14,7 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , AdminDashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, DashboardComponent, InputAutocompleteComponent, ProfileComponent, BarManagementComponent} from './components';
+import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , AdminDashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, DashboardComponent, InputAutocompleteComponent, ProfileComponent, BarManagementComponent, BeerTableComponent} from './components';
 import { BarPropertiesService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
@@ -67,7 +67,8 @@ const MATERIAL_MODULES = [
 		InputAutocompleteComponent,
 		DashboardComponent,
 		ProfileComponent,
-		BarManagementComponent
+		BarManagementComponent,
+		BeerTableComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
