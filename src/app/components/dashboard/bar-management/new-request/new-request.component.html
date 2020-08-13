@@ -1,0 +1,39 @@
+<section>
+	<div class="request-card">
+		<div [formGroup]="form" class="request-card-content">
+			<div app-input-autocomplete
+				[itemNames]="barNames"
+				placeHolder="Recherchez un bar"
+				(selectedItemChanged)="onSelectedItemChanged($event)">
+			</div>
+			<mat-form-field>
+				<mat-label>Décrivez votre demande</mat-label>
+				<input matInput formControlName="reason"/>
+			</mat-form-field>
+
+			<input type="file" #file style="display: none" (change)="onFilesAdded()" multiple/>
+			<!-- <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+				<button
+					[disabled]="uploading || uploadSuccessful"
+					mat-raised-button
+					color="primary"
+					class="add-files-btn"
+					(click)="addFiles()">
+					Ajouter des images
+				</button>
+			
+				<mat-list>
+					<mat-list-item *ngFor="let file of files">
+						<h4 mat-line>{{file.name}}</h4>
+						<mat-progress-bar
+						*ngIf="progress"
+						mode="determinate"
+						[value]="progress[file.name].progress | async">
+						</mat-progress-bar>
+					</mat-list-item>
+				</mat-list>
+			</div> -->
+			<button mat-raised-button [disabled]="!form.valid || form.pristine" (click)="onSubmitButton()">Envoyer ma demande</button>
+		</div>
+	</div>
+</section>

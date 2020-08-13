@@ -52,4 +52,8 @@ export class UserService {
 	delete(email: string) {
 		return this.http.delete(`${API_URL}/users/${email}`);
 	}
+
+	requestOwnership(payload: any) {
+		return this.http.post<any>(`${API_URL}/users/ask-for-bar-responsability`, payload);
+	}
 }

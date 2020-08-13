@@ -1,7 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, BeerListComponent, MapPageComponent, HomeComponent, BarAdminComponent, BeerAdminComponent, AdminDashboardComponent ,NavBarComponent, LoginComponent, RegisterComponent, UserAdminComponent, DashboardComponent, ProfileComponent, BarManagementComponent} from '../components';
-import { MapResolver } from './resolvers';
+import {
+	PageNotFoundComponent,
+	BeerListComponent,
+	MapPageComponent,
+	HomeComponent,
+	BarAdminComponent,
+	BeerAdminComponent,
+	AdminDashboardComponent, 
+	NavBarComponent,
+	LoginComponent,
+	RegisterComponent,
+	UserAdminComponent,
+	DashboardComponent,
+	ProfileComponent,
+	BarManagementComponent,
+	OwnedBarsComponent,
+	NewRequestComponent,
+	PendingRequestComponent
+} from '../components';
+import { MapResolver, OwnedBarsResolver, PendingRequestResolver } from './resolvers';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -32,7 +50,15 @@ const routes: Routes = [
 				children: [
 					{ path: '', pathMatch: 'full', redirectTo: 'profile' },
 					{ path: 'profile', component: ProfileComponent },
-					{ path: 'bar-management', component: BarManagementComponent },
+					{
+						path: 'bar-management',
+						component: BarManagementComponent,
+						children: [
+							{ path: '', pathMatch: 'full', component: OwnedBarsComponent, resolve: { ownedBars: OwnedBarsResolver } },
+							{ path: 'pending-request', component: PendingRequestComponent, resolve: { requests: PendingRequestResolver } },
+							{ path: 'new', component: NewRequestComponent }
+						]
+					},
 				]
 			},
 			{

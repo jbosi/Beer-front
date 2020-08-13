@@ -1,0 +1,26 @@
+:host {
+	width: 100%;
+}
+
+.loading {
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.add-files-btn {
+	width: 200px;
+}
+
+.request-card {
+	margin: 0 6rem 1rem 6rem;
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+	.request-card-content {
+		padding: 1rem 2rem 2rem 2rem;
+		display: flex;
+		flex-direction: column;
+	}
+}

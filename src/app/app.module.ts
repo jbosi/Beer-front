@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSliderModule, MatAutocompleteModule, MatSnackBarModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSliderModule, MatAutocompleteModule, MatSnackBarModule, MatListModule, MatProgressBarModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
@@ -14,8 +14,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , AdminDashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, DashboardComponent, InputAutocompleteComponent, ProfileComponent, BarManagementComponent, BeerTableComponent} from './components';
-import { BarPropertiesService } from './services';
+import { UserAdminComponent, RegisterComponent, LoginComponent, BeerIconComponent, BeerListCardComponent, BeerListComponent, MapFiltersComponent, HomeComponent, MapComponent, MapPopupComponent, MapPageComponent, NavBarComponent, BeerFormComponent, PageNotFoundComponent , AdminDashboardComponent, BarAdminComponent, BeerAdminComponent, AddBeerComponent, TableListBeerComponent, DashboardComponent, InputAutocompleteComponent, ProfileComponent, BarManagementComponent, BeerTableComponent, OwnedBarsComponent, NewRequestComponent, PendingRequestComponent} from './components';
+import { BarPropertiesService, UploadService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -39,7 +39,9 @@ const MATERIAL_MODULES = [
 	MatCheckboxModule,
 	MatSliderModule,
 	MatAutocompleteModule,
-	MatSnackBarModule
+	MatSnackBarModule,
+	MatListModule,
+	MatProgressBarModule
 ];
 
 @NgModule({
@@ -68,7 +70,10 @@ const MATERIAL_MODULES = [
 		DashboardComponent,
 		ProfileComponent,
 		BarManagementComponent,
-		BeerTableComponent
+		BeerTableComponent,
+		OwnedBarsComponent,
+		NewRequestComponent,
+		PendingRequestComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
@@ -87,6 +92,7 @@ const MATERIAL_MODULES = [
 		{ provide: LocationStrategy, useClass: HashLocationStrategy },
 		BarPropertiesService,
 		BeerPropertiesService,
+		UploadService
 	],
 	entryComponents: [MapPopupComponent],
 	bootstrap: [AppComponent]

@@ -50,7 +50,7 @@
 }
 
 .bar-content {
-	width: 100%;
+	width: 100%;	
 	max-width: 1400px;
 	.bar-management-header {
 		margin: 0 6rem 1rem 6rem;
@@ -58,60 +58,8 @@
 		flex-direction: row;
 		justify-content: space-between;
 	}
-	.bar-management-cards, .bar-request-cards {
-		margin: 0 6rem 1rem 6rem;
-		.bar-management-card, .bar-request-card  {
-			background-color: #FFFFFF;
-			border-radius: 10px;
-			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-			.bar-management-card-content {
-				padding: 1rem 2rem 2rem 2rem;
-			}
-			.bar-request-card-header {
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-				padding: 1rem 2rem;
-				border-radius: 10px;
-			}
-			.bar-management-card-header {
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-				padding: 1rem 2rem;
-				border-radius: 10px 10px 0 0;
-				cursor: pointer;
-				background-color: rgba(#E9BC2F, 0.7);
-				.container-left {
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					color: #FFFFFF;
-					.bar-name {
-						font-weight: 500;
-						text-align: left;
-						font-size: 22px;
-					}
-				}
-			}
-		}
-	}
 }
 
 .is-active {
 	color: #5C9CE6;
-}
-
-.loading {
-	z-index: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.barDetails-container {
-	margin-top: 1rem;
-	margin-bottom: 1rem;
 }

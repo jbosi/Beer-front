@@ -48,15 +48,11 @@ export class BarManagementComponent implements OnInit {
 		});
 	}
 
-	public toggleExpand(index: number) {
-		this.ownedBars[index].expand = !this.ownedBars[index].expand; 
-	}
-
 	public toggleOwnershipRequests(toggle: boolean): void {
 		this.toggledOwnershipRequests = toggle;
 	}
 }
 
-declare interface IDetailedBarPropertiesView extends IDetailedBarProperties {
+export interface IDetailedBarPropertiesView extends IDetailedBarProperties {
 	expand: boolean;
 }
