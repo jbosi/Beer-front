@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app.config';
-import { IOwnership, IOwnershipRequest } from '../models';
+import { IOwnership, IOwnershipRequest, IOwnershipResponse } from '../models';
 import { Observable } from 'rxjs';
 
 
@@ -21,8 +21,8 @@ export class UserService {
 		return this.http.get<any[]>(`${API_URL}/users/list-user-responsabilities`);
 	}
 
-	getAllOwnershipByUserId(userId: string): Observable<IOwnership[]> {
-		return this.http.get<IOwnership[]>(`${API_URL}/users/list-user-responsabilities/${userId}`);
+	getAllOwnershipByUserId(userId: string): Observable<IOwnershipResponse[]> {
+		return this.http.get<IOwnershipResponse[]>(`${API_URL}/users/list-user-responsabilities/${userId}`);
 	}
 
 	getAllOwnershipRequests() {

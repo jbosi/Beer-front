@@ -11,12 +11,11 @@ import { switchMap, map } from 'rxjs/operators';
 export class PendingRequestResolver {
 	constructor(
 		protected router: Router,
-		private barService: BarPropertiesService,
 		private userService: UserService
 	) {	}
 
 	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 		const userId = localStorage.getItem('user_id');
-		return;
+		return this.userService.getAllOwnershipRequestsByUserId(userId);
 	}
 }

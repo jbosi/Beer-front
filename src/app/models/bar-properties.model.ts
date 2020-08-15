@@ -80,3 +80,15 @@ export interface IOwnershipRequest extends IOwnership {
 	reason: any;
 	pictures: string[];
 }
+
+export interface  IOwnershipResponse {
+	bar: IDetailedBarProperties;
+	id: string;
+	user: {
+		email: string;
+		isAdmin: boolean;
+		id: string;
+		username: string
+	}
+}
+

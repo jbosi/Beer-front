@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { IBarProperties } from '../../models';
+import { IOwnershipResponse } from '../../models';
 import { BarPropertiesService, UserService } from '../../services';
 import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,16 +10,11 @@ import { switchMap, map } from 'rxjs/operators';
 export class OwnedBarsResolver {
 	constructor(
 		protected router: Router,
-		private barService: BarPropertiesService,
 		private userService: UserService
 	) {	}
 
-	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
+	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IOwnershipResponse[]> {
 		const userId = localStorage.getItem('user_id');
-		const result = [];
-		// this.userService.getAllOwnershipByUserId(userId).pipe(
-		// 	switchMap(ownerships => ownerships.map(ownership => this.barService.getBarPropertiesById(ownership.barId)))
-		// ).subscribe(bar => result.push(bar))
-		return
+		return this.userService.getAllOwnershipByUserId(userId);
 	}
 }
