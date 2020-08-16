@@ -1,11 +1,11 @@
 <mat-toolbar class="nav-bar">
-	<div class="brand" fxShow.xs="false"><img src={{logoPath}} class="navBar-logo"></div>
-	<div class= "nav-items">
+	<div class="brand nav-items" fxShow.xs="false"><img src={{logoPath}} class="navBar-logo"></div>
+	<div class= "nav-links nav-items">
 		<span><a routerLink="/map" routerLinkActive="active">MAP</a></span>
 		<span><a routerLink="/dashboard" routerLinkActive="active">DASHBOARD</a></span>
 		<span><a routerLink="/beers" routerLinkActive="active">BIERES</a></span>
 	</div>
-	<div class="nav-icons">
+	<div class="nav-icons nav-items">
 		<a routerLink="/admin-dashboard">
 			<mat-icon aria-hidden="false" aria-label="Logout">settings</mat-icon>
 		</a>
