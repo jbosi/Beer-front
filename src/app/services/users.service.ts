@@ -1,53 +1,63 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app.config';
+import { IOwnershipResponse, IOwnershipRequest } from '../models';
+import { Observable } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 	constructor(private http: HttpClient) { }
 
-	checkUserName(username: string) { // back not ready yet
+	public checkUserName(username: string) {
 		return this.http.get<any[]>(`${API_URL}/users/check-username?username=${username}`);
 	}
 	
-	getAllUsers() {
+	public getAllUsers() {
 		return this.http.get<any[]>(`${API_URL}/users`);
 	}
 	
-	getAllOwnership() {
+	public getAllOwnership() {
 		return this.http.get<any[]>(`${API_URL}/users/list-user-responsabilities`);
 	}
 
-	getAllOwnershipById(id: number) {
-		return this.http.get<any[]>(`${API_URL}/users/list-user-responsabilities/${id}`);
+	public getAllOwnershipByUserId(userId: string): Observable<IOwnershipResponse[]> {
+		return this.http.get<IOwnershipResponse[]>(`${API_URL}/users/list-user-responsabilities/${userId}`);
 	}
 
-	getAllOwnershipRequests() {
+	public getAllOwnershipRequests() {
 		return this.http.get<any[]>(`${API_URL}/users/list-user-ask-responsabilities`);
 	}
 
-	getAllOwnershipRequestsById(id: number) {
-		return this.http.get<any[]>(`${API_URL}/users/list-user-ask-responsabilities/${id}`);
+	public getAllOwnershipRequestsByUserId(userId: string): Observable<IOwnershipRequest[]> {
+		return this.http.get<IOwnershipRequest[]>(`${API_URL}/users/list-user-ask-responsabilities/${userId}`);
 	}
 	
-	register(user: any) {
+	public register(user: any) {
 		return this.http.post(`${API_URL}/users/signup`, user);
 	}
 
-	getfavoritesByUserId(id: string) {
+	public getfavoritesByUserId(id: string) {
 		return this.http.get<any[]>(`${API_URL}/users/favourites/${id}`);
 	}
 
-	favorites(id: string) {
+	public favorites(id: string) {
 		return this.http.post(`${API_URL}/users/favourites`, { barId: id });
 	}
 	
-	unfavorites(id: string) {
+	public unfavorites(id: string) {
 		return this.http.delete(`${API_URL}/users/favourites/${id}`);
 	}
 
-	delete(email: string) {
+	public delete(email: string) {
 		return this.http.delete(`${API_URL}/users/${email}`);
+	}
+
+	public requestOwnership(payload: any) {
+		return this.http.post<any>(`${API_URL}/users/ask-for-bar-responsability`, payload);
+	}
+
+	public acceptOrRefuseRequest(payload: { userId: string, barId: string, stateRequest: boolean }) {
+		return this.http.post<any>(`${API_URL}/users/handle-bar-responsability`, payload);
 	}
 }

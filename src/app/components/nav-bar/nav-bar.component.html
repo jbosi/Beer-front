@@ -1,11 +1,14 @@
-<mat-toolbar class="nav-bar" color="primary">
-	<div class="brand" fxShow.xs="false"><img src={{logoPath}} class="navBar-logo"></div>
-	<div class= "nav-items">
+<mat-toolbar class="nav-bar">
+	<div class="brand nav-items" fxShow.xs="false"><img src={{logoPath}} class="navBar-logo"></div>
+	<div class= "nav-links nav-items">
 		<span><a routerLink="/map" routerLinkActive="active">MAP</a></span>
 		<span><a routerLink="/dashboard" routerLinkActive="active">DASHBOARD</a></span>
 		<span><a routerLink="/beers" routerLinkActive="active">BIERES</a></span>
 	</div>
-	<div class="nav-icons">
+	<div class="nav-icons nav-items">
+		<a routerLink="/admin-dashboard">
+			<mat-icon aria-hidden="false" aria-label="Logout">settings</mat-icon>
+		</a>
 		<a *ngIf="isLogged; else login" (click)="logout()">
 			<mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
 		</a>

@@ -67,3 +67,28 @@ export interface IBarNames {
 export interface IFavoriteBar {
 	barId: string;
 }
+
+export interface IOwnership {
+	barId: string;
+	userId: string;
+	id: string;
+}
+
+export interface IOwnershipRequest extends IOwnershipResponse {
+	studied: boolean;
+	accepted: boolean;
+	reason: any;
+	pictures: string[];
+}
+
+export interface  IOwnershipResponse {
+	bar: IDetailedBarProperties;
+	id: string;
+	user: {
+		email: string;
+		isAdmin: boolean;
+		id: string;
+		username: string
+	}
+}
+

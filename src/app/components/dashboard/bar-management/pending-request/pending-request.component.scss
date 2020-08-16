@@ -1,0 +1,24 @@
+.loading {
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bar-request-cards {
+	margin: 0 6rem 1rem 6rem;
+	.bar-request-card  {
+		background-color: #FFFFFF;
+		border-radius: 10px;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+		margin-bottom: 10px;
+		.bar-request-card-header {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1rem 2rem;
+			border-radius: 10px;
+		}
+	}
+}

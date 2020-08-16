@@ -4,18 +4,24 @@
 	font-size: medium;
 }
 
-.nav-items {
-	margin: auto;
+.nav-links {
+	display: flex;
+	justify-content: center;
 	span {
 		padding-right: 1rem;
 		font-weight: 100;
 	}
 }
 
+.nav-items {
+	flex: 1 1;
+}
+
 .nav-bar {
 	z-index: 1;
 	position: relative;
 	height: 50px;
+	background-color: #E9BC2F;
 }
 
 a {
@@ -42,9 +48,8 @@ a {
 }
 
 .nav-icons {
-	position: absolute;
-	top: 10px;
-	right: 10px;
+	display: flex;
+	justify-content: flex-end;
 	a {
 		padding-right: 5px;
 		cursor: pointer;

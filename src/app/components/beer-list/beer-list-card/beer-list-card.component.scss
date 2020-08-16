@@ -1,6 +1,10 @@
+:host {
+	max-width: 100%;
+}
+
 mat-card {
-	max-width: 500px;
-	min-width: 350px;
+	max-width: 100%;
+	width: 450px;
 }
 
 mat-card-content {
@@ -16,7 +20,7 @@ mat-card-content {
 
 .beerListCard-image {
 	background-color: #EECC60;
-	width: 40%;
+	width: 30%;
 	display: flex;
 	justify-content: center;
 	align-items: center;

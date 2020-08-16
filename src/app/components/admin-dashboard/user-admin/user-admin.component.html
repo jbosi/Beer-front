@@ -36,8 +36,23 @@
 		<table mat-table [dataSource]="ownershipRequestList" class="user-admin-table">
 			
 			<ng-container *ngFor="let column of userOwnersRequestsColumns.columnsProperties" [matColumnDef]="column.columnName">
-				<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
-				<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
+				<ng-container *ngIf="column.columnName === 'icon'; else normalColumn">
+					<th mat-header-cell *matHeaderCellDef></th>
+					<td class="table-action-icon" mat-cell *matCellDef="let element">
+						<ng-container *ngIf="!element.studied">
+							<button mat-icon-button color="primary" aria-label="Accept request" (click)="onAcceptOrRefuse(element, true)">
+								<mat-icon>done</mat-icon>
+							</button>
+							<button mat-icon-button color="primary" aria-label="Refuse request" (click)="onAcceptOrRefuse(element, false)">
+								<mat-icon>clear</mat-icon>
+							</button>
+						</ng-container>
+					</td>
+				</ng-container>
+				<ng-template #normalColumn>
+					<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
+					<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
+				</ng-template>
 			</ng-container>
 			
 			<tr mat-header-row *matHeaderRowDef="userOwnersRequestsColumns.columnsNames; sticky: true"></tr>

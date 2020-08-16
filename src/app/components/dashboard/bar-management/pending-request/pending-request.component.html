@@ -1,0 +1,17 @@
+<div class="bar-request-cards" *ngIf="requests.length; else loader">
+	<div class="bar-request-card" *ngFor="let request of requests">
+		<div class="bar-request-card-header">
+			<h2 class="bar-name mod-marginTopReset mod-marginBottomReset">{{ request.bar.name | uppercase }}</h2>
+			<span *ngIf="!request.accepted && request.studied; else studiedOrAccepted">Demande: Refusée</span>
+			<ng-template #studiedOrAccepted>
+				<span>Etat de la demande: {{ request.accepted ? 'Acceptée' : request.studied ? 'étudiée' : 'en cours d étude' }}</span>
+			</ng-template>
+		</div>
+	</div>
+</div>
+
+<ng-template #loader>
+	<div class="loading">
+		<mat-spinner></mat-spinner>
+	</div>
+</ng-template>

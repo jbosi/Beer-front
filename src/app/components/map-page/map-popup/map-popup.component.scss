@@ -18,47 +18,14 @@
 	font-size: larger;
 }
 
-table {
-	width: 100%;
-}
-
-.barDetails-cell {
-	font-weight: 300;
-	border: none;
-}
-
-.mat-row {
-	height: 40px;
-}
-
-.barDetails-cell {
-	min-width: 30px;
-}
-
-.mapPopup-empty {
-	padding: 50px 0;
-	text-align: center;
-}
-
-.centered-spinner {
-	margin: 5px auto;
-}
-
-.beer-icon-rounded {
-	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-}
-
-td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type,
-td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
-	padding: 0;
-}
-
 .favorite-icon {
 	position: absolute;
 	left: 16px;
 	top: 13px;
 	cursor: pointer;
 	user-select: none;
+}
+
+.centered-spinner {
+	margin: 5px auto;
 }
