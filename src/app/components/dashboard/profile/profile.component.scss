@@ -1,0 +1,46 @@
+:host {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.theme-background-container {
+	height: 100px;
+	width: 100%;
+	background-color: #E9BC2F;
+}
+
+.group-container {
+	flex: 1 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.highlighted-info, .description-info {
+	margin: 0.3rem 0;
+}
+
+.highlighted-info {
+	color: #676767;
+	font-weight: 500;
+}
+
+.description-info {
+	color: #A8A8A8;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.header-card-white {
+	height: 110px;
+	width: 700px;
+	background-color: #FFFFFF;
+	transform: translateY(-55px);
+	border-radius: 10px;
+	max-width: 90%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
