@@ -9,3 +9,18 @@
 .default-admin-cell:first-of-type {
 	padding-left: 24px;
 }
+
+.table-action-icon {
+	border: none;
+	button {
+		visibility: hidden;
+	}
+}
+.mat-row {
+	&:hover {
+		background-color: #EEEEEE;
+		button {
+			visibility: visible;
+		}
+	}
+}

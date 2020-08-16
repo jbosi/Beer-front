@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/users.service';
-import { zip } from 'rxjs';
-import { MatTableDataSource } from '@angular/material';
+import { zip, throwError, Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-user-admin',
@@ -20,7 +19,7 @@ export class UserAdminComponent implements OnInit {
 	public userOwnersRequestsColumns: IcolumnsInterface;
 
 	constructor(
-		private userService: UserService
+		private readonly userService: UserService
 	) { }
 	
 	ngOnInit() {
@@ -30,6 +29,7 @@ export class UserAdminComponent implements OnInit {
 			this.userService.getAllOwnershipRequests()
 		).subscribe(([users, owners, ownersRequests]) => {
 			this.userList = users;
+			
 			this.ownersList = owners
 				.filter(owner => owner.user != null && owner.bar != null)
 				.map(owner => {
@@ -40,6 +40,7 @@ export class UserAdminComponent implements OnInit {
 					userId: owner.user.id
 				};
 			});
+
 			this.ownershipRequestList = ownersRequests
 			.filter(request => request.bar != null && request.user != null)
 			.map(request => {
@@ -109,7 +110,7 @@ export class UserAdminComponent implements OnInit {
 
 	private initUserOwnersRequestsColumns(): IcolumnsInterface {
 		return {
-			columnsNames: ['barName', 'username', 'reason', 'pictures', 'studied', 'accepted'],
+			columnsNames: ['barName', 'username', 'reason', 'pictures', 'studied', 'accepted', 'icon'],
 			columnsProperties: [
 				{
 					columnName: 'barName',
@@ -140,11 +141,29 @@ export class UserAdminComponent implements OnInit {
 					columnName: 'accepted',
 					value: 'accepted',
 					title: 'Accepted',
+				},
+				{
+					columnName: 'icon',
+					value: 'icon',
+					title: 'icon',
 				}
 			]
 		};
 	}
+
+	public onAcceptOrRefuse(element, state: boolean): void | Observable<never> {
+		console.log(element)
+		if (element.user == null || element.bar == null) {
+			return throwError("user or bar undefined");
+		}
+		this.userService.acceptOrRefuseRequest({
+			userId: element.user.id,
+			barId: element.bar.id,
+			stateRequest: state
+		}).subscribe();
+	}
 }
+
 export interface IcolumnPropertiesInterface {
 	columnName: string;
 	value: string;
