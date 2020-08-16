@@ -33,7 +33,24 @@
 					</mat-list-item>
 				</mat-list>
 			</div> -->
-			<button mat-raised-button [disabled]="!form.valid || form.pristine" (click)="onSubmitButton()">Envoyer ma demande</button>
+			<button mat-raised-button [disabled]="!form.valid || form.pristine || formState != null" (click)="onSubmitButton()"
+				[ngClass]="{
+					'button-state-saved': formState === 'saved',
+					'button-state-error': formState === 'error'
+				}">
+				<div [ngSwitch]="formState">
+					<div *ngSwitchCase="'loading'">
+						<mat-spinner class="spinner" diameter="35"></mat-spinner>
+					</div>
+					<div *ngSwitchCase="'saved'">
+						<mat-icon>done</mat-icon>
+					</div>
+					<div *ngSwitchCase="'error'">
+						<mat-icon>clear</mat-icon>
+					</div>
+					<div *ngSwitchDefault>Envoyer ma demande</div>
+				</div>
+			</button>
 		</div>
 	</div>
 </section>

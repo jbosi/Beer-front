@@ -3,6 +3,7 @@ import { IBarNames } from 'src/app/models';
 import { BarPropertiesService, UploadService, UserService } from 'src/app/services';
 import { forkJoin } from 'rxjs';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-new-request',
@@ -23,18 +24,20 @@ import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder } from '@angul
 })
 export class NewRequestComponent implements OnInit {
 	@ViewChild('file', { static: false }) file
-  	public files: Set<File> = new Set()
+	public files: Set<File> = new Set();
 	public barNames: IBarNames[] = [];
 	public progress;
 	public uploading = false;
 	public uploadSuccessful = false;
-	public form: FormGroup;	
+	public form: FormGroup;
+	public formState: 'loading' | 'saved' | 'error' = null;
 	
 	constructor(
 		private readonly barPropertiesService: BarPropertiesService,
 		private readonly formBuilder: FormBuilder,
 		private readonly uploadService: UploadService,
-		private readonly userService: UserService
+		private readonly userService: UserService,
+		private readonly snackBar: MatSnackBar
 	) { }
 	
 	ngOnInit() {
@@ -78,6 +81,19 @@ export class NewRequestComponent implements OnInit {
 	}
 
 	public onSubmitButton() {
-		this.userService.requestOwnership(this.form.value).subscribe(r => console.log('r',r))
+		this.formState = 'loading';
+		this.userService.requestOwnership(this.form.value).subscribe(
+			() => {
+				this.formState = 'saved';
+				setTimeout(() => { this.formState = null }, 1500);
+			},
+			error => {
+				this.formState = 'error';
+				this.snackBar.open(error.error.message, '', {
+					duration: 2000,
+				});
+				setTimeout(() => { this.formState = null }, 1500);
+			}, 
+		);
 	}
 }
