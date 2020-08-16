@@ -45,6 +45,7 @@ a {
 	position: absolute;
 	top: 0.3rem;
 	left: 0.6rem;
+
 }
 
 .nav-icons {
@@ -53,5 +54,7 @@ a {
 	a {
 		padding-right: 5px;
 		cursor: pointer;
+		display: flex;
+		align-items: center;
 	}
 }
