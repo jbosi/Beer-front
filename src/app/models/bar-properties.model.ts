@@ -74,7 +74,7 @@ export interface IOwnership {
 	id: string;
 }
 
-export interface IOwnershipRequest extends IOwnership {
+export interface IOwnershipRequest extends IOwnershipResponse {
 	studied: boolean;
 	accepted: boolean;
 	reason: any;

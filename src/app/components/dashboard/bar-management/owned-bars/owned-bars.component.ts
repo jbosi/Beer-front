@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IDetailedBarPropertiesView } from '../bar-management.component';
-import { ActivatedRoute } from '@angular/router';
-import { IOwnershipResponse } from 'src/app/models';
+import { IOwnershipResponse } from '../../../../models';
+import { UserService } from '../../../../services';
 
 @Component({
 	selector: 'app-owned-bars',
@@ -12,12 +12,13 @@ export class OwnedBarsComponent implements OnInit {
 	public ownedBars: IDetailedBarPropertiesView[] = [];
 
 	constructor(
-		private readonly activatedRoute: ActivatedRoute
+		private readonly userService: UserService
 	) { }
 	
 	ngOnInit() {
-		this.activatedRoute.data.subscribe((data: { ownedBars: IOwnershipResponse[] }) => {
-			this.ownedBars = data.ownedBars.map(ownedBar => {
+		const userId = localStorage.getItem('user_id');
+		this.userService.getAllOwnershipByUserId(userId).subscribe((ownedBars: IOwnershipResponse[] ) => {
+			this.ownedBars = ownedBars.map(ownedBar => {
 				return {
 					...ownedBar.bar,
 					expand: false

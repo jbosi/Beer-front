@@ -15,7 +15,7 @@
 	</div>
 </section>
 
-<section class="bar-content">
+<section class="bar-section bar-content">
 	<div class="bar-management-header">
 		<button mat-flat-button [routerLink]="['./new']" routerLinkActive="is-active">
 			<mat-icon class="add-icon"  aria-hidden="false" aria-label="add" color="primary">add</mat-icon>
@@ -32,4 +32,6 @@
 	</div>
 </section>
 
-<router-outlet></router-outlet>
+<section class="bar-section">
+	<router-outlet></router-outlet>
+</section>

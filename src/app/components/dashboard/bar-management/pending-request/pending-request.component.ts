@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IOwnershipRequest } from '../../../../models';
+import { UserService } from '../../../../services';
 
 @Component({
 	selector: 'app-pending-request',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./pending-request.component.scss']
 })
 export class PendingRequestComponent implements OnInit {
+	public requests: IOwnershipRequest[] = [];
 	
-	constructor() { }
+	constructor(
+		private readonly userService: UserService
+	) { }
 	
 	ngOnInit() {
+		const userId = localStorage.getItem('user_id');
+		this.userService.getAllOwnershipRequestsByUserId(userId).subscribe((requests: IOwnershipRequest[]) => {
+			this.requests = requests;
+		});
+
 	}
 	
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { zip } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
-import { UserService, BarPropertiesService } from '../../../services';
-import { IDetailedBarProperties, IBarBeerDetail } from '../../../models';
+import { IDetailedBarProperties } from '../../../models';
 
 @Component({
 	selector: 'app-bar-management',

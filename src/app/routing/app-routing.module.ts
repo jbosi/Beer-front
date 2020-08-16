@@ -19,7 +19,7 @@ import {
 	NewRequestComponent,
 	PendingRequestComponent
 } from '../components';
-import { MapResolver, OwnedBarsResolver, PendingRequestResolver } from './resolvers';
+import { MapResolver } from './resolvers';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -54,8 +54,8 @@ const routes: Routes = [
 						path: 'bar-management',
 						component: BarManagementComponent,
 						children: [
-							{ path: '', pathMatch: 'full', component: OwnedBarsComponent, resolve: { ownedBars: OwnedBarsResolver } },
-							{ path: 'pending-request', component: PendingRequestComponent, resolve: { requests: PendingRequestResolver } },
+							{ path: '', pathMatch: 'full', component: OwnedBarsComponent },
+							{ path: 'pending-request', component: PendingRequestComponent },
 							{ path: 'new', component: NewRequestComponent }
 						]
 					},
