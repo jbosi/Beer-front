@@ -30,13 +30,30 @@ export class UserAdminComponent implements OnInit {
 			this.userService.getAllOwnershipRequests()
 		).subscribe(([users, owners, ownersRequests]) => {
 			this.userList = users;
-			this.ownersList = owners;
-			this.ownershipRequestList = ownersRequests;
+			this.ownersList = owners
+				.filter(owner => owner.user != null && owner.bar != null)
+				.map(owner => {
+				return {
+					barName: owner.bar.name,
+					email: owner.user.email,
+					username: owner.user.username,
+					userId: owner.user.id
+				};
+			});
+			this.ownershipRequestList = ownersRequests
+			.filter(request => request.bar != null && request.user != null)
+			.map(request => {
+				return {
+					...request,
+					barName: request.bar.name,
+					username: request.user.username
+				};
+			});
 		});
 
 		this.userColumns = this.initUserColumns();
-		this.userOwnersColumns = this.inituserOwnersColumns();
-		this.userOwnersRequestsColumns = this.inituserOwnersRequestsColumns();
+		this.userOwnersColumns = this.initUserOwnersColumns();
+		this.userOwnersRequestsColumns = this.initUserOwnersRequestsColumns();
 	}
 
 	private initUserColumns(): IcolumnsInterface {
@@ -62,37 +79,47 @@ export class UserAdminComponent implements OnInit {
 		};
 	}
 
-	private inituserOwnersColumns(): IcolumnsInterface {
+	private initUserOwnersColumns(): IcolumnsInterface {
 		return {
-			columnsNames: ['id', 'userId', 'barId'],
+			columnsNames: ['name', 'barName', 'email', 'userId'],
 			columnsProperties: [
 				{
-					columnName: 'id',
-					value: 'id',
-					title: 'Id',
+					columnName: 'name',
+					value: 'username',
+					title: 'User Name',
+				},
+				{
+					columnName: 'barName',
+					value: 'barName',
+					title: 'Bar name',
+				},
+				{
+					columnName: 'email',
+					value: 'email',
+					title: 'Email',
 				},
 				{
 					columnName: 'userId',
 					value: 'userId',
-					title: 'UserId',
+					title: 'User id',
 				},
-				{
-					columnName: 'barId',
-					value: 'barId',
-					title: 'BarId',
-				}
 			]
 		};
 	}
 
-	private inituserOwnersRequestsColumns(): IcolumnsInterface {
+	private initUserOwnersRequestsColumns(): IcolumnsInterface {
 		return {
-			columnsNames: ['id', 'reason', 'pictures', 'studied', 'accepted', 'userId', 'barId'],
+			columnsNames: ['barName', 'username', 'reason', 'pictures', 'studied', 'accepted'],
 			columnsProperties: [
 				{
-					columnName: 'id',
-					value: 'id',
-					title: 'Id',
+					columnName: 'barName',
+					value: 'barName',
+					title: 'Bar name',
+				},
+				{
+					columnName: 'username',
+					value: 'username',
+					title: 'username',
 				},
 				{
 					columnName: 'reason',
@@ -113,16 +140,6 @@ export class UserAdminComponent implements OnInit {
 					columnName: 'accepted',
 					value: 'accepted',
 					title: 'Accepted',
-				},
-				{
-					columnName: 'userId',
-					value: 'userId',
-					title: 'UserId',
-				},
-				{
-					columnName: 'barId',
-					value: 'barId',
-					title: 'BarId',
 				}
 			]
 		};
