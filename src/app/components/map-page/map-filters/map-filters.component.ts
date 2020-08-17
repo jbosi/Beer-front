@@ -42,6 +42,7 @@ export class MapFiltersComponent implements OnInit {
 	public beerTypes = BEER_ICON_TYPES;
 	public isLogged: boolean;
 	public beerNames: string[] = [];
+	public isShowfavoritesChecked: boolean = false;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -81,17 +82,10 @@ export class MapFiltersComponent implements OnInit {
 		const filteredData = [...this.allData];
 		const priceField = this.form.get('price');
 		const beerTypeField = this.form.get('type');
-		const hasTerraceField = this.form.get('hasTerrace');
 
 		if (priceField.dirty) {
 			this.filters['price'] = model['price'];
 			priceField.markAsPristine();
-			this.backFiltersChanged = true;
-		}
-
-		if (hasTerraceField.dirty) {
-			model['hasTerrace'] ? this.filters['tag'] = 'Terrasse' : delete this.filters['tag'];
-			hasTerraceField.markAsPristine();
 			this.backFiltersChanged = true;
 		}
 
@@ -103,7 +97,7 @@ export class MapFiltersComponent implements OnInit {
 				delete this.filters['type'];
 			}
 		}
-    
+
 		if (!this.backFiltersChanged && this.previousResponse != null && this.previousResponse.length) {
 			return of(this.addFrontFilters(model, this.previousResponse));
 		}
@@ -121,15 +115,15 @@ export class MapFiltersComponent implements OnInit {
 	}
 
 	private addFrontFilters(model, filteredData: IBarProperties[]): IBarProperties[] {
-		if (model.isOpened) {
+		if (this.filters['isOpened']) {
 			filteredData = filteredData.filter(bar => bar.opened);
 		}
-		if (model.isHappyHour) {
+		if (this.filters['isHappyHour']) {
 			filteredData = filteredData.filter(bar => bar.inHappy);
 		}
-		if (model.showfavorites) {
+		if (this.filters['showfavorites']) {
 			if (!this.isLogged) {
-				this.form.get("showfavorites").setValue(!model.showfavorites, { emitEvent: false })
+				this.isShowfavoritesChecked = false;
 				this.snackBar.open('Veuillez vous connecter', '', {
 					duration: 2000,
 				});
@@ -161,6 +155,15 @@ export class MapFiltersComponent implements OnInit {
 		else {
 			delete this.filters['beer'];
 		}
+		this.backFiltersChanged = true;
+		this.form.updateValueAndValidity();
+	}
+
+	public onValueChange($event) {
+		if ($event.target.value === 'hasTerrace') {
+			$event.target.checked ? this.filters['tag'] = 'Terrasse' : delete this.filters['tag'];
+		}
+		this.filters[$event.target.value] = $event.target.checked;
 		this.backFiltersChanged = true;
 		this.form.updateValueAndValidity();
 	}

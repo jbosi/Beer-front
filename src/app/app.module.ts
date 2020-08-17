@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSliderModule, MatAutocompleteModule, MatSnackBarModule, MatListModule, MatProgressBarModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatDialogModule, MatToolbarModule, MatCardModule, MatGridListModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSliderModule, MatAutocompleteModule, MatSnackBarModule, MatListModule, MatProgressBarModule, MatSlideToggleModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { createCustomElement } from '@angular/elements';
@@ -19,6 +19,7 @@ import { BarPropertiesService, UploadService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ToggleSwitchComponent } from './components/shared/toggle-switch/toggle-switch.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -41,7 +42,8 @@ const MATERIAL_MODULES = [
 	MatAutocompleteModule,
 	MatSnackBarModule,
 	MatListModule,
-	MatProgressBarModule
+	MatProgressBarModule,
+	MatSlideToggleModule
 ];
 
 @NgModule({
@@ -73,10 +75,10 @@ const MATERIAL_MODULES = [
 		BeerTableComponent,
 		OwnedBarsComponent,
 		NewRequestComponent,
-		PendingRequestComponent
+		PendingRequestComponent,
+		ToggleSwitchComponent
 	],
 	imports: [
-		...MATERIAL_MODULES,
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
@@ -85,7 +87,8 @@ const MATERIAL_MODULES = [
 		AppRoutingModule,
 		FlexLayoutModule,
 		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-		ScrollDispatchModule
+		ScrollDispatchModule,
+		...MATERIAL_MODULES,
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
