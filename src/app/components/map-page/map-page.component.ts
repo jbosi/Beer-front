@@ -26,12 +26,12 @@ export class MapPageComponent implements OnInit {
 		private readonly userService: UserService,
 		private readonly snackBar: MatSnackBar
 	) {}
-	
+
 	ngOnInit() {
 		window.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
 
 		this.authenticationService.isLogged.subscribe(isLogged => this.isLogged = isLogged);
-		
+
 		this.activatedRoute.data.subscribe((response: { mapData: IBarProperties[] }) => {
 			this.barProperties = response.mapData;
 			this.barNames = this.barProperties.map(bar => {
@@ -66,7 +66,7 @@ export class MapPageComponent implements OnInit {
 		}
 	}
 
-  private getfavorites(): Observable<IFavoriteBar[]> {
+	private getfavorites(): Observable<IFavoriteBar[]> {
 		if (this.isLogged) {
 			return this.userService.getfavoritesByUserId(localStorage.getItem('user_id'));
 		}

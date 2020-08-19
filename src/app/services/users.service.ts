@@ -12,11 +12,11 @@ export class UserService {
 	public checkUserName(username: string) {
 		return this.http.get<any[]>(`${API_URL}/users/check-username?username=${username}`);
 	}
-	
+
 	public getAllUsers() {
 		return this.http.get<any[]>(`${API_URL}/users`);
 	}
-	
+
 	public getAllOwnership() {
 		return this.http.get<any[]>(`${API_URL}/users/list-user-responsabilities`);
 	}
@@ -32,7 +32,7 @@ export class UserService {
 	public getAllOwnershipRequestsByUserId(userId: string): Observable<IOwnershipRequest[]> {
 		return this.http.get<IOwnershipRequest[]>(`${API_URL}/users/list-user-ask-responsabilities/${userId}`);
 	}
-	
+
 	public register(user: any) {
 		return this.http.post(`${API_URL}/users/signup`, user);
 	}
@@ -44,7 +44,7 @@ export class UserService {
 	public favorites(id: string) {
 		return this.http.post(`${API_URL}/users/favourites`, { barId: id });
 	}
-	
+
 	public unfavorites(id: string) {
 		return this.http.delete(`${API_URL}/users/favourites/${id}`);
 	}

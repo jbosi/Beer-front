@@ -21,7 +21,7 @@ export class UserAdminComponent implements OnInit {
 	constructor(
 		private readonly userService: UserService
 	) { }
-	
+
 	ngOnInit() {
 		zip(
 			this.userService.getAllUsers(),
@@ -29,7 +29,7 @@ export class UserAdminComponent implements OnInit {
 			this.userService.getAllOwnershipRequests()
 		).subscribe(([users, owners, ownersRequests]) => {
 			this.userList = users;
-			
+
 			this.ownersList = owners
 				.filter(owner => owner.user != null && owner.bar != null)
 				.map(owner => {
@@ -152,9 +152,8 @@ export class UserAdminComponent implements OnInit {
 	}
 
 	public onAcceptOrRefuse(element, state: boolean): void | Observable<never> {
-		console.log(element)
 		if (element.user == null || element.bar == null) {
-			return throwError("user or bar undefined");
+			return throwError('user or bar undefined');
 		}
 		this.userService.acceptOrRefuseRequest({
 			userId: element.user.id,

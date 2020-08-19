@@ -12,8 +12,8 @@ export class AddBeerComponent implements OnInit {
 	public addBeerForm: FormGroup;
 
 	constructor(
-		private formBuilder: FormBuilder,
-		private beerPropertiesService: BeerPropertiesService
+		private readonly formBuilder: FormBuilder,
+		private readonly beerPropertiesService: BeerPropertiesService
 	) {
 		this.addBeerForm = this.formBuilder.group({
 			addBeer: [],

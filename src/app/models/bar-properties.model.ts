@@ -39,7 +39,7 @@ export interface IDetailedBarProperties {
 	};
 	tags: string[];
 	type: string;
-	characteristics: Object;
+	characteristics: object;
 	happyHourTime: IWeekDaysOpeningHours;
 	openingTime: IWeekDaysOpeningHours;
 	privateaserBookingUrl: string;
@@ -74,13 +74,6 @@ export interface IOwnership {
 	id: string;
 }
 
-export interface IOwnershipRequest extends IOwnershipResponse {
-	studied: boolean;
-	accepted: boolean;
-	reason: any;
-	pictures: string[];
-}
-
 export interface  IOwnershipResponse {
 	bar: IDetailedBarProperties;
 	id: string;
@@ -88,7 +81,13 @@ export interface  IOwnershipResponse {
 		email: string;
 		isAdmin: boolean;
 		id: string;
-		username: string
-	}
+		username: string;
+	};
 }
 
+export interface IOwnershipRequest extends IOwnershipResponse {
+	studied: boolean;
+	accepted: boolean;
+	reason: any;
+	pictures: string[];
+}

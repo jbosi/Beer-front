@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import {
 	HttpClient,
 	HttpRequest,
 	HttpEventType,
 	HttpResponse,
-} from '@angular/common/http'
-import { Observable, Subject } from 'rxjs'
+} from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 
-const API_URL = ''
+const API_URL = '';
 
 @Injectable()
 export class UploadService {
 	constructor(
 		private http: HttpClient
 	) {}
-	
+
 	public upload(files: Set<File>): { [key: string]: { progress: Observable<number> } } {
 		const status: { [key: string]: { progress: Observable<number> } } = {};
 		files.forEach(file => {

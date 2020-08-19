@@ -13,16 +13,16 @@ declare var require: any;
 export class NavBarComponent implements OnInit {
 	public logoPath: string = require('./../../../assets/logo/logoTitleWhite.png');	// TODO replace with svg
 	public isLogged = false;
-	
+
 	constructor(
 		private router: Router,
 		private authenticationService: AuthenticationService
 	) { }
-	
+
 	ngOnInit() {
 		this.authenticationService.isLogged.subscribe(isLogged => this.isLogged = isLogged);
 	}
-	
+
 	public logout() {
 		this.authenticationService.logout();
 		this.router.navigate(['/login']);

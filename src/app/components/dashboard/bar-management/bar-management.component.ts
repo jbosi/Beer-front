@@ -13,11 +13,11 @@ export class BarManagementComponent implements OnInit {
 	public ownershipRequests: any[] = [];
 	public toggledOwnershipRequests: boolean;
 	public barData: IDetailedBarProperties;
-	
+
 	constructor(
 		private readonly snackBar: MatSnackBar,
 	) { }
-	
+
 	ngOnInit() {
 		this.userId = localStorage.getItem('user_id');
 		if (this.userId == null) {

@@ -10,11 +10,11 @@ export class ToggleSwitchComponent {
 	@Input() public size: 'small' | undefined;
 	@Input() public value: string;
 	@Input() public checked = false; // TODO fix
-	@Output() public change = new EventEmitter<any>();
-	
+	@Output() public switchChanged = new EventEmitter<any>();
+
 	constructor() { }
-	
+
 	public onSwitchChange($event) {
-		this.change.emit($event);
+		this.switchChanged.emit($event);
 	}
 }

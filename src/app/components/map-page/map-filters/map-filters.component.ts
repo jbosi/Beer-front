@@ -32,7 +32,7 @@ export class MapFiltersComponent implements OnInit {
 	@Input() public showFilters: boolean;
 	@Input() public favorites: IFavoriteBar[] = [];
 	@Output() public dataChange = new EventEmitter<IBarProperties[]>();
-	@Output() public showFiltersChange = new EventEmitter<Boolean>();
+	@Output() public showFiltersChange = new EventEmitter<boolean>();
 
 	public form: FormGroup;
 	private filters = {};
@@ -42,7 +42,7 @@ export class MapFiltersComponent implements OnInit {
 	public beerTypes = BEER_ICON_TYPES;
 	public isLogged: boolean;
 	public beerNames: string[] = [];
-	public isShowfavoritesChecked: boolean = false;
+	public isShowfavoritesChecked = false;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -151,8 +151,7 @@ export class MapFiltersComponent implements OnInit {
 	public onSelectedItemChanged(beerName: string) {
 		if (beerName != null) {
 			this.filters['beer'] = beerName;
-		}
-		else {
+		} else {
 			delete this.filters['beer'];
 		}
 		this.backFiltersChanged = true;

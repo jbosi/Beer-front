@@ -9,7 +9,7 @@ export class JwtInterceptor implements HttpInterceptor {
 	constructor(
 		private authenticationService: AuthenticationService
 	) {}
-	
+
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		const currentUserToken = this.authenticationService.currentUserToken;
 		if (this.authenticationService.isExpired()) {
@@ -22,7 +22,7 @@ export class JwtInterceptor implements HttpInterceptor {
 				}
 			});
 		}
-		
+
 		return next.handle(request);
 	}
 }

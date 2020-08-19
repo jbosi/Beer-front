@@ -11,7 +11,7 @@ export class BeerPropertiesService {
 		private http: HttpClient,
 	) { }
 
-	public getBeers() : Observable<IBeerInfo[]> {
+	public getBeers(): Observable<IBeerInfo[]> {
 		return this.http.get<IBeerInfo[]>(`${API_URL}/beers`);
 	}
 

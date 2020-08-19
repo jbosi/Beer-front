@@ -15,19 +15,19 @@ export class InputAutocompleteComponent implements OnInit {
 	@Output() public selectedItemChanged = new EventEmitter<any>();
 	public itemSearcher = new FormControl();
 	public items: Observable<any[]>;
-	
+
 	constructor() { }
-	
+
 	ngOnInit() {
 		this.items = this.itemSearcher.valueChanges.pipe(
 			debounceTime(300),
 			distinctUntilChanged(),
 			filter(value => value != null),
-			map(value => typeof(value) === "string" ? this.filterItemSearch(value) : this.filterItemSearch(value.name))
+			map(value => typeof(value) === 'string' ? this.filterItemSearch(value) : this.filterItemSearch(value.name))
 		);
 
 		if (this.placeHolder == null) {
-			this.placeHolder = "Recherchez";
+			this.placeHolder = 'Recherchez';
 		}
 	}
 
@@ -50,10 +50,10 @@ export class InputAutocompleteComponent implements OnInit {
 			}];
 		}
 		const filterValue = value.toLowerCase();
-	
+
 		return this.itemNames.filter(item => (item.name || item).toLowerCase().includes(filterValue));
 	}
-	
+
 	public clearInput(): void {
 		this.itemSearcher.reset();
 		this.selectedItemChanged.emit(null);

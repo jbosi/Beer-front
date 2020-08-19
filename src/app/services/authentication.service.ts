@@ -10,20 +10,20 @@ export class AuthenticationService {
 	private currentUserSubject: BehaviorSubject<{token: string}>;
 	public currentUser: Observable<{token: string}>;
 	public isLogged: Observable<boolean>;
-	
+
 	constructor(private http: HttpClient) {
 		this.currentUserSubject = new BehaviorSubject<{token: string}>(JSON.parse(localStorage.getItem('token_id')));
 		this.currentUser = this.currentUserSubject.asObservable();
 		this.isLogged = this.currentUserSubject.asObservable().pipe(map(token => token != null));
 	}
-	
+
 	public get currentUserToken(): string {
 		if (this.currentUserSubject.value != null) {
 			return this.currentUserSubject.value.token;
 		}
 		return null;
 	}
-	
+
 	public login(email, password) {
 		return this.http.post<any>(`${API_URL}/users/signin`, { email, password })
 		.pipe(map((response: {token: string}) => {
@@ -36,7 +36,7 @@ export class AuthenticationService {
 			return response;
 		}));
 	}
-	
+
 	public logout() {
 		// remove token from local storage and set current user to null
 		localStorage.removeItem('token_id');
@@ -54,12 +54,12 @@ export class AuthenticationService {
 	public parseJwt(token): ITokenPayload {
 		const base64Url = token.split('.')[1];
 		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-		const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+		const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
 			return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 		}).join(''));
-	
+
 		return JSON.parse(jsonPayload);
-	};
+	}
 }
 
 export interface ITokenPayload {

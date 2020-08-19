@@ -30,21 +30,21 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 	private subscriptions: Subscription[] = [];
 	onChange: any = () => {};
 	onTouched: any = () => {};
-	
+
 	get value(): IBeerInfo {
 		return this.form.value;
 	}
-	
+
 	set value(value: IBeerInfo) {
 		this.form.setValue(value);
 		this.onChange(value);
 		this.onTouched();
 	}
-	
+
 	get nameControl() {
 		return this.form.controls.name;
 	}
-	
+
 	constructor(private beerPropertiesService: BeerPropertiesService, private formBuilder: FormBuilder) {
 		this.form = this.formBuilder.group({
 			name: [],
@@ -52,7 +52,7 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 			degre: [],
 			type: []
 		});
-		
+
 		this.subscriptions.push(
 			this.form.valueChanges.subscribe(value => {
 				this.onChange(value);
@@ -60,31 +60,31 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 			})
 		);
 	}
-		
+
 	ngOnDestroy() {
 		this.subscriptions.forEach(s => s.unsubscribe());
 	}
-	
+
 	registerOnChange(fn) {
 		this.onChange = fn;
 	}
-	
+
 	writeValue(value) {
 		if (value) {
 			this.value = value;
 		}
-		
+
 		if (value == null) {
 			this.form.reset();
 		}
 	}
-	
+
 	registerOnTouched(fn) {
 		this.onTouched = fn;
 	}
-	
+
 	validate(_: FormControl) {
 		return this.form.valid ? null : { addBeer: { valid: false } };
 	}
-		
+
 }
