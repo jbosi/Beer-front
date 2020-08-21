@@ -91,6 +91,20 @@ mat-card-title.mat-card-title {
 	}
 }
 
+// MATERIAL
+
+.auto-complete-container {
+	&.colored {
+		.mat-form-field-label-wrapper {
+			label {
+				color: white;
+				font-weight: 500;
+				font-size: 14px;
+			}
+		}
+	}
+}
+
 // Mods
 
 .mod-textCenter {

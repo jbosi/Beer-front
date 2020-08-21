@@ -12,6 +12,7 @@ import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators'
 export class InputAutocompleteComponent implements OnInit {
 	@Input() public itemNames: any[] = [];
 	@Input() public placeHolder: string;
+	@Input() public isColoredAutocomplete = false;
 	@Output() public selectedItemChanged = new EventEmitter<any>();
 	public itemSearcher = new FormControl();
 	public items: Observable<any[]>;
@@ -25,10 +26,6 @@ export class InputAutocompleteComponent implements OnInit {
 			filter(value => value != null),
 			map(value => typeof(value) === 'string' ? this.filterItemSearch(value) : this.filterItemSearch(value.name))
 		);
-
-		if (this.placeHolder == null) {
-			this.placeHolder = 'Recherchez';
-		}
 	}
 
 	public setSelectedItemChanged(option: MatOption): void {

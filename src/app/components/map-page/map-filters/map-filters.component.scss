@@ -28,6 +28,18 @@
 		}
 	}
 }
+.autocomplete-button {
+	position: relative;
+	.button-like {
+		position: absolute;
+		top: 22px;
+		bottom: 18px;
+		left: 0;
+		right: 0;
+		background-color: #E9BC2F;
+		border-radius: 10px;
+	}
+}
 
 h3 {
 	text-align: left;

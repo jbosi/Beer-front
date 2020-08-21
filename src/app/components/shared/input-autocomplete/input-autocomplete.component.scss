@@ -1,19 +1,31 @@
 .auto-complete-container {
 	display: flex;
 	align-items: baseline;
-}
-
-.clear-icon {
-	font-size: 18px;
-}
-
-.button-icon {
-	width: 20px;
-	height: 20px;
-	transform: translateX(-20px);
-	line-height: 20px;
-}
-
-.auto-complete-field {
 	width: 100%;
+	position: relative;
+	
+	.auto-complete-field {
+		width: 100%;
+		text-align: center;
+	}
+
+	.button-icon {
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		position: absolute;
+		right: 0;
+		bottom: 26px;
+		.clear-icon {
+			font-size: 18px;
+		}
+	}
+	&.colored {
+		.clear-icon {
+			color: white;
+		}
+		.mat-form-field-label-wrapper {
+			color: white;
+		}
+	}
 }

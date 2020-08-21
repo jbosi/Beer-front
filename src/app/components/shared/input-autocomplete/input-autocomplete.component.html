@@ -1,4 +1,4 @@
-<div class="auto-complete-container">
+<div class="auto-complete-container" [ngClass]="{ 'colored': isColoredAutocomplete }">
 	<mat-form-field class="auto-complete-field">
 		<input type="text" [placeholder]="placeHolder" matInput [formControl]="itemSearcher" [matAutocomplete]="auto">
 		<mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSelectedItemChanged($event.option)" [displayWith]="displayFn">
