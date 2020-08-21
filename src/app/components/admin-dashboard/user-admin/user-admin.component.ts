@@ -134,11 +134,6 @@ export class UserAdminComponent implements OnInit {
 				columnName: 'accepted',
 				value: 'accepted',
 				title: 'Accepted',
-			},
-			{
-				columnName: 'icon',
-				value: 'icon',
-				title: 'icon',
 			}
 		];
 	}

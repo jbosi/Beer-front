@@ -15,7 +15,7 @@ export class TableListBeerComponent implements AfterViewInit {
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
 	public isLoadingResults = false;
 
-	constructor(private beerPropertiesService: BeerPropertiesService) {
+	constructor(private readonly beerPropertiesService: BeerPropertiesService) {
 		this.isLoadingResults = true;
 	}
 

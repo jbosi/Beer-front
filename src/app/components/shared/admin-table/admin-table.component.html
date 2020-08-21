@@ -6,15 +6,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="admin-table-row" *ngFor="let item of data">
+		<tr class="admin-table-row" *ngFor="let item of data; let itemIndex = index">
 			<td *ngFor="let prop of columnsProperties">{{ item[prop.value] }}</td>
-			<td class="table-action-icon" *ngIf="!item.studied && displayEditIcons">
-				<button mat-icon-button color="primary" aria-label="Accept request" (click)="onAcceptOrRefuse(item, true)">
-					<mat-icon>done</mat-icon>
-				</button>
-				<button mat-icon-button color="primary" aria-label="Refuse request" (click)="onAcceptOrRefuse(item, false)">
-					<mat-icon>clear</mat-icon>
-				</button>
+			<td class="table-action-icon">
+				<ng-container *ngIf="!item.studied && displayEditIcons">
+					<button mat-icon-button color="primary" aria-label="Accept request" (click)="onAcceptOrRefuse(item, itemIndex, true)">
+						<mat-icon>done</mat-icon>
+					</button>
+					<button mat-icon-button color="primary" aria-label="Refuse request" (click)="onAcceptOrRefuse(item, itemIndex, false)">
+						<mat-icon>clear</mat-icon>
+					</button>
+				</ng-container>
 			</td>
 		</tr>
 	</tbody>
