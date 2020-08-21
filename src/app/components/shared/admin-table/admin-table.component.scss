@@ -1,0 +1,16 @@
+.table-action-icon {
+	border: none;
+	button {
+		visibility: hidden;
+	}
+	&:hover {
+		background-color: #EEEEEE;
+		button {
+			visibility: visible;
+		}
+	}
+}
+
+.admin-table {
+	width: 100%;
+}

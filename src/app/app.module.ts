@@ -19,6 +19,7 @@ import { BarPropertiesService, UploadService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { AdminTableComponent } from './components/shared/admin-table/admin-table.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -73,7 +74,8 @@ const MATERIAL_MODULES = [
 		BeerTableComponent,
 		OwnedBarsComponent,
 		NewRequestComponent,
-		PendingRequestComponent
+		PendingRequestComponent,
+		AdminTableComponent
 	],
 	imports: [
 		...MATERIAL_MODULES,
