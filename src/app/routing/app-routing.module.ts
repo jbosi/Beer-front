@@ -7,7 +7,7 @@ import {
 	HomeComponent,
 	BarAdminComponent,
 	BeerAdminComponent,
-	AdminDashboardComponent, 
+	AdminDashboardComponent,
 	NavBarComponent,
 	LoginComponent,
 	RegisterComponent,
@@ -25,7 +25,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
 	{
 		path: '',
-		component: HomeComponent,	
+		component: HomeComponent,
 		pathMatch: 'full',
 	},
 	{
@@ -78,7 +78,7 @@ const routes: Routes = [
 			{
 				path: 'register',
 				component: RegisterComponent
-			}, 
+			},
 		]
 	},
 	{

@@ -14,7 +14,7 @@ export class OwnedBarsComponent implements OnInit {
 	constructor(
 		private readonly userService: UserService
 	) { }
-	
+
 	ngOnInit() {
 		const userId = localStorage.getItem('user_id');
 		this.userService.getAllOwnershipByUserId(userId).subscribe((ownedBars: IOwnershipResponse[] ) => {
@@ -22,12 +22,12 @@ export class OwnedBarsComponent implements OnInit {
 				return {
 					...ownedBar.bar,
 					expand: false
-				}
+				};
 			});
 		});
 	}
-	
+
 	public toggleExpand(index: number) {
-		this.ownedBars[index].expand = !this.ownedBars[index].expand; 
+		this.ownedBars[index].expand = !this.ownedBars[index].expand;
 	}
 }

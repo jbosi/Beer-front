@@ -9,13 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class BeerListComponent implements OnInit {
 	public beers$: Observable<IBeerInfo[]>;
-	
+
 	constructor(
 		private beersService: BeerPropertiesService
 	) { }
-	
+
 	ngOnInit() {
 		this.beers$ = this.beersService.getBeers();
 	}
-	
 }

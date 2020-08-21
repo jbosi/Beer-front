@@ -19,6 +19,6 @@ export class BarPropertiesService {
 	}
 
 	public getFilteredBarsProperties(filters: string): Observable<IBarProperties[]> {
-		return this.http.get<IBarProperties[]>(`${API_URL}/bars?${filters}`)
+		return this.http.get<IBarProperties[]>(`${API_URL}/bars?${filters}`);
 	}
 }

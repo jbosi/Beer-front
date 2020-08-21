@@ -29,7 +29,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		maxClusterRadius: 100,
 		chunkedLoading: true
 	});
-	
+
 	@Input() data: IBarProperties[];
 	@Input() highlightedMarkerId: Subject<string>;
 
@@ -41,7 +41,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	ngAfterViewInit(): void {
 		this.initMap();
 		this.highlightedMarkerId.subscribe(markerId => {
-			const marker = this.markers.find(marker => marker.id == markerId);
+			const marker = this.markers.find(m => m.id == markerId);
 			marker.setStyle(this.getHighlightOptions());
 			this.highlight = marker;
 			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < clustersDiabledZoom ? clustersDiabledZoom : this.map.getZoom());
@@ -52,7 +52,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
 		});
 		tiles.addTo(this.map);
-		
+
 		this.addMarkers();
 		this.map
 			.locate({setView: true, maxZoom: 15})
@@ -68,7 +68,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			preferCanvas: true
 		});
 		L.control.zoom({
-			position:'topright'
+			position: 'topright'
 		}).addTo(this.map);
 	}
 
@@ -78,7 +78,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			this.onDataChange();
 		}
 	}
-	
+
 	private addMarkers(): void {
 		this.data.map((bar: IBarProperties) => {
 			const cheapestBeer = bar.cheapestBeer ? bar.cheapestBeer.toString() : 'NA';
@@ -87,7 +87,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				this.removeHighlight();
 				marker.setStyle(this.getHighlightOptions());
 				this.highlight = marker;
-				
+
 				const targetPoint = this.map.project(e.target.getLatLng(), this.map.getZoom()).subtract([0, 200]);
 				const targetLatLng = this.map.unproject(targetPoint, this.map.getZoom());
 				this.map.flyTo(targetLatLng, this.map.getZoom());
@@ -96,22 +96,22 @@ export class MapComponent implements AfterViewInit, OnChanges {
 				permanent: true,
 				direction: 'center',
 				className: 'map-marker-tooltip-price'
-			}).bindPopup(() => {	
+			}).bindPopup(() => {
 				const popupEl: NgElement & WithProperties<MapPopupComponent> = document.createElement('popup-element') as any;
 				// Listen to the close event
 				popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
 
 				popupEl.barData$ = this.barPropertiesService.getBarPropertiesById(bar.id);
 				popupEl.favorites = this.favorites;
-				
+
 				document.body.appendChild(popupEl);
 				return popupEl;
 			});
-			
+
 			marker.id = bar.id;
 			this.markers.push(marker);
 		});
-		
+
 		this.cluster.addLayers(this.markers);
 		this.map.addLayer(this.cluster);
 	}
@@ -121,13 +121,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		this.markers = [];
 		this.addMarkers();
 	}
-		
+
 	private removeMarkers(): void {
 		this.cluster.clearLayers();
 	}
 
 	private onLocationFound(e: any) {
-		var radius = e.accuracy / 2;
+		const radius = e.accuracy / 2;
 		L.circle(e.latlng, radius).addTo(this.map);
 	}
 

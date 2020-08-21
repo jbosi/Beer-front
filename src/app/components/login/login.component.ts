@@ -14,38 +14,38 @@ export class LoginComponent implements OnInit {
 	loading = false;
 	submitted = false;
 	returnUrl: string;
-	
+
 	constructor(
-		private formBuilder: FormBuilder,
-		private route: ActivatedRoute,
-		private router: Router,
-		private authenticationService: AuthenticationService,
+		private readonly formBuilder: FormBuilder,
+		private readonly route: ActivatedRoute,
+		private readonly router: Router,
+		private readonly authenticationService: AuthenticationService,
 	) {
 		if (this.authenticationService.currentUserToken) {
 			this.router.navigate(['/map']);
 		}
 	}
-	
+
 	ngOnInit() {
 		this.loginForm = this.formBuilder.group({
 			email: ['', Validators.required],
 			password: ['', Validators.required]
 		});
-		
+
 		// get return url from route parameters or default to '/map'
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/map';
 	}
-	
+
 	// convenience getter for easy access to form fields
 	get f() { return this.loginForm.controls; }
-	
+
 	onSubmit() {
 		this.submitted = true;
-		
+
 		if (this.loginForm.invalid) {
 			return;
 		}
-		
+
 		this.loading = true;
 		this.authenticationService.login(this.f.email.value, this.f.password.value)
 		.pipe(first())
@@ -59,4 +59,3 @@ export class LoginComponent implements OnInit {
 		});
 	}
 }
-	

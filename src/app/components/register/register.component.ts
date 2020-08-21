@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 	submitted = false;
 	public hasError = false;
 	public errorsMessage: string[];
-	
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
 			this.router.navigate(['/map']);
 		}
 	}
-	
+
 	ngOnInit() {
 		this.registerForm = this.formBuilder.group({
 			username: ['', Validators.required],
@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
 			passwordConfirmed: ['', Validators.required]
 		});
 
-		this.registerForm.get("username").valueChanges.pipe(
+		this.registerForm.get('username').valueChanges.pipe(
 			debounceTime(250),
 			distinctUntilChanged(),
 			switchMap(username => this.userService.checkUserName(username))
@@ -46,18 +46,18 @@ export class RegisterComponent implements OnInit {
 			error => this.handleError(error)
 		);
 	}
-	
+
 	// convenience getter for easy access to form fields
 	get f() { return this.registerForm.controls; }
-	
+
 	onSubmit() {
 		this.submitted = true;
 		this.hasError = false;
-		
+
 		if (this.registerForm.invalid) {
 			return;
 		}
-		
+
 		this.loading = true;
 		this.userService.register(this.registerForm.value)
 		.pipe(first())

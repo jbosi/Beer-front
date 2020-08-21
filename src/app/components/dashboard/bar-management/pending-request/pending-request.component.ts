@@ -9,11 +9,11 @@ import { UserService } from '../../../../services';
 })
 export class PendingRequestComponent implements OnInit {
 	public requests: IOwnershipRequest[] = [];
-	
+
 	constructor(
 		private readonly userService: UserService
 	) { }
-	
+
 	ngOnInit() {
 		const userId = localStorage.getItem('user_id');
 		this.userService.getAllOwnershipRequestsByUserId(userId).subscribe((requests: IOwnershipRequest[]) => {
@@ -21,5 +21,5 @@ export class PendingRequestComponent implements OnInit {
 		});
 
 	}
-	
+
 }

@@ -27,4 +27,4 @@ export const BEER_ICON_TYPES = [
 		value: 'white',
 		name: 'Blanche'
 	}
-]
+];

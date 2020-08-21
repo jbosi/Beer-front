@@ -1,0 +1,7 @@
+<div class="container" [ngClass]="{'mod-small': size === 'small'}">
+	<span class="switch-label">{{ label }}</span>
+	<label class="switch">
+		<input type="checkbox" [value]="value" [checked]="checked" (change)="onSwitchChange($event)">
+		<span class="slider"></span>
+	</label>
+</div>

@@ -23,7 +23,7 @@ import { MatSnackBar } from '@angular/material';
 	]
 })
 export class NewRequestComponent implements OnInit {
-	@ViewChild('file', { static: false }) file
+	@ViewChild('file', { static: false }) file;
 	public files: Set<File> = new Set();
 	public barNames: IBarNames[] = [];
 	public progress;
@@ -31,7 +31,7 @@ export class NewRequestComponent implements OnInit {
 	public uploadSuccessful = false;
 	public form: FormGroup;
 	public formState: 'loading' | 'saved' | 'error' = null;
-	
+
 	constructor(
 		private readonly barPropertiesService: BarPropertiesService,
 		private readonly formBuilder: FormBuilder,
@@ -39,7 +39,7 @@ export class NewRequestComponent implements OnInit {
 		private readonly userService: UserService,
 		private readonly snackBar: MatSnackBar
 	) { }
-	
+
 	ngOnInit() {
 		this.barPropertiesService.getBarsProperties().subscribe(bars => {
 			this.barNames = bars.map(bar => { return { name: bar.name, id: bar.id } });
@@ -54,7 +54,7 @@ export class NewRequestComponent implements OnInit {
 
 	onFilesAdded(): void {
 		const files: { [key: string]: File } = this.file.nativeElement.files;
-		for (let key in files) {
+		for (const key in files) {
 			if (!isNaN(parseInt(key))) {
 				this.files.add(files[key]);
 			}
@@ -63,12 +63,12 @@ export class NewRequestComponent implements OnInit {
 		this.progress = this.uploadService.upload(this.files);
 		let allProgressObservables = [];
 		for (let key in this.progress) {
-		  allProgressObservables.push(this.progress[key].progress);
+			allProgressObservables.push(this.progress[key].progress);
 		}
-	  
+
 		forkJoin(allProgressObservables).subscribe(() => {
-		  this.uploadSuccessful = true;
-		  this.uploading = false;
+			this.uploadSuccessful = true;
+			this.uploading = false;
 		});
 	}
 
@@ -85,15 +85,15 @@ export class NewRequestComponent implements OnInit {
 		this.userService.requestOwnership(this.form.value).subscribe(
 			() => {
 				this.formState = 'saved';
-				setTimeout(() => { this.formState = null }, 1500);
+				setTimeout(() => { this.formState = null; }, 1500);
 			},
 			error => {
 				this.formState = 'error';
 				this.snackBar.open(error.error.message, '', {
 					duration: 2000,
 				});
-				setTimeout(() => { this.formState = null }, 1500);
-			}, 
+				setTimeout(() => { this.formState = null; }, 1500);
+			},
 		);
 	}
 }

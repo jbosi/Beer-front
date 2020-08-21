@@ -15,7 +15,7 @@ export class BarAdminComponent implements AfterViewInit {
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
 	public isLoadingResults = false;
 
-	constructor(private barPropertiesService: BarPropertiesService) {
+	constructor(private readonly barPropertiesService: BarPropertiesService) {
 		this.isLoadingResults = true;
 	}
 
