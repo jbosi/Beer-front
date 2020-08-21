@@ -100,8 +100,13 @@ mat-card-title.mat-card-title {
 				color: white;
 				font-weight: 500;
 				font-size: 14px;
+				position: absolute;
+				top: 22px;
 			}
 		}
+	}
+	.mat-form-field-underline {
+		display: none;
 	}
 }
 

@@ -32,8 +32,8 @@
 	position: relative;
 	.button-like {
 		position: absolute;
-		top: 22px;
-		bottom: 18px;
+		top: 26px;
+		bottom: 22px;
 		left: 0;
 		right: 0;
 		background-color: #E9BC2F;
@@ -65,6 +65,9 @@ h3 {
 		display: flex;
 		padding: 0.8rem 0 0 0;
 		justify-content: space-between;
+		.mat-form-field {
+			width: 100%;
+		}
 	}
 }
 
