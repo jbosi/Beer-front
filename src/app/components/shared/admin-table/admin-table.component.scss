@@ -13,4 +13,14 @@
 
 .admin-table {
 	width: 100%;
+	padding: 0 10px;
+	.admin-table-header {
+		color: #A8A8A8;
+		font-size: 14px;
+		font-weight: 400;
+		text-align: left;
+	}
+	.admin-table-row {
+		line-height: 40px;
+	}
 }

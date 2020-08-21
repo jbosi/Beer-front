@@ -1,12 +1,12 @@
-<table>
+<table class="admin-table">
 	<thead>
-		<tr>
-			<th *ngFor="let columnHeader of displayedColumns">{{ columnHeader.name }}</th>
+		<tr class="admin-table-row">
+			<th class="admin-table-header" *ngFor="let columnHeader of displayedColumns">{{ columnHeader.name }}</th>
 			<th></th> <!-- Header for Icons -->
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let data of tableData">
+		<tr class="admin-table-row" *ngFor="let data of tableData">
 			<td>{{ data.name }}</td>
 			<td>{{ data.price }}</td>
 			<td>{{ data.priceHH }}</td>

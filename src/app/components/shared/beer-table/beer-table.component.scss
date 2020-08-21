@@ -27,7 +27,16 @@ table {
 	height: 35px;
 }
 
-td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type,
-td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
-	padding: 0 ;
+.admin-table {
+	width: 100%;
+	padding: 0 10px;
+	.admin-table-header {
+		color: #A8A8A8;
+		font-size: 12px;
+		font-weight: 500;
+		text-align: left;
+	}
+	.admin-table-row {
+		line-height: 40px;
+	}
 }

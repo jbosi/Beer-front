@@ -1,12 +1,12 @@
 <table class="admin-table">
 	<thead>
-		<tr>
-			<th *ngFor="let prop of columnsProperties">{{ prop.title }}</th>
+		<tr class="admin-table-row">
+			<th class="admin-table-header" *ngFor="let prop of columnsProperties">{{ prop.title }}</th>
 			<th></th> <!-- Header for Icons -->
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let item of data">
+		<tr class="admin-table-row" *ngFor="let item of data">
 			<td *ngFor="let prop of columnsProperties">{{ item[prop.value] }}</td>
 			<td class="table-action-icon" *ngIf="!item.studied && displayEditIcons">
 				<button mat-icon-button color="primary" aria-label="Accept request" (click)="onAcceptOrRefuse(item, true)">

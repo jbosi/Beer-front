@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/users.service';
-import { zip, throwError, Observable } from 'rxjs';
+import { zip } from 'rxjs';
 import { IcolumnPropertiesInterface } from '../../shared';
 
 @Component({
@@ -22,7 +22,7 @@ export class UserAdminComponent implements OnInit {
 	constructor(
 		private readonly userService: UserService
 	) { }
-	
+
 	ngOnInit() {
 		zip(
 			this.userService.getAllUsers(),
@@ -30,7 +30,7 @@ export class UserAdminComponent implements OnInit {
 			this.userService.getAllOwnershipRequests()
 		).subscribe(([users, owners, ownersRequests]) => {
 			this.userList = users;
-			
+
 			this.ownersList = owners
 				.filter(owner => owner.user != null && owner.bar != null)
 				.map(owner => {
@@ -141,17 +141,5 @@ export class UserAdminComponent implements OnInit {
 				title: 'icon',
 			}
 		];
-	}
-
-	public onAcceptOrRefuse(element, state: boolean): void | Observable<never> {
-		console.log(element)
-		if (element.user == null || element.bar == null) {
-			return throwError("user or bar undefined");
-		}
-		this.userService.acceptOrRefuseRequest({
-			userId: element.user.id,
-			barId: element.bar.id,
-			stateRequest: state
-		}).subscribe();
 	}
 }
