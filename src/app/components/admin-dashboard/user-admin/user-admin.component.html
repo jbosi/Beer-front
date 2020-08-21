@@ -1,62 +1,29 @@
 <section>
 	<h1>Users</h1>
-	<div *ngIf="userList?.length" class="user-admin-table-container mat-elevation-z8">
-		<table mat-table [dataSource]="userList" class="user-admin-table">
-			
-			<ng-container *ngFor="let column of userColumns.columnsProperties" [matColumnDef]="column.columnName">
-				<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
-				<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
-			</ng-container>
-			
-			<tr mat-header-row *matHeaderRowDef="userColumns.columnsNames; sticky: true"></tr>
-			<tr mat-row *matRowDef="let row; columns: userColumns.columnsNames;"></tr>
-		</table>
+	<div *ngIf="userList?.length" class="user-admin-table-container">
+		<div app-admin-table
+			[columnsProperties]="userColumns"
+			[data]="userList">
+		</div>
 	</div>
 </section>
 
 <section>
 	<h1>Owners</h1>
-	<div *ngIf="ownersList?.length" class="user-admin-table-container mat-elevation-z8">
-		<table mat-table [dataSource]="ownersList" class="user-admin-table">
-			
-			<ng-container *ngFor="let column of userOwnersColumns.columnsProperties" [matColumnDef]="column.columnName">
-				<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
-				<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
-			</ng-container>
-			
-			<tr mat-header-row *matHeaderRowDef="userOwnersColumns.columnsNames; sticky: true"></tr>
-			<tr mat-row *matRowDef="let row; columns: userOwnersColumns.columnsNames;"></tr>
-		</table>
+	<div *ngIf="ownersList?.length" class="user-admin-table-container">
+		<div app-admin-table
+			[columnsProperties]="userOwnersColumns"
+			[data]="ownersList">
+		</div>
 	</div>
 </section>
 
 <section>
 	<h1>Ownership requests</h1>
-	<div *ngIf="ownershipRequestList?.length" class="user-admin-table-container mat-elevation-z8">
-		<table mat-table [dataSource]="ownershipRequestList" class="user-admin-table">
-			
-			<ng-container *ngFor="let column of userOwnersRequestsColumns.columnsProperties" [matColumnDef]="column.columnName">
-				<ng-container *ngIf="column.columnName === 'icon'; else normalColumn">
-					<th mat-header-cell *matHeaderCellDef></th>
-					<td class="table-action-icon" mat-cell *matCellDef="let element">
-						<ng-container *ngIf="!element.studied">
-							<button mat-icon-button color="primary" aria-label="Accept request" (click)="onAcceptOrRefuse(element, true)">
-								<mat-icon>done</mat-icon>
-							</button>
-							<button mat-icon-button color="primary" aria-label="Refuse request" (click)="onAcceptOrRefuse(element, false)">
-								<mat-icon>clear</mat-icon>
-							</button>
-						</ng-container>
-					</td>
-				</ng-container>
-				<ng-template #normalColumn>
-					<th mat-header-cell *matHeaderCellDef> {{ column.title }} </th>
-					<td [class]="column.class || 'default-admin-cell'" mat-cell *matCellDef="let element"> {{ element[column.value] }} </td>
-				</ng-template>
-			</ng-container>
-			
-			<tr mat-header-row *matHeaderRowDef="userOwnersRequestsColumns.columnsNames; sticky: true"></tr>
-			<tr mat-row *matRowDef="let row; columns: userOwnersRequestsColumns.columnsNames;"></tr>
-		</table>
+	<div *ngIf="ownershipRequestList?.length" class="user-admin-table-container">
+		<div app-admin-table displayEditIcons="true"
+			[columnsProperties]="userOwnersRequestsColumns"
+			[data]="ownershipRequestList">
+		</div>
 	</div>
 </section>
