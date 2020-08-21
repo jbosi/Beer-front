@@ -1,0 +1,27 @@
+<table class="admin-table" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr class="admin-table-row">
+			<th class="admin-table-header" *ngFor="let prop of columnsProperties">{{ prop.title }}</th>
+			<th></th> <!-- Header for Icons -->
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="admin-table-row" *ngFor="let item of data">
+			<td *ngFor="let prop of columnsProperties">{{ item[prop.value] }}</td>
+			<td class="table-action-icon" *ngIf="!item.studied && displayEditIcons">
+				<button mat-icon-button color="primary" aria-label="Accept request" (click)="onAcceptOrRefuse(item, true)">
+					<mat-icon>done</mat-icon>
+				</button>
+				<button mat-icon-button color="primary" aria-label="Refuse request" (click)="onAcceptOrRefuse(item, false)">
+					<mat-icon>clear</mat-icon>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<ng-template #empty>
+	<p class="mapPopup-empty">
+		{{ labelEmpty }}
+	</p>
+</ng-template>

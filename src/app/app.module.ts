@@ -62,13 +62,14 @@ import {
 	BeerTableComponent,
 	OwnedBarsComponent,
 	NewRequestComponent,
-	PendingRequestComponent
+	PendingRequestComponent,
+  ToggleSwitchComponent,
+  AdminTableComponent
 } from './components';
 import { BarPropertiesService, UploadService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ToggleSwitchComponent } from './components/shared/toggle-switch/toggle-switch.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -125,7 +126,8 @@ const MATERIAL_MODULES = [
 		OwnedBarsComponent,
 		NewRequestComponent,
 		PendingRequestComponent,
-		ToggleSwitchComponent
+		ToggleSwitchComponent,
+		AdminTableComponent
 	],
 	imports: [
 		BrowserModule,
