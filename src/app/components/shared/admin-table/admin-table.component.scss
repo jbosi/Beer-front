@@ -1,16 +1,3 @@
-.table-action-icon {
-	border: none;
-	button {
-		visibility: hidden;
-	}
-	&:hover {
-		background-color: #EEEEEE;
-		button {
-			visibility: visible;
-		}
-	}
-}
-
 .admin-table {
 	width: 100%;
 	padding: 0 10px;
@@ -22,5 +9,20 @@
 	}
 	.admin-table-row {
 		line-height: 40px;
+		.table-action-icon {
+			min-width: 50px;
+			border: none;
+			button {
+				visibility: hidden;
+			}
+		}
+		&:hover {
+			background-color: #EEEEEE;
+			.table-action-icon {
+				button {
+					visibility: visible;
+				}
+			}
+		}
 	}
 }

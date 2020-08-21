@@ -16,14 +16,14 @@
 				</div>
 			</td>
 			<td>{{ data.quantity }}</td>
-			<ng-container *ngIf="displayEditIcons">
+			<td class="table-action-icon" *ngIf="displayEditIcons">
 				<button mat-icon-button color="primary" aria-label="edit" (click)="onEditOrRemove(data)">
 					<mat-icon>edit</mat-icon>
 				</button>
 				<button mat-icon-button color="primary" aria-label="remove" (click)="onEditOrRemove(data)">
 					<mat-icon>clear</mat-icon>
 				</button>
-			</ng-container>
+			</td>
 		</tr>
 	</tbody>
 </table>

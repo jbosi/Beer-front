@@ -38,5 +38,20 @@ table {
 	}
 	.admin-table-row {
 		line-height: 40px;
+		.table-action-icon {
+			min-width: 50px;
+			border: none;
+			button {
+				visibility: hidden;
+			}
+		}
+		&:hover {
+			background-color: #EEEEEE;
+			.table-action-icon {
+				button {
+					visibility: visible;
+				}
+			}
+		}
 	}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserService } from 'src/app/services';
 import { Observable, throwError } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Observable, throwError } from 'rxjs';
 	templateUrl: './admin-table.component.html',
 	styleUrls: ['./admin-table.component.scss']
 })
-export class AdminTableComponent implements OnInit {
+export class AdminTableComponent {
 	@Input() public labelEmpty: string;
 	@Input() public displayEditIcons = false;
 	@Input() public columnsProperties: IcolumnPropertiesInterface[] = [];
@@ -16,14 +16,10 @@ export class AdminTableComponent implements OnInit {
 	constructor(
 		private readonly userService: UserService
 	) { }
-	
-	ngOnInit() {
-		console.log(this.columnsProperties)
-	}
 
 	public onAcceptOrRefuse(element, state: boolean): void | Observable<never> {
 		if (element.user == null || element.bar == null) {
-			return throwError("user or bar undefined");
+			return throwError('user or bar undefined');
 		}
 		this.userService.acceptOrRefuseRequest({
 			userId: element.user.id,
