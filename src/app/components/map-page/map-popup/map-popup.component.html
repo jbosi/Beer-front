@@ -1,17 +1,21 @@
-<mat-card >
-	<mat-card-title>
-		<div class="mod-textCenter">{{ barName }}</div>
-		<div (click)="toggleIsFavorite()">
-			<mat-icon *ngIf="!isFavorite; else unfavorite" class="favorite-icon">favorite_border</mat-icon>
-			<ng-template #unfavorite>
-				<mat-icon class="favorite-icon" color="primary">favorite</mat-icon>
-			</ng-template>
-		</div>
-	</mat-card-title>
+<div class="card">
+	<div class="mod-textCenter">{{ barName }}</div>
+	<div (click)="toggleIsFavorite()">
+		<mat-icon *ngIf="!isFavorite; else unfavorite" class="favorite-icon">favorite_border</mat-icon>
+		<ng-template #unfavorite>
+			<mat-icon class="favorite-icon" color="primary">favorite</mat-icon>
+		</ng-template>
+	</div>
 
-	<mat-card-content>
+	<div class="tab-buttons">
+		<button [ngClass]="{'isActive': isBeerButtonActive}" (click)="toggleBeerButton()" class="beer-button" color="primary">BIERES</button>
+		<button [ngClass]="{'isActive': isMoreButtonActive}" (click)="toggleMoreButton()" class="more-button" color="primary">A PROPOS</button>
+	</div>
+	<ng-container *ngIf="isMoreButtonActive">
 		<p class="mod-textSmall mod-marginBottomReset">{{ barAddress }}</p>
 		<p class="mod-textSmall mod-marginTopReset mod-marginBottomReset">Happy hours : {{ happyHourStart }} - {{ happyHourEnd }}</p>
+	</ng-container>
+	<ng-container *ngIf="isBeerButtonActive">
 		<div *ngIf="!isLoading ; else spinner">
 			<div class="barDetails-container mat-elevation-z8"
 				[bar]="barData"
@@ -22,5 +26,5 @@
 		<ng-template #spinner>
 			<mat-spinner class="centered-spinner"></mat-spinner>
 		</ng-template> 
-	</mat-card-content>
-</mat-card>
+	</ng-container>
+</div>
