@@ -6,8 +6,8 @@
 	.auto-complete-search-icon {
 		color: #E9BC2F;
 		position: absolute;
-		top: 16px;
-		left: 3px;
+		top: 17px;
+		left: 4px;
 	}
 	
 	.auto-complete-field {
@@ -30,7 +30,8 @@
 		.clear-icon, .mat-form-field-label-wrapper, .auto-complete-search-icon {
 			color: white;
 			position: absolute;
-			bottom: 28px;
+			bottom: 7px;
+			right: 0;
 		}
 	}
 }
