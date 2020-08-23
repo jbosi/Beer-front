@@ -1,6 +1,20 @@
 :host {
 	display: block;
-	width: 400px;
+	width: 350px;
+	max-width: 70vw;
+	max-height: 60vh;
+	height: 300px;
+}
+
+.card {
+	background-color: #FFFFFF;
+	padding: 1.5rem 1rem;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	box-sizing: border-box;
+	overflow: hidden;
+	height: 300px;
+	width: 350px;
 	max-width: 70vw;
 	max-height: 60vh;
 }
@@ -28,4 +42,21 @@
 
 .centered-spinner {
 	margin: 5px auto;
+}
+
+.tab-buttons {
+	margin: 0.8rem 0 !important;
+	button {
+		border: 1px solid #eecc60;
+		margin-right: 0.5rem;
+		border-radius: 5px;
+		background-color: #FFFFFF;
+		color: #eecc60;
+		padding: 0.5rem 1.2rem;
+		&.isActive {
+			color: #FFFFFF;
+			background-color: #eecc60;
+			border: none;
+		}
+	}
 }

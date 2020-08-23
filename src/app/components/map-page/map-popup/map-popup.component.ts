@@ -24,12 +24,14 @@ export class MapPopupComponent implements OnInit {
 	public isLoading = true;
 	public isFavorite: boolean;
 	public barData: IDetailedBarProperties;
+	public isBeerButtonActive = true;
+	public isMoreButtonActive = false;
 
 	constructor(
-		private userService: UserService,
-		private snackBar: MatSnackBar
+		private readonly userService: UserService,
+		private readonly snackBar: MatSnackBar
 	) {}
-	
+
 	ngOnInit() {
 		const currentDay: string = getCurrentDay();
 		this.barData$.subscribe((bar: IDetailedBarProperties) => {
@@ -53,15 +55,14 @@ export class MapPopupComponent implements OnInit {
 			this.userService.favorites(this.barId).subscribe(
 				(_) => {
 					this.isFavorite = !this.isFavorite;
-					this.favorites.push({ barId: this.barId })
+					this.favorites.push({ barId: this.barId });
 				},
 				error => this.handleError(error)
 			);
-		}
-		else {
+		} else {
 			this.userService.unfavorites(this.barId).subscribe(
 				(_) => {
-					this.isFavorite = !this.isFavorite
+					this.isFavorite = !this.isFavorite;
 					const index = this.favorites.findIndex(favorite => favorite.barId === this.barId);
 					this.favorites.splice(index, 1);
 				},
@@ -85,5 +86,20 @@ export class MapPopupComponent implements OnInit {
 			return false;
 		}
 		return this.favorites.some(bar => bar.barId === this.barId);
+	}
+
+	public toggleBeerButton() {
+		this.resetButtonsState();
+		this.isBeerButtonActive = true;
+	}
+
+	public toggleMoreButton() {
+		this.resetButtonsState();
+		this.isMoreButtonActive = true;
+	}
+
+	private resetButtonsState() {
+		this.isBeerButtonActive = false;
+		this.isMoreButtonActive = false;
 	}
 }
