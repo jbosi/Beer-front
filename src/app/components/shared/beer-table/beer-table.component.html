@@ -1,4 +1,4 @@
-<table class="admin-table" cellspacing="0" cellpadding="0">
+<table class="admin-table" *ngIf="tableData.length; else empty" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr class="admin-table-row">
 			<th class="admin-table-header" *ngFor="let columnHeader of displayedColumns">{{ columnHeader.name }}</th>
