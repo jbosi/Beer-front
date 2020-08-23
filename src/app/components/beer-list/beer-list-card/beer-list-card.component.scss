@@ -2,20 +2,23 @@
 	max-width: 100%;
 }
 
-mat-card {
+.card {
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	max-width: 100%;
 	width: 450px;
-}
-
-mat-card-content {
-	display: flex;
-	justify-content: space-between;
-	flex-direction: row;
 }
 
 .beerListCard-container {
 	display: flex;
 	flex-direction: row;
+}
+
+.beerListCard-label {
+	font-weight: 500;
+	color: #676767;
+	font-size: 22px;
 }
 
 .beerListCard-image {
@@ -25,23 +28,77 @@ mat-card-content {
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
+	border-radius: 10px 0 0 10px;
 }
 
 .beerListCard-content {
 	display: flex;
 	flex-direction: column;
 	margin-left: 10px;
+	width: 100%;
+	margin-bottom: 0.8rem;
 }
 
-.mat-card-title {
-	font-weight: bold;
+.beerListCard-info {
+	display: flex;
+	flex-direction: row;
+	margin: 0.4rem 0;
+	perspective: 1000px;
+}
+
+.beerListCard-title {
+	height: 16px;
+	display: flex;
+	align-items: flex-end;
 }
 
 .beerListCard-title-column, .beerListCard-info-column {
 	font-size: 12px;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	span {
+		margin: 0.5rem 0;
+	}
 }
 
 .beerListCard-title-column {
 	color: #888888;
 	font-weight: 500;
+	margin-right: 0.5rem;
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden; /* Safari */
+	backface-visibility: hidden;
+  }
+
+.flip-card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+	background-color: #FFFFFF;
+}
+
+.beerListCard-content:hover .flip-card-inner {
+	transform: rotateX(180deg);
+}
+
+.flip-card-back {
+	transform: rotateX(180deg);
+	background-color: #FFFFFF;
+	position: absolute;
+	top: 0;
+}
+
+.beerListCard-back-info {
+	display: flex;
+	flex-direction: column;
 }
