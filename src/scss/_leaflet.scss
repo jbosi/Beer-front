@@ -35,3 +35,11 @@
 .leaflet-popup {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.leaflet-control-zoom {
+	border: none !important;
+	a {
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		border-radius: 50% !important;
+	}
+}

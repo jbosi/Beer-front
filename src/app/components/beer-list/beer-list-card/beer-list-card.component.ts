@@ -12,12 +12,14 @@ declare var require: any;
 
 export class BeerListCardComponent implements OnInit {
 	@Input() public beerInfo: IBeerInfo;
-	
+	public beerDescription;
+
 	ngOnInit() {
+		this.beerDescription = this.beerInfo.descriptionObject;
 	}
 
 	public getBeerIconColor(type: string): string {
 		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
 	}
-	
+
 }

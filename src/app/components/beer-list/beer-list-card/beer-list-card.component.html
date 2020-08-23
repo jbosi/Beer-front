@@ -1,24 +1,41 @@
-<mat-card class="mod-paddingReset">
+<div class="card">
 	<div class="beerListCard-container">
 		<div class="beerListCard-image" [style.background-color]="getBeerIconColor(beerInfo.type)">
 			<app-beer-icon></app-beer-icon>
 		</div>
 		<div class="beerListCard-content">
-			<mat-card-title>
-				<h4 class="mod-marginBottomReset">{{ beerInfo.name | uppercase }}</h4>
-			</mat-card-title>
-			<mat-card-content>
-				<div class="beerListCard-title-column">
-					<p>TYPE</p>
-					<p>DEGRE</p>
-					<p>BRASSERIE</p>
+			<div class="flip-card-inner">
+				<div class="flip-card-front">
+					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo.name | uppercase }}</h2>
+					<div class="beerListCard-info">
+						<div class="beerListCard-title-column">
+							<span class="beerListCard-title">TYPE</span>
+							<span class="beerListCard-title">DEGRE</span>
+							<span class="beerListCard-title">BRASSERIE</span>
+						</div>
+						<div class="beerListCard-info-column">
+							<span>{{ beerInfo.type }}</span>
+							<span>{{ beerInfo.alcohol }}</span>
+							<span>{{ beerInfo.brewery }}</span>
+						</div>
+					</div>
 				</div>
-				<div class="beerListCard-info-column">
-					<p>{{ beerInfo.type }}</p>
-					<p>{{ beerInfo.alcohol }}</p>
-					<p>{{ beerInfo.brewery }}</p>
+				<div class="flip-card-back">
+					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo.name | uppercase }}</h2>
+					<div class="beerListCard-info">
+						<div class="beerListCard-title-column">
+							<span class="beerListCard-title">OEIL</span>
+							<span class="beerListCard-title">GOUT</span>
+							<span class="beerListCard-title">NEZ</span>
+						</div>
+						<div class="beerListCard-info-column">
+							<span>{{ beerDescription.eye }}</span>
+							<span>{{ beerDescription.mouth }}</span>
+							<span>{{ beerDescription.nose }}</span>
+						</div>
+					</div>
 				</div>
-			</mat-card-content>
+			</div>
 		</div>
 	</div>
-</mat-card>
+</div>
