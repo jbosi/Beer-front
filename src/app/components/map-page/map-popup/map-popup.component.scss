@@ -60,3 +60,24 @@
 		}
 	}
 }
+
+.popup-info {
+	display: flex;
+	align-items: flex-end;
+	.mat-icon {
+		padding-right: 0.3rem;
+	}
+}
+
+.chips {
+	display: flex;
+	flex-direction: row;
+	margin-top: 1rem;
+	.chip {
+		margin: 0 0.3rem;
+		border-radius: 30px;
+		padding: 0.3rem 1rem;
+		color: #FFF;
+		font-weight: 500;
+	}
+}
