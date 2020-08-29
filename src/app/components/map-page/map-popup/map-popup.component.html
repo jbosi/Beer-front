@@ -1,5 +1,5 @@
 <div class="card">
-	<div class="mod-textCenter">{{ barName }}</div>
+	<div class="mod-textCenter popup-title">{{ barName }}</div>
 	<div (click)="toggleIsFavorite()">
 		<mat-icon *ngIf="!isFavorite; else unfavorite" class="favorite-icon">favorite_border</mat-icon>
 		<ng-template #unfavorite>
