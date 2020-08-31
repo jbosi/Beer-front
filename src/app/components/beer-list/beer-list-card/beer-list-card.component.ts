@@ -21,5 +21,4 @@ export class BeerListCardComponent implements OnInit {
 	public getBeerIconColor(type: string): string {
 		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
 	}
-
 }

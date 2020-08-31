@@ -70,6 +70,7 @@ import { BarPropertiesService, UploadService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { InfiniteScrollComponent } from './components/shared/infinite-scroll/infinite-scroll.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -127,7 +128,8 @@ const MATERIAL_MODULES = [
 		NewRequestComponent,
 		PendingRequestComponent,
 		ToggleSwitchComponent,
-		AdminTableComponent
+		AdminTableComponent,
+		InfiniteScrollComponent
 	],
 	imports: [
 		BrowserModule,

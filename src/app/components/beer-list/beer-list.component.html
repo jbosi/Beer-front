@@ -3,6 +3,12 @@
 		<h2>Bières</h2>
 	</section>
 	<section  class="beerListCards-section">
-		<app-beer-list-card *ngFor="let beer of beers$ | async" [beerInfo]="beer"></app-beer-list-card>
+		<app-infinite-scroll class="beerListCards-container" (scrolled)="onScroll()">
+			<app-beer-list-card *ngFor="let beer of beers" [beerInfo]="beer"></app-beer-list-card>
+			<div *ngIf="isLoading">
+				Chargement des bières
+				<mat-spinner></mat-spinner>
+			</div>
+		</app-infinite-scroll>
 	</section>
 </div>
