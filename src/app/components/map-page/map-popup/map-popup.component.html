@@ -1,5 +1,5 @@
 <div class="card">
-	<div class="mod-textCenter">{{ barName }}</div>
+	<div class="mod-textCenter popup-title">{{ barName }}</div>
 	<div (click)="toggleIsFavorite()">
 		<mat-icon *ngIf="!isFavorite; else unfavorite" class="favorite-icon">favorite_border</mat-icon>
 		<ng-template #unfavorite>
@@ -12,8 +12,17 @@
 		<button [ngClass]="{'isActive': isMoreButtonActive}" (click)="toggleMoreButton()" class="more-button" color="primary">A PROPOS</button>
 	</div>
 	<ng-container *ngIf="isMoreButtonActive">
-		<p class="mod-textSmall mod-marginBottomReset">{{ barAddress }}</p>
-		<p class="mod-textSmall mod-marginTopReset mod-marginBottomReset">Happy hours : {{ happyHourStart }} - {{ happyHourEnd }}</p>
+		<p class="mod-textSmall mod-marginBottomReset popup-info">
+			<mat-icon color="primary">place</mat-icon>
+			{{ barAddress }}
+		</p>
+		<p class="mod-textSmall mod-marginTopReset mod-marginBottomReset popup-info">
+			<mat-icon color="primary">schedule</mat-icon>
+			Happy hours : {{ happyHourStart }} - {{ happyHourEnd }}
+		</p>
+		<div class="chips">
+			<div *ngFor="let chip of chips; let chipIndex = index" class="chip" [style.background-color]="getChipColors(chipIndex)">{{ chip }}</div>
+		</div>
 	</ng-container>
 	<ng-container *ngIf="isBeerButtonActive">
 		<div *ngIf="!isLoading ; else spinner">

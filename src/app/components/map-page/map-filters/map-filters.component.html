@@ -5,6 +5,12 @@
 		<span class="mod-textSmall"> bars correspondent à votre recherche</span>
 	</div>
 	<div [formGroup]="form" class="filters-form">
+		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" value="isOpened" label="BAR OUVERT" class="marginTopBig"></div>
+		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" value="isHappyHour" label="EN HAPPY HOURS"></div>
+		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" value="hasTerrace" label="TERRASSE"></div>
+		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" [checked]="isShowfavoritesChecked" value="showfavorites" label="FAVORIS"></div>
+		<label class="price-label">PRIX MAXI D'UNE BIERE</label>
+		<mat-slider matInput color="primary" formControlName="price" min="2" max="10" step="0.5" thumbLabel="true"></mat-slider>
 		<div class="autocomplete-button">
 			<div class="button-like"></div>
 			<div app-input-autocomplete isColoredAutocomplete="true" class="filters-form-row mod-autocomplete-button"
@@ -14,22 +20,14 @@
 			</div>
 		</div>
 		<button mat-flat-button></button>
-		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" value="isOpened" label="BAR OUVERT"></div>
-		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" value="isHappyHour" label="EN HAPPY HOURS"></div>
-		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" value="hasTerrace" label="TERRASSE"></div>
-		<div app-toggle-switch size="small" (switchChanged)="onValueChange($event)" [checked]="isShowfavoritesChecked" value="showfavorites" label="FAVORIS"></div>
-		<label class="price-label">PRIX MAXI D'UNE BIERE</label>
-		<mat-slider matInput color="primary" formControlName="price" min="2" max="10" step="0.5" thumbLabel="true"></mat-slider>
-		<div class="filters-form-row">
-			<mat-form-field>
-				<mat-select formControlName="type" placeholder="Type de bière">
-					<mat-option>Reset</mat-option>
-					<mat-option *ngFor="let beerType of beerTypes" [value]="beerType.value">
-						{{ beerType.name }}
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
+		<mat-form-field>
+			<mat-select formControlName="type" placeholder="Type de bière">
+				<mat-option>Reset</mat-option>
+				<mat-option *ngFor="let beerType of beerTypes" [value]="beerType.value">
+					{{ beerType.name }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
 	</div>
 	<div class="filters-hide-button" *ngIf="isMobile">
 		<button mat-flat-button color="primary" (click)="toggleShowFilters()">Cacher</button>

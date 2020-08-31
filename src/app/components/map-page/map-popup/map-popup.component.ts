@@ -5,6 +5,14 @@ import { getCurrentDay, formatDateToHoursMinutes } from '../../../utils';
 import { UserService } from '../../../services';
 import { MatSnackBar } from '@angular/material';
 
+const CHIP_COLORS = [
+	'#E69F5C',
+	'#DA686F',
+	'#E9BC2F',
+	'#CF3942',
+	'#DF812A'
+];
+
 @Component({
 	selector: 'app-map-popup',
 	templateUrl: './map-popup.component.html',
@@ -26,6 +34,7 @@ export class MapPopupComponent implements OnInit {
 	public barData: IDetailedBarProperties;
 	public isBeerButtonActive = true;
 	public isMoreButtonActive = false;
+	public chips: string[];
 
 	constructor(
 		private readonly userService: UserService,
@@ -39,6 +48,7 @@ export class MapPopupComponent implements OnInit {
 			this.barName = bar.name;
 			this.barAddress = bar.address;
 			this.barId = bar.id;
+			this.chips = bar.tags;
 			this.happyHourStart = formatDateToHoursMinutes(bar.happyHourTime[currentDay].start);
 			this.happyHourEnd = formatDateToHoursMinutes(bar.happyHourTime[currentDay].end);
 			if (this.happyHourStart === this.happyHourEnd) {
@@ -86,6 +96,10 @@ export class MapPopupComponent implements OnInit {
 			return false;
 		}
 		return this.favorites.some(bar => bar.barId === this.barId);
+	}
+
+	public getChipColors(index: number): string {
+		return CHIP_COLORS[index];
 	}
 
 	public toggleBeerButton() {
