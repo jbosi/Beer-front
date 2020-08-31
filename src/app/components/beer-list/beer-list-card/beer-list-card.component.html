@@ -6,7 +6,7 @@
 		<div class="beerListCard-content">
 			<div class="flip-card-inner">
 				<div class="flip-card-front">
-					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo.name | uppercase }}</h2>
+					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo?.name | uppercase }}</h2>
 					<div class="beerListCard-info">
 						<div class="beerListCard-title-column">
 							<span class="beerListCard-title">TYPE</span>
@@ -14,14 +14,14 @@
 							<span class="beerListCard-title">BRASSERIE</span>
 						</div>
 						<div class="beerListCard-info-column">
-							<span>{{ beerInfo.type }}</span>
-							<span>{{ beerInfo.alcohol }}</span>
-							<span>{{ beerInfo.brewery }}</span>
+							<span>{{ beerInfo?.type }}</span>
+							<span>{{ beerInfo?.alcohol }}</span>
+							<span>{{ beerInfo?.brewery }}</span>
 						</div>
 					</div>
 				</div>
 				<div class="flip-card-back">
-					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo.name | uppercase }}</h2>
+					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo?.name | uppercase }}</h2>
 					<div class="beerListCard-info">
 						<div class="beerListCard-title-column">
 							<span class="beerListCard-title">OEIL</span>
@@ -29,9 +29,9 @@
 							<span class="beerListCard-title">NEZ</span>
 						</div>
 						<div class="beerListCard-info-column">
-							<span>{{ beerDescription.eye }}</span>
-							<span>{{ beerDescription.mouth }}</span>
-							<span>{{ beerDescription.nose }}</span>
+							<span>{{ beerDescription?.eye }}</span>
+							<span>{{ beerDescription?.mouth }}</span>
+							<span>{{ beerDescription?.nose }}</span>
 						</div>
 					</div>
 				</div>
