@@ -27,6 +27,8 @@
     "@angular/service-worker": "~8.2.3",
     "@ng-dynamic-forms/core": "^11.0.1",
     "@ng-dynamic-forms/ui-material": "^11.0.1",
+    "@sentry/angular": "^5.23.0",
+    "@sentry/tracing": "^5.23.0",
     "@types/leaflet": "^1.5.12",
     "@types/leaflet.markercluster": "^1.4.2",
     "angular2-text-mask": "^9.0.0",

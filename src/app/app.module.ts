@@ -1,10 +1,11 @@
 import { BeerPropertiesService } from './services/beer-properties.service';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector } from '@angular/core';
+import { NgModule, Injector, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import * as Sentry from '@sentry/angular';
 
 import {
 	MatIconModule,
@@ -64,13 +65,14 @@ import {
 	NewRequestComponent,
 	PendingRequestComponent,
   ToggleSwitchComponent,
-  AdminTableComponent
+  AdminTableComponent,
+  InfiniteScrollComponent
 } from './components';
 import { BarPropertiesService, UploadService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { InfiniteScrollComponent } from './components/shared/infinite-scroll/infinite-scroll.component';
+import { Router } from '@angular/router';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -95,6 +97,25 @@ const MATERIAL_MODULES = [
 	MatListModule,
 	MatProgressBarModule,
 	MatSlideToggleModule
+];
+
+const SENTRY_PROVIDERS = [
+	{
+		provide: ErrorHandler,
+		useValue: Sentry.createErrorHandler({
+			showDialog: true,
+		}),
+	},
+	{
+		provide: Sentry.TraceService,
+		deps: [Router],
+	},
+	{
+		provide: APP_INITIALIZER,
+		useFactory: () => () => {},
+		deps: [Sentry.TraceService],
+		multi: true,
+	},
 ];
 
 @NgModule({
@@ -148,14 +169,15 @@ const MATERIAL_MODULES = [
 		{ provide: LocationStrategy, useClass: HashLocationStrategy },
 		BarPropertiesService,
 		BeerPropertiesService,
-		UploadService
+		UploadService,
+		...SENTRY_PROVIDERS
 	],
 	entryComponents: [MapPopupComponent],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
 	constructor(private injector: Injector) {
-		const PopupElement = createCustomElement(MapPopupComponent, {injector});
+		const PopupElement = createCustomElement(MapPopupComponent, { injector });
 		customElements.define('popup-element', PopupElement);
 	}
 }
