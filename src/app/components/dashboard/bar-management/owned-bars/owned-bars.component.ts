@@ -17,13 +17,8 @@ export class OwnedBarsComponent implements OnInit {
 
 	ngOnInit() {
 		const userId = localStorage.getItem('user_id');
-		this.userService.getAllOwnershipByUserId(userId).subscribe((ownedBars: IOwnershipResponse[] ) => {
-			this.ownedBars = ownedBars.map(ownedBar => {
-				return {
-					...ownedBar.bar,
-					expand: false
-				};
-			});
+		this.userService.getAllOwnershipByUserId(userId).subscribe((ownedBars: IOwnershipResponse[]) => {
+			this.ownedBars = ownedBars.map(ownedBar => ({ ...ownedBar.bar, expand: true	}));
 		});
 	}
 
