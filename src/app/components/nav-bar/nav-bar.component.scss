@@ -28,7 +28,7 @@ a {
 	color: #ffffff;
 	font-weight: 400;
 	text-decoration: none;
-	font-size: large;
+	font-size: medium;
 	&:visited {
 		color: #ffffff;
 	}
@@ -39,13 +39,9 @@ a {
 }
 
 .navBar-logo {
-	height: 2.6rem;
-	vertical-align: top;
+	height: 2rem;
 	margin-right: 0.4rem;
-	position: absolute;
-	top: 0.3rem;
-	left: 0.6rem;
-
+	display: flex;
 }
 
 .nav-icons {
