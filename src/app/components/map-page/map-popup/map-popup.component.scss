@@ -7,15 +7,17 @@
 }
 
 .card {
+	display: flex;
+	flex-direction: column;
 	background-color: #FFFFFF;
-	padding: 1.5rem 1rem;
+	padding: 0.5rem 1rem;
 	border-radius: 15px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	box-sizing: border-box;
 	overflow: hidden;
 	height: 300px;
 	width: 350px;
-	max-width: 85vw;
+	max-width: 95vw;
 	max-height: 60vh;
 }
 
@@ -30,6 +32,10 @@
 	overflow: auto;
 	scrollbar-width: none;
 	box-shadow: none;
+}
+
+.barDetails-card {
+	display: contents;
 }
 
 .mat-card-title {
@@ -59,10 +65,10 @@
 		background-color: #FFFFFF;
 		color: #eecc60;
 		padding: 0.5rem 1.2rem;
+		outline: none;
 		&.isActive {
 			color: #FFFFFF;
 			background-color: #eecc60;
-			border: none;
 		}
 	}
 }

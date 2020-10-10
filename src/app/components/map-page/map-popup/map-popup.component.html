@@ -25,7 +25,7 @@
 		</div>
 	</ng-container>
 	<ng-container *ngIf="isBeerButtonActive">
-		<div *ngIf="!isLoading ; else spinner">
+		<div class="barDetails-card" *ngIf="!isLoading ; else spinner">
 			<div class="barDetails-container mat-elevation-z8"
 				[bar]="barData"
 				labelEmpty="Les bières de ce bar n'ont pas été renseignées !"

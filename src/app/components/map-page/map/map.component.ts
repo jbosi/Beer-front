@@ -34,7 +34,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 	@Input() highlightedMarkerId: Subject<string>;
 
 	constructor(
-		private barPropertiesService: BarPropertiesService,
+		private readonly barPropertiesService: BarPropertiesService,
 		public dialog: MatDialog,
 	) { }
 
@@ -47,10 +47,14 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < clustersDiabledZoom ? clustersDiabledZoom : this.map.getZoom());
 		});
 
-		const tiles = L.tileLayer('https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/{z}/{x}/{y}.png?access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP', {
-			maxZoom: 20,
-			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
-		});
+		const tiles = L.tileLayer(
+			`https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/
+			{z}/{x}/{y}.png?access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP`,
+			{
+				maxZoom: 20,
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
+			}
+		);
 		tiles.addTo(this.map);
 
 		this.addMarkers();
@@ -116,7 +120,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		this.map.addLayer(this.cluster);
 	}
 
-	private onDataChange() {
+	private onDataChange(): void {
 		this.removeMarkers(); // TODO remove only filtered markers
 		this.markers = [];
 		this.addMarkers();
@@ -126,12 +130,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		this.cluster.clearLayers();
 	}
 
-	private onLocationFound(e: any) {
+	private onLocationFound(e: any): void { // TODO improve
 		const radius = e.accuracy / 2;
 		L.circle(e.latlng, radius).addTo(this.map);
 	}
 
-	private removeHighlight() {
+	private removeHighlight(): void {
 		if (this.highlight !== null) {
 			this.highlight.setStyle(this.getDefaultOptions());
 			this.highlight = null;
