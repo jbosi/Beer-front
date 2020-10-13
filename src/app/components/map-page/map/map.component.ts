@@ -47,14 +47,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			this.map.flyTo(marker.getLatLng(), this.map.getZoom() < clustersDiabledZoom ? clustersDiabledZoom : this.map.getZoom());
 		});
 
-		const tiles = L.tileLayer(
-			`https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/
-			{z}/{x}/{y}.png?access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP`,
-			{
-				maxZoom: 20,
-				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
-			}
-		);
+		const tiles = L.tileLayer(`https://tile.jawg.io/366c861a-b654-449a-b232-3c6a14acece4/{z}/{x}/{y}.png?
+			access-token=cANBjZRijJpZ3Pr0KrNMhgJxUoLUeTcK59EGJtlRK5YeT6nThxJac1GUCocmaKPP`, {
+			maxZoom: 20,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>'
+		});
 		tiles.addTo(this.map);
 
 		this.addMarkers();
@@ -62,6 +59,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
 			.locate({setView: true, maxZoom: 15})
 			.on('locationfound', (e: any) => this.onLocationFound(e))
 			.on('click', () => this.highlight ? this.removeHighlight() : null);
+	}
+
+	ngOnChanges(changes: SimpleChanges): void {
+		const dataChange = changes.data;
+		if (dataChange != null && dataChange.currentValue != dataChange.previousValue && dataChange.previousValue !== undefined) {
+			this.onDataChange();
+		}
 	}
 
 	private initMap(): void {
@@ -74,13 +78,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 		L.control.zoom({
 			position: 'topright'
 		}).addTo(this.map);
-	}
-
-	ngOnChanges(changes: SimpleChanges): void {
-		const dataChange = changes.data;
-		if (dataChange != null && dataChange.currentValue != dataChange.previousValue && dataChange.previousValue !== undefined) {
-			this.onDataChange();
-		}
 	}
 
 	private addMarkers(): void {
