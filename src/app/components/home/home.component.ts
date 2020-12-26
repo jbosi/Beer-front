@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 	public loading = false;
-
-	constructor() { }
 }

@@ -1,30 +1,27 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { API_URL } from '../app.config';
 
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class AuthenticationService  {
 	private currentUserSubject: BehaviorSubject<{token: string}>;
 	public currentUser: Observable<{token: string}>;
 	public isLogged: Observable<boolean>;
 
-	constructor(private http: HttpClient) {
+	public get currentUserToken(): string {
+		return this.currentUserSubject.value?.token;
+	}
+
+	constructor(private readonly http: HttpClient) {
 		this.currentUserSubject = new BehaviorSubject<{token: string}>(JSON.parse(localStorage.getItem('token_id')));
 		this.currentUser = this.currentUserSubject.asObservable();
 		this.isLogged = this.currentUserSubject.asObservable().pipe(map(token => token != null));
 	}
 
-	public get currentUserToken(): string {
-		if (this.currentUserSubject.value != null) {
-			return this.currentUserSubject.value.token;
-		}
-		return null;
-	}
-
-	public login(email, password) {
+	public login(email, password): Observable<{ token: string }> {
 		return this.http.post<any>(`${API_URL}/users/signin`, { email, password })
 		.pipe(map((response: {token: string}) => {
 			// store token details and jwt token in local storage to keep token logged in between page refreshes
@@ -37,21 +34,20 @@ export class AuthenticationService {
 		}));
 	}
 
-	public logout() {
-		// remove token from local storage and set current user to null
+	public logout(): void {
 		localStorage.removeItem('token_id');
 		localStorage.removeItem('expires_at');
 		localStorage.removeItem('user_id');
 		this.currentUserSubject.next(null);
 	}
 
-	public isExpired() {
+	public isExpired(): boolean {
 		const expiration = localStorage.getItem('expires_at');
 		const expiresAt = JSON.parse(expiration);
 		return Date.now() > expiresAt;
 	}
 
-	public parseJwt(token): ITokenPayload {
+	public parseJwt(token: string): ITokenPayload {
 		const base64Url = token.split('.')[1];
 		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 		const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {

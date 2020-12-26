@@ -7,7 +7,7 @@ import { AuthenticationService } from '../services';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 	constructor(
-		private authenticationService: AuthenticationService
+		private readonly authenticationService: AuthenticationService
 	) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -17,7 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
 		}
 		if (currentUserToken) {
 			request = request.clone({
-				setHeaders: { 
+				setHeaders: {
 					Authorization: `Bearer ${currentUserToken}`
 				}
 			});

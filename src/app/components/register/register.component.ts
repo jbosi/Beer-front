@@ -11,17 +11,20 @@ import { AuthenticationService, UserService } from '../../services';
 	styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-	registerForm: FormGroup;
-	loading = false;
-	submitted = false;
+	public registerForm: FormGroup;
+	public loading = false;
+	public submitted = false;
 	public hasError = false;
 	public errorsMessage: string[];
 
+	// convenience getter for easy access to form fields
+	get f() { return this.registerForm.controls; }
+
 	constructor(
-		private formBuilder: FormBuilder,
-		private router: Router,
-		private authenticationService: AuthenticationService,
-		private userService: UserService,
+		private readonly formBuilder: FormBuilder,
+		private readonly router: Router,
+		private readonly authenticationService: AuthenticationService,
+		private readonly userService: UserService,
 	) {
 		// redirect to home if already logged in
 		if (this.authenticationService.currentUserToken) {
@@ -29,7 +32,7 @@ export class RegisterComponent implements OnInit {
 		}
 	}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.registerForm = this.formBuilder.group({
 			username: ['', Validators.required],
 			email: ['', Validators.required],
@@ -47,10 +50,7 @@ export class RegisterComponent implements OnInit {
 		);
 	}
 
-	// convenience getter for easy access to form fields
-	get f() { return this.registerForm.controls; }
-
-	onSubmit() {
+	onSubmit(): void {
 		this.submitted = true;
 		this.hasError = false;
 
@@ -62,12 +62,12 @@ export class RegisterComponent implements OnInit {
 		this.userService.register(this.registerForm.value)
 		.pipe(first())
 		.subscribe(
-			data => this.router.navigate(['/login']),
+			_ => this.router.navigate(['/login']),
 			error => this.handleError(error)
 		);
 	}
 
-	private handleError(error) {
+	private handleError(error): void {
 		this.hasError = true;
 		this.loading = false;
 		const message = error.error.message;

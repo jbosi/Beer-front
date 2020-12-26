@@ -1,78 +1,52 @@
-import { BeerPropertiesService } from './services/beer-properties.service';
-import { AppComponent } from './app.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector, ErrorHandler, APP_INITIALIZER } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import * as Sentry from '@sentry/angular';
-
-import {
-	MatIconModule,
-	MatButtonModule,
-	MatDialogModule,
-	MatToolbarModule,
-	MatCardModule,
-	MatGridListModule,
-	MatTableModule,
-	MatFormFieldModule,
-	MatInputModule,
-	MatSelectModule,
-	MatProgressSpinnerModule,
-	MatPaginatorModule,
-	MatSortModule,
-	MatCheckboxModule,
-	MatSliderModule,
-	MatAutocompleteModule,
-	MatSnackBarModule,
-	MatListModule,
-	MatProgressBarModule,
-	MatSlideToggleModule
-} from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './routing/app-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import 'hammerjs';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
-	UserAdminComponent,
-	RegisterComponent,
-	LoginComponent,
-	BeerIconComponent,
+	MatAutocompleteModule, MatButtonModule,
+	MatCardModule,
+	MatCheckboxModule, MatDialogModule,
+	MatFormFieldModule, MatGridListModule, MatIconModule,
+	MatInputModule,
+	MatListModule, MatPaginatorModule,
+	MatProgressBarModule, MatProgressSpinnerModule, MatSelectModule,
+	MatSliderModule,
+	MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule
+} from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
+import * as Sentry from '@sentry/angular';
+import 'hammerjs';
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import {
+	AddBeerComponent, AdminDashboardComponent,
+	AdminTableComponent, BarAdminComponent,
+	BarManagementComponent, BeerAdminComponent, BeerFormComponent, BeerIconComponent,
 	BeerListCardComponent,
 	BeerListComponent,
-	MapFiltersComponent,
-	HomeComponent,
-	MapComponent,
-	MapPopupComponent,
-	MapPageComponent,
-	NavBarComponent,
-	BeerFormComponent,
-	PageNotFoundComponent,
-	AdminDashboardComponent,
-	BarAdminComponent,
-	BeerAdminComponent,
-	AddBeerComponent,
-	TableListBeerComponent,
-	DashboardComponent,
-	InputAutocompleteComponent,
-	ProfileComponent,
-	BarManagementComponent,
 	BeerTableComponent,
-	OwnedBarsComponent,
-	NewRequestComponent,
-	PendingRequestComponent,
-  ToggleSwitchComponent,
-  AdminTableComponent,
-  InfiniteScrollComponent
+	CalloutErrorComponent, DashboardComponent, HomeComponent,
+	InfiniteScrollComponent, InputAutocompleteComponent, LoginComponent,
+	MapComponent, MapFiltersComponent,
+	MapPageComponent, MapPopupComponent,
+	NavBarComponent,
+	NewRequestComponent, OwnedBarsComponent, PageNotFoundComponent,
+	PendingRequestComponent, ProfileComponent, RegisterComponent,
+	TableListBeerComponent,
+	ToggleSwitchComponent, UserAdminComponent
 } from './components';
+import { AppRoutingModule } from './routing/app-routing.module';
 import { BarPropertiesService, UploadService } from './services';
+import { BeerPropertiesService } from './services/beer-properties.service';
 import { JwtInterceptor } from './utils/jwt.interceptor';
-import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { Router } from '@angular/router';
+
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -150,7 +124,8 @@ const SENTRY_PROVIDERS = [
 		PendingRequestComponent,
 		ToggleSwitchComponent,
 		AdminTableComponent,
-		InfiniteScrollComponent
+		InfiniteScrollComponent,
+		CalloutErrorComponent
 	],
 	imports: [
 		BrowserModule,

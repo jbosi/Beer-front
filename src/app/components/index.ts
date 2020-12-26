@@ -9,3 +9,4 @@ export * from './page-not-found';
 export * from './register';
 export * from './dashboard';
 export * from './shared';
+export * from './callout-error';

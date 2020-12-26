@@ -15,7 +15,7 @@ export class BeerListComponent implements OnInit {
 		private beersService: BeerPropertiesService
 	) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.fetchData();
 	}
 

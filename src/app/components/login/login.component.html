@@ -1,3 +1,5 @@
+<app-callout-error *ngIf="hasError" [errorsMessage]="errorsMessage"></app-callout-error>
+
 <mat-card class="login-card">
 	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 		<mat-card-title class="login-header">

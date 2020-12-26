@@ -10,10 +10,15 @@ import { first } from 'rxjs/operators';
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-	loginForm: FormGroup;
-	loading = false;
-	submitted = false;
-	returnUrl: string;
+	public loginForm: FormGroup;
+	public submitted = false;
+	public returnUrl: string;
+	public loading = false;
+	public hasError = false;
+	public errorsMessage: string[];
+
+	// convenience getter for easy access to form fields
+	get f() { return this.loginForm.controls; }
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -26,7 +31,7 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.loginForm = this.formBuilder.group({
 			email: ['', Validators.required],
 			password: ['', Validators.required]
@@ -36,11 +41,9 @@ export class LoginComponent implements OnInit {
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/map';
 	}
 
-	// convenience getter for easy access to form fields
-	get f() { return this.loginForm.controls; }
-
-	onSubmit() {
+	onSubmit(): void {
 		this.submitted = true;
+		this.hasError = false;
 
 		if (this.loginForm.invalid) {
 			return;
@@ -50,12 +53,14 @@ export class LoginComponent implements OnInit {
 		this.authenticationService.login(this.f.email.value, this.f.password.value)
 		.pipe(first())
 		.subscribe(
-			data => {
-				this.router.navigate([this.returnUrl]);
-			},
-			error => {
-				console.log('[authError]', error);
-				this.loading = false;
-		});
+			_ => this.router.navigate([this.returnUrl]),
+			error => this.handleError(error));
+	}
+
+	private handleError(error): void {
+		this.hasError = true;
+		this.loading = false;
+		const message = error.error.message;
+		this.errorsMessage = Array.isArray(message) ? message : [message];
 	}
 }
