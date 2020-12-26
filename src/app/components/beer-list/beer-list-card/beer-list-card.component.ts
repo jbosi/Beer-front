@@ -12,6 +12,7 @@ export class BeerListCardComponent implements OnInit {
 	@Input() public beerInfo: IBeerInfo;
 	public beerDescription: IBeerDescriptionInfo;
 	public flipCard = false;
+	public beerIconColor: string
 
 	public get hasDescription(): boolean {
 		return this.beerDescription != null && (!!this.beerDescription.eye || !!this.beerDescription.mouth || !!this.beerDescription.nose);
@@ -23,10 +24,7 @@ export class BeerListCardComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.beerDescription = this.beerInfo.descriptionObject;
-	}
-
-	public getBeerIconColor(type: string): string {
-		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
+		this.beerIconColor = BEER_ICON_TYPES_COLORS[this.beerInfo.type] || '#FFFFFF';
 	}
 
 	public onIconClick(): void {
