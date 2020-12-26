@@ -1,12 +1,15 @@
-<div class="card">
+<div *ngIf="hasInfo" class="card">
 	<div class="beerListCard-container">
 		<div class="beerListCard-image" [style.background-color]="getBeerIconColor(beerInfo.type)">
 			<app-beer-icon></app-beer-icon>
 		</div>
 		<div class="beerListCard-content">
-			<div class="flip-card-inner">
+			<div class="flip-card-inner" [class.flipCard]="flipCard">
 				<div class="flip-card-front">
-					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo?.name | uppercase }}</h2>
+					<h2 class="mod-marginBottomReset beerListCard-label">
+						{{ beerInfo?.name | uppercase }}
+						<mat-icon *ngIf="hasDescription" color="primary" class="icon" (click)="onIconClick()">info</mat-icon>
+					</h2>
 					<div class="beerListCard-info">
 						<div class="beerListCard-title-column">
 							<span class="beerListCard-title">TYPE</span>
@@ -21,7 +24,10 @@
 					</div>
 				</div>
 				<div class="flip-card-back">
-					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo?.name | uppercase }}</h2>
+					<h2 class="mod-marginBottomReset beerListCard-label">
+						{{ beerInfo?.name | uppercase }}
+						<mat-icon *ngIf="hasDescription" color="primary" class="icon icon-right" (click)="onCrossClick()">clear</mat-icon>
+					</h2>
 					<div class="beerListCard-info">
 						<div class="beerListCard-title-column">
 							<span class="beerListCard-title">OEIL</span>

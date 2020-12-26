@@ -16,9 +16,11 @@ export interface IBeerInfo {
 	alcohol: number;
 	description: string;
 	ibu: number;
-	descriptionObject: {
-		eye: string;
-		mouth: string;
-		nose: string;
-	};
+	descriptionObject: IBeerDescriptionInfo
+}
+
+export interface IBeerDescriptionInfo {
+	eye: string;
+	mouth: string;
+	nose: string;
 }
