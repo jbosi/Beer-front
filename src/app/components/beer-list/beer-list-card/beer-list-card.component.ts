@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBeerInfo } from '../../../models';
+import { IBeerDescriptionInfo, IBeerInfo } from '../../../models';
 import { BEER_ICON_TYPES_COLORS } from '../../../utils';
-
-declare var require: any;
 
 @Component({
 	selector: 'app-beer-list-card',
@@ -12,13 +10,28 @@ declare var require: any;
 
 export class BeerListCardComponent implements OnInit {
 	@Input() public beerInfo: IBeerInfo;
-	public beerDescription;
+	public beerDescription: IBeerDescriptionInfo;
+	public flipCard = false;
+	public beerIconColor: string
 
-	ngOnInit() {
-		this.beerDescription = this.beerInfo.descriptionObject;
+	public get hasDescription(): boolean {
+		return this.beerDescription != null && (!!this.beerDescription.eye || !!this.beerDescription.mouth || !!this.beerDescription.nose);
 	}
 
-	public getBeerIconColor(type: string): string {
-		return BEER_ICON_TYPES_COLORS[type] || '#FFFFFF';
+	public get hasInfo(): boolean {
+		return this.beerInfo != null && (!!this.beerInfo.alcohol || !!this.beerInfo.type || !!this.beerInfo.brewery);
+	}
+
+	ngOnInit(): void {
+		this.beerDescription = this.beerInfo.descriptionObject;
+		this.beerIconColor = BEER_ICON_TYPES_COLORS[this.beerInfo.type] || '#FFFFFF';
+	}
+
+	public onIconClick(): void {
+		this.flipCard = true;
+	}
+
+	public onCrossClick(): void {
+		this.flipCard = false;
 	}
 }

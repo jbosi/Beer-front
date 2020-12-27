@@ -34,9 +34,8 @@
 .beerListCard-content {
 	display: flex;
 	flex-direction: column;
-	margin-left: 10px;
 	width: 100%;
-	margin-bottom: 0.8rem;
+	margin: 0 0.8rem 0.8rem 0.8rem;
 }
 
 .beerListCard-info {
@@ -54,7 +53,6 @@
 
 .beerListCard-title-column, .beerListCard-info-column {
 	font-size: 12px;
-	display: flex;
 	flex-direction: column;
 	text-align: left;
 	span {
@@ -66,6 +64,25 @@
 	color: #888888;
 	font-weight: 500;
 	margin-right: 0.5rem;
+	display: flex;
+}
+
+.beerListCard-info-column {
+	min-width: 0;
+	display: flex;
+	span {
+		height: 16px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		line-height: 18px;
+	}
+}
+
+.icon {
+	vertical-align: top;
+	cursor: pointer;
+	float: right;
 }
 
 /* Position the front and back side */
@@ -75,7 +92,7 @@
 	height: 100%;
 	-webkit-backface-visibility: hidden; /* Safari */
 	backface-visibility: hidden;
-  }
+}
 
 .flip-card-inner {
 	position: relative;
@@ -87,7 +104,7 @@
 	background-color: #FFFFFF;
 }
 
-.beerListCard-content:hover .flip-card-inner {
+.flipCard {
 	transform: rotateX(180deg);
 }
 

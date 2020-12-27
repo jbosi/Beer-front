@@ -1,12 +1,15 @@
-<div class="card">
+<div *ngIf="hasInfo" class="card">
 	<div class="beerListCard-container">
-		<div class="beerListCard-image" [style.background-color]="getBeerIconColor(beerInfo.type)">
+		<div class="beerListCard-image" [style.background-color]="beerIconColor">
 			<app-beer-icon></app-beer-icon>
 		</div>
 		<div class="beerListCard-content">
-			<div class="flip-card-inner">
+			<div class="flip-card-inner" [class.flipCard]="flipCard">
 				<div class="flip-card-front">
-					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo?.name | uppercase }}</h2>
+					<h2 [title]="beerInfo?.name" class="mod-marginBottomReset beerListCard-label">
+						{{ beerInfo?.name | uppercase }}
+						<mat-icon *ngIf="hasDescription" color="primary" class="icon" (click)="onIconClick()">info</mat-icon>
+					</h2>
 					<div class="beerListCard-info">
 						<div class="beerListCard-title-column">
 							<span class="beerListCard-title">TYPE</span>
@@ -14,14 +17,17 @@
 							<span class="beerListCard-title">BRASSERIE</span>
 						</div>
 						<div class="beerListCard-info-column">
-							<span>{{ beerInfo?.type }}</span>
-							<span>{{ beerInfo?.alcohol }}</span>
-							<span>{{ beerInfo?.brewery }}</span>
+							<span [title]="beerInfo?.type">{{ beerInfo?.type }}</span>
+							<span [title]="beerInfo?.alcohol">{{ beerInfo?.alcohol }}</span>
+							<span [title]="beerInfo?.brewery">{{ beerInfo?.brewery }}</span>
 						</div>
 					</div>
 				</div>
 				<div class="flip-card-back">
-					<h2 class="mod-marginBottomReset beerListCard-label">{{ beerInfo?.name | uppercase }}</h2>
+					<h2 class="mod-marginBottomReset beerListCard-label">
+						{{ beerInfo?.name | uppercase }}
+						<mat-icon *ngIf="hasDescription" color="primary" class="icon" (click)="onCrossClick()">clear</mat-icon>
+					</h2>
 					<div class="beerListCard-info">
 						<div class="beerListCard-title-column">
 							<span class="beerListCard-title">OEIL</span>
@@ -29,9 +35,9 @@
 							<span class="beerListCard-title">NEZ</span>
 						</div>
 						<div class="beerListCard-info-column">
-							<span>{{ beerDescription?.eye }}</span>
-							<span>{{ beerDescription?.mouth }}</span>
-							<span>{{ beerDescription?.nose }}</span>
+							<span [title]="beerDescription?.eye">{{ beerDescription?.eye }}</span>
+							<span [title]="beerDescription?.mouth">{{ beerDescription?.mouth }}</span>
+							<span [title]="beerDescription?.nose">{{ beerDescription?.nose }}</span>
 						</div>
 					</div>
 				</div>
