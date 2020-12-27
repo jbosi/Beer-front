@@ -24,3 +24,9 @@ export interface IBeerDescriptionInfo {
 	mouth: string;
 	nose: string;
 }
+
+export interface IBeerDescriptionInfo {
+	eye: string;
+	mouth: string;
+	nose: string;
+}
