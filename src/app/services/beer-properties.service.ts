@@ -8,7 +8,7 @@ import { API_URL } from '../app.config';
 export class BeerPropertiesService {
 
 	constructor(
-		private http: HttpClient,
+		private readonly http: HttpClient
 	) { }
 
 	public getBeers(offset = 0, limit = 20): Observable<IBeerInfo[]> {

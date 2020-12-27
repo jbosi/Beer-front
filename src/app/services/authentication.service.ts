@@ -6,13 +6,13 @@ import { API_URL } from '../app.config';
 
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService  {
+export class AuthenticationService {
 	private currentUserSubject: BehaviorSubject<{token: string}>;
 	public currentUser: Observable<{token: string}>;
 	public isLogged: Observable<boolean>;
 
 	public get currentUserToken(): string {
-		return this.currentUserSubject.value?.token;
+		return this.currentUserSubject.value && this.currentUserSubject.value.token;
 	}
 
 	constructor(private readonly http: HttpClient) {
@@ -23,15 +23,17 @@ export class AuthenticationService  {
 
 	public login(email, password): Observable<{ token: string }> {
 		return this.http.post<any>(`${API_URL}/users/signin`, { email, password })
-		.pipe(map((response: {token: string}) => {
-			// store token details and jwt token in local storage to keep token logged in between page refreshes
-			const parsedToken: ITokenPayload = this.parseJwt(response.token);
-			localStorage.setItem('token_id', JSON.stringify(response));
-			localStorage.setItem('expires_at', JSON.stringify(parsedToken.exp));
-			localStorage.setItem('user_id', JSON.stringify(parsedToken.sub).replace(/['"]+/g, ''));
-			this.currentUserSubject.next(response);
-			return response;
-		}));
+		.pipe(
+			map((response: { token: string }) => {
+				// store token details and jwt token in local storage to keep token logged in between page refreshes
+				const parsedToken: ITokenPayload = this.parseJwt(response.token);
+				localStorage.setItem('token_id', JSON.stringify(response));
+				localStorage.setItem('expires_at', JSON.stringify(parsedToken.exp));
+				localStorage.setItem('user_id', JSON.stringify(parsedToken.sub).replace(/['"]+/g, ''));
+				this.currentUserSubject.next(response);
+				return response;
+			})
+		);
 	}
 
 	public logout(): void {

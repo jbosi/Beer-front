@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 	public errorsMessage: string[];
 
 	// convenience getter for easy access to form fields
-	get f() { return this.registerForm.controls; }
+	public get f() { return this.registerForm.controls; }
 
 	constructor(
 		private readonly formBuilder: FormBuilder,

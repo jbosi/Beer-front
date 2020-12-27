@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
 	selector: '[app-toggle-switch]',
@@ -14,7 +14,7 @@ export class ToggleSwitchComponent {
 
 	constructor() { }
 
-	public onSwitchChange($event) {
+	public onSwitchChange($event): void {
 		this.switchChanged.emit($event);
 	}
 }

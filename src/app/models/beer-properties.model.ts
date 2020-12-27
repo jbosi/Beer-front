@@ -16,7 +16,7 @@ export interface IBeerInfo {
 	alcohol: number;
 	description: string;
 	ibu: number;
-	descriptionObject: IBeerDescriptionInfo
+	descriptionObject: IBeerDescriptionInfo;
 }
 
 export interface IBeerDescriptionInfo {

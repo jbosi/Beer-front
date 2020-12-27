@@ -1,26 +1,17 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import {
-	PageNotFoundComponent,
-	BeerListComponent,
-	MapPageComponent,
-	HomeComponent,
-	BarAdminComponent,
-	BeerAdminComponent,
-	AdminDashboardComponent,
+	AdminDashboardComponent, BarAdminComponent,
+	BarManagementComponent, BeerAdminComponent, BeerListComponent,
+	DashboardComponent, HomeComponent,
+	LoginComponent, MapPageComponent,
 	NavBarComponent,
-	LoginComponent,
-	RegisterComponent,
-	UserAdminComponent,
-	DashboardComponent,
-	ProfileComponent,
-	BarManagementComponent,
-	OwnedBarsComponent,
-	NewRequestComponent,
-	PendingRequestComponent
+	NewRequestComponent, OwnedBarsComponent, PageNotFoundComponent,
+	PendingRequestComponent, ProfileComponent, RegisterComponent,
+	UserAdminComponent
 } from '../components';
-import { MapResolver } from './resolvers';
 import { AuthGuard } from './guards/auth.guard';
+import { MapResolver } from './resolvers';
 
 const routes: Routes = [
 	{
