@@ -41,12 +41,12 @@ export class UserService {
 		return this.http.get<any[]>(`${API_URL}/users/favourites/${id}`);
 	}
 
-	public favorites(id: string) {
-		return this.http.post(`${API_URL}/users/favourites`, { barId: id });
+	public favorites(id: string, userId: string) {
+		return this.http.post(`${API_URL}/users/favourites`, { barId: id, userId });
 	}
 
-	public unfavorites(id: string) {
-		return this.http.delete(`${API_URL}/users/favourites/${id}`);
+	public unfavorites(id: string, userId: string) {
+		return this.http.delete(`${API_URL}/users/favourites/${id}?userId=${userId}`);
 	}
 
 	public delete(email: string) {

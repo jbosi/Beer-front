@@ -62,7 +62,7 @@ export class MapPopupComponent implements OnInit {
 
 	public toggleIsFavorite(): void {
 		if (!this.isFavorite) {
-			this.userService.favorites(this.barId).subscribe(
+			this.userService.favorites(this.barId, localStorage.getItem('user_id')).subscribe(
 				(_) => {
 					this.isFavorite = !this.isFavorite;
 					this.favorites.push({ barId: this.barId });
@@ -70,7 +70,7 @@ export class MapPopupComponent implements OnInit {
 				error => this.handleError(error)
 			);
 		} else {
-			this.userService.unfavorites(this.barId).subscribe(
+			this.userService.unfavorites(this.barId, localStorage.getItem('user_id')).subscribe(
 				(_) => {
 					this.isFavorite = !this.isFavorite;
 					const index = this.favorites.findIndex(favorite => favorite.barId === this.barId);
