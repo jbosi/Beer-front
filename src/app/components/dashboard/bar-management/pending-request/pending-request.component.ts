@@ -19,7 +19,5 @@ export class PendingRequestComponent implements OnInit {
 		this.userService.getAllOwnershipRequestsByUserId(userId).subscribe((requests: IOwnershipRequest[]) => {
 			this.requests = requests;
 		});
-
 	}
-
 }

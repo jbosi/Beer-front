@@ -1,1 +1,1 @@
-export * from "./map.resolver";
+export * from './map.resolver';

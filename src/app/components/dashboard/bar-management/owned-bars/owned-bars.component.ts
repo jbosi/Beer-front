@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IDetailedBarPropertiesView } from '../bar-management.component';
 import { IOwnershipResponse } from '../../../../models';
 import { UserService } from '../../../../services';
+import { IDetailedBarPropertiesView } from '../bar-management.component';
 
 @Component({
 	selector: 'app-owned-bars',
@@ -22,7 +22,7 @@ export class OwnedBarsComponent implements OnInit {
 		});
 	}
 
-	public toggleExpand(index: number) {
+	public toggleExpand(index: number): void {
 		this.ownedBars[index].expand = !this.ownedBars[index].expand;
 	}
 }
