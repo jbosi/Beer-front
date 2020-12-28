@@ -1,7 +1,9 @@
 import { BarPropertiesService } from '../../../services';
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { IBarProperties } from '../../../models';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
 	selector: 'app-bar-admin',

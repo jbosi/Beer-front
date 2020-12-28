@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, of } from 'rxjs';
 import { IBarProperties, IFavoriteBar, IBarNames } from '../../models';
 import { AuthenticationService, UserService } from '../../services';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-map-page',
