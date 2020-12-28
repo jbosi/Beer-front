@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services';
-
-declare var require: any;
-
 @Component({
 	selector: 'app-nav-bar',
 	templateUrl: './nav-bar.component.html',
@@ -11,7 +8,7 @@ declare var require: any;
 })
 
 export class NavBarComponent implements OnInit {
-	public logoPath: string = require('./../../../assets/logo/logoTitleWhite.png');	// TODO replace with svg
+	public logoPath = './../../../assets/logo/logoTitleWhite.png';	// TODO replace with svg
 	public isLogged = false;
 
 	constructor(
