@@ -20,7 +20,7 @@ import {
 	PendingRequestComponent
 } from '../components';
 import { MapResolver } from './resolvers';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards';
 
 const routes: Routes = [
 	{
