@@ -1,6 +1,7 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
 		"baseUrl": "./",
 		"outDir": "./dist/out-tsc",
 		"sourceMap": true,
@@ -18,10 +19,21 @@
 			"es2018",
 			"dom"
 		],
+		"paths": {
+			"@beer/services": [
+				"./src/app/services/index",
+			],
+			"@beer/utils": [
+				"./src/app/utils/index",
+			],
+			"@beer/models": [
+				"./src/app/models/index",
+			],
+		},
 		"skipLibCheck": true
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
 		"strictInjectionParameters": true
-	}
+	},
 }
