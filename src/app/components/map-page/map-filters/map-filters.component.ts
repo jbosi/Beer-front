@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { BarPropertiesService, BeerPropertiesService, AuthenticationService } from '../../../services';
 import { IBarProperties, IFavoriteBar } from '../../../models';
 import { BEER_ICON_TYPES } from '../../../utils';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-map-filters',
@@ -127,8 +127,7 @@ export class MapFiltersComponent implements OnInit {
 				this.snackBar.open('Veuillez vous connecter', '', {
 					duration: 2000,
 				});
-			}
-			else if (this.favorites != null) {
+			} else if (this.favorites != null) {
 				filteredData = filteredData.filter(bar => this.favorites.some(favorite => favorite.barId === bar.id));
 			}
 		}
@@ -148,7 +147,7 @@ export class MapFiltersComponent implements OnInit {
 		this.showFiltersChange.emit(this.showFilters);
 	}
 
-	public onSelectedItemChanged(beerName: string) {
+	public onSelectedItemChanged(beerName: string): void {
 		if (beerName != null) {
 			this.filters['beer'] = beerName;
 		} else {
@@ -158,7 +157,7 @@ export class MapFiltersComponent implements OnInit {
 		this.form.updateValueAndValidity();
 	}
 
-	public onValueChange($event) {
+	public onValueChange($event): void {
 		if ($event.target.value === 'hasTerrace') {
 			$event.target.checked ? this.filters['tag'] = 'Terrasse' : delete this.filters['tag'];
 		}

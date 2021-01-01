@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MatOption } from '@angular/material';
 import { FormControl } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
 

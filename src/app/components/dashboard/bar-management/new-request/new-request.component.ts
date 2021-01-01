@@ -3,7 +3,7 @@ import { IBarNames } from 'src/app/models';
 import { BarPropertiesService, UploadService, UserService } from 'src/app/services';
 import { forkJoin } from 'rxjs';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-new-request',

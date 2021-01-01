@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { IDetailedBarProperties, IBarBeerDetail, IFavoriteBar } from '../../../models';
 import { getCurrentDay, formatDateToHoursMinutes } from '../../../utils';
 import { UserService } from '../../../services';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const CHIP_COLORS = [
 	'#E69F5C',
