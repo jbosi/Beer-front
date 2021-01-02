@@ -2,8 +2,8 @@ import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angu
 import { NgElement, WithProperties } from '@angular/elements';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { BarPropertiesService } from '../../../services/';
-import { IBarProperties, IFavoriteBar } from '../../../models/';
+import { BarPropertiesService } from '@beer/services';
+import { IBarProperties, IFavoriteBar } from '@beer/models';
 import { MapPopupComponent } from '../map-popup';
 
 import * as L from 'leaflet';
@@ -12,11 +12,11 @@ import 'leaflet.markercluster';
 const clustersDiabledZoom = 18;
 
 @Component({
-	selector: 'app-map',
-	templateUrl: './map.component.html',
-	styleUrls: ['./map.component.scss']
+	selector: 'app-map-item',
+	templateUrl: './map-item.component.html',
+	styleUrls: ['./map-item.component.scss']
 })
-export class MapComponent implements AfterViewInit, OnChanges {
+export class MapItemComponent implements AfterViewInit, OnChanges {
 	@Input() public favorites: IFavoriteBar[];
 	public markers: IMarker[] = [];
 	private map: L.Map;

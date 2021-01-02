@@ -1,11 +1,11 @@
-import { Component, OnInit, forwardRef, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import { FormGroup, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormBuilder } from '@angular/forms';
-import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { BarPropertiesService, BeerPropertiesService, AuthenticationService } from '../../../services';
-import { IBarProperties, IFavoriteBar } from '../../../models';
-import { BEER_ICON_TYPES } from '../../../utils';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IBarProperties, IFavoriteBar } from '@beer/models';
+import { AuthenticationService, BarPropertiesService, BeerPropertiesService } from '@beer/services';
+import { BEER_ICON_TYPES } from '@beer/utils';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-map-filters',

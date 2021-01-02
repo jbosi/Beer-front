@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { BeerPropertiesService } from '../../services';
-import { IBeerInfo } from '../../models';
+import { BeerPropertiesService } from '@beer/services';
+import { IBeerInfo } from '@beer/models';
 @Component({
-	selector: 'app-beer-list',
-	templateUrl: './beer-list.component.html',
-	styleUrls: ['./beer-list.component.scss']
+	selector: 'app-beers',
+	templateUrl: './beers.component.html',
+	styleUrls: ['./beers.component.scss']
 })
-export class BeerListComponent implements OnInit {
+export class BeersComponent implements OnInit {
 	public beers: IBeerInfo[] = [];
 	public isLoading = false;
 	public offset = 0;
 
 	constructor(
-		private beersService: BeerPropertiesService
+		private readonly beersService: BeerPropertiesService
 	) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.fetchData();
 	}
 
@@ -23,7 +23,7 @@ export class BeerListComponent implements OnInit {
 		this.fetchData();
 	}
 
-	private fetchData() {
+	private fetchData(): void {
 		this.isLoading = true;
 		this.beersService.getBeers(this.offset).subscribe((beers) => {
 			this.beers = [...this.beers.concat(beers)];

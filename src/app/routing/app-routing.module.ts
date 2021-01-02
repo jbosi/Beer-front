@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {
 	PageNotFoundComponent,
-	BeerListComponent,
-	MapPageComponent,
 	HomeComponent,
 	BarAdminComponent,
 	BeerAdminComponent,
@@ -19,7 +17,6 @@ import {
 	NewRequestComponent,
 	PendingRequestComponent
 } from '../components';
-import { MapResolver } from './resolvers';
 import { AuthGuard } from './guards';
 
 const routes: Routes = [
@@ -63,13 +60,11 @@ const routes: Routes = [
 			},
 			{
 				path: 'map',
-				component: MapPageComponent,
-				resolve: { mapData: MapResolver }
+				loadChildren: () => import('../pages/map').then(m => m.MapModule)
 			},
 			{
 				path: 'beers',
-				component: BeerListComponent,
-				resolve: { mapData: MapResolver }
+				loadChildren: () => import('../pages/beers').then(m => m.BeersModule)
 			},
 			{
 				path: 'login',

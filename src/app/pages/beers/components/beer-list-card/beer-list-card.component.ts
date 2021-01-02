@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBeerDescriptionInfo, IBeerInfo } from '../../../models';
-import { BEER_ICON_TYPES_COLORS } from '../../../utils';
+import { IBeerDescriptionInfo, IBeerInfo } from '@beer/models';
+import { BEER_ICON_TYPES_COLORS } from '@beer/utils';
 
 @Component({
 	selector: 'app-beer-list-card',
@@ -12,7 +12,7 @@ export class BeerListCardComponent implements OnInit {
 	@Input() public beerInfo: IBeerInfo;
 	public beerDescription: IBeerDescriptionInfo;
 	public flipCard = false;
-	public beerIconColor: string
+	public beerIconColor: string;
 
 	public get hasDescription(): boolean {
 		return this.beerDescription != null && (!!this.beerDescription.eye || !!this.beerDescription.mouth || !!this.beerDescription.nose);

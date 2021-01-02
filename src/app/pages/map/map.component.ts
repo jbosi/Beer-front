@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, of } from 'rxjs';
-import { IBarProperties, IFavoriteBar, IBarNames } from '../../models';
-import { AuthenticationService, UserService } from '../../services';
+import { IBarProperties, IFavoriteBar, IBarNames } from '@beer/models';
+import { AuthenticationService, UserService } from '@beer/services';
 
 @Component({
-	selector: 'app-map-page',
-	templateUrl: './map-page.component.html',
-	styleUrls: ['./map-page.component.scss']
+	selector: 'app-map',
+	templateUrl: './map.component.html',
+	styleUrls: ['./map.component.scss']
 })
-export class MapPageComponent implements OnInit {
+export class MapComponent implements OnInit {
 	public isMobile: boolean;
 	public barProperties: IBarProperties[];
 	public highlightedMarkerId = new Subject<string>();
@@ -27,7 +27,7 @@ export class MapPageComponent implements OnInit {
 		private readonly snackBar: MatSnackBar
 	) {}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		window.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
 
 		this.authenticationService.isLogged.subscribe(isLogged => this.isLogged = isLogged);

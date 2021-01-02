@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { IBarProperties } from '../../models';
-import { BarPropertiesService } from '../../services';
+import { IBarProperties } from '@beer/models';
+import { BarPropertiesService } from '@beer/services';
 import { Observable } from 'rxjs';
 
 @Injectable({

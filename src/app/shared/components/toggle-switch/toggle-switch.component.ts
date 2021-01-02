@@ -14,7 +14,7 @@ export class ToggleSwitchComponent {
 
 	constructor() { }
 
-	public onSwitchChange($event) {
+	public onSwitchChange($event): void {
 		this.switchChanged.emit($event);
 	}
 }

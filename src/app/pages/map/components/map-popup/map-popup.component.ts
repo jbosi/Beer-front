@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IDetailedBarProperties, IBarBeerDetail, IFavoriteBar } from '../../../models';
-import { getCurrentDay, formatDateToHoursMinutes } from '../../../utils';
-import { UserService } from '../../../services';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IBarBeerDetail, IDetailedBarProperties, IFavoriteBar } from '@beer/models';
+import { UserService } from '@beer/services';
+import { formatDateToHoursMinutes, getCurrentDay } from '@beer/utils';
+import { Observable } from 'rxjs';
 
 const CHIP_COLORS = [
 	'#E69F5C',
@@ -41,7 +41,7 @@ export class MapPopupComponent implements OnInit {
 		private readonly snackBar: MatSnackBar
 	) {}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		const currentDay: string = getCurrentDay();
 		this.barData$.subscribe((bar: IDetailedBarProperties) => {
 			this.barData = bar;
@@ -81,7 +81,7 @@ export class MapPopupComponent implements OnInit {
 		}
 	}
 
-	private handleError(error) {
+	private handleError(error): void { // TODO
 		// this.loading = false;
 		const message = error.error.message;
 		if (error.error.keyError === 'missingToken') {
@@ -102,17 +102,17 @@ export class MapPopupComponent implements OnInit {
 		return CHIP_COLORS[index];
 	}
 
-	public toggleBeerButton() {
+	public toggleBeerButton(): void {
 		this.resetButtonsState();
 		this.isBeerButtonActive = true;
 	}
 
-	public toggleMoreButton() {
+	public toggleMoreButton(): void {
 		this.resetButtonsState();
 		this.isMoreButtonActive = true;
 	}
 
-	private resetButtonsState() {
+	private resetButtonsState(): void {
 		this.isBeerButtonActive = false;
 		this.isMoreButtonActive = false;
 	}

@@ -19,13 +19,7 @@ import {
 	RegisterComponent,
 	LoginComponent,
 	BeerIconComponent,
-	BeerListCardComponent,
-	BeerListComponent,
-	MapFiltersComponent,
 	HomeComponent,
-	MapComponent,
-	MapPopupComponent,
-	MapPageComponent,
 	NavBarComponent,
 	BeerFormComponent,
 	PageNotFoundComponent,
@@ -35,14 +29,12 @@ import {
 	AddBeerComponent,
 	TableListBeerComponent,
 	DashboardComponent,
-	InputAutocompleteComponent,
 	ProfileComponent,
 	BarManagementComponent,
 	BeerTableComponent,
 	OwnedBarsComponent,
 	NewRequestComponent,
 	PendingRequestComponent,
-	ToggleSwitchComponent,
 	AdminTableComponent,
 	InfiniteScrollComponent
 } from './components';
@@ -117,26 +109,19 @@ const SENTRY_PROVIDERS = [
 @NgModule({
 	declarations: [
 		AppComponent,
-		MapComponent,
-		MapPageComponent,
 		NavBarComponent,
 		BeerFormComponent,
 		PageNotFoundComponent,
-		MapPopupComponent,
 		HomeComponent,
 		AdminDashboardComponent,
 		BarAdminComponent,
 		BeerAdminComponent,
 		AddBeerComponent,
 		TableListBeerComponent,
-		MapFiltersComponent,
-		BeerListComponent,
-		BeerListCardComponent,
 		BeerIconComponent,
 		LoginComponent,
 		RegisterComponent,
 		UserAdminComponent,
-		InputAutocompleteComponent,
 		DashboardComponent,
 		ProfileComponent,
 		BarManagementComponent,
@@ -144,7 +129,6 @@ const SENTRY_PROVIDERS = [
 		OwnedBarsComponent,
 		NewRequestComponent,
 		PendingRequestComponent,
-		ToggleSwitchComponent,
 		AdminTableComponent,
 		InfiniteScrollComponent
 	],
@@ -167,12 +151,7 @@ const SENTRY_PROVIDERS = [
 		UploadService,
 		...SENTRY_PROVIDERS
 	],
-	entryComponents: [MapPopupComponent],
+	entryComponents: [],
 	bootstrap: [AppComponent]
 })
-export class AppModule {
-	constructor(private injector: Injector) {
-		const PopupElement = createCustomElement(MapPopupComponent, { injector });
-		customElements.define('popup-element', PopupElement);
-	}
-}
+export class AppModule {}
