@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IOwnershipRequest } from '../../../../models';
-import { UserService } from '../../../../services';
+import { IOwnershipRequest } from '@beer/models';
+import { UserService } from '@beer/services';
 
 @Component({
 	selector: 'app-pending-request',
@@ -14,12 +14,10 @@ export class PendingRequestComponent implements OnInit {
 		private readonly userService: UserService
 	) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		const userId = localStorage.getItem('user_id');
 		this.userService.getAllOwnershipRequestsByUserId(userId).subscribe((requests: IOwnershipRequest[]) => {
 			this.requests = requests;
 		});
-
 	}
-
 }

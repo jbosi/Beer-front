@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IDetailedBarPropertiesView } from '../bar-management.component';
-import { IOwnershipResponse } from '../../../../models';
-import { UserService } from '../../../../services';
+import { IOwnershipResponse } from '@beer/models';
+import { UserService } from '@beer/services';
 
 @Component({
 	selector: 'app-owned-bars',
@@ -15,14 +15,14 @@ export class OwnedBarsComponent implements OnInit {
 		private readonly userService: UserService
 	) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		const userId = localStorage.getItem('user_id');
 		this.userService.getAllOwnershipByUserId(userId).subscribe((ownedBars: IOwnershipResponse[]) => {
 			this.ownedBars = ownedBars.map(ownedBar => ({ ...ownedBar.bar, expand: true	}));
 		});
 	}
 
-	public toggleExpand(index: number) {
+	public toggleExpand(index: number): void {
 		this.ownedBars[index].expand = !this.ownedBars[index].expand;
 	}
 }

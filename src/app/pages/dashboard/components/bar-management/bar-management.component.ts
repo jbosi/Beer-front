@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IDetailedBarProperties } from '../../../models';
+import { IDetailedBarProperties } from '@beer/models';
 
 @Component({
 	selector: 'app-bar-management',

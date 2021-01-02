@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, forwardRef } from '@angular/core';
-import { IBarNames } from 'src/app/models';
-import { BarPropertiesService, UploadService, UserService } from 'src/app/services';
+import { IBarNames } from '@beer/models';
+import { BarPropertiesService, UploadService, UserService } from '@beer/services';
 import { forkJoin } from 'rxjs';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -42,7 +42,7 @@ export class NewRequestComponent implements OnInit {
 
 	ngOnInit() {
 		this.barPropertiesService.getBarsProperties().subscribe(bars => {
-			this.barNames = bars.map(bar => { return { name: bar.name, id: bar.id } });
+			this.barNames = bars.map(bar => ({ name: bar.name, id: bar.id }));
 		});
 
 		this.form = this.formBuilder.group({
@@ -55,7 +55,7 @@ export class NewRequestComponent implements OnInit {
 	onFilesAdded(): void {
 		const files: { [key: string]: File } = this.file.nativeElement.files;
 		for (const key in files) {
-			if (!isNaN(parseInt(key))) {
+			if (!isNaN(parseInt(key, 10))) {
 				this.files.add(files[key]);
 			}
 		}
@@ -72,15 +72,15 @@ export class NewRequestComponent implements OnInit {
 		});
 	}
 
-	addFiles() {
+	public addFiles(): void {
 		this.file.nativeElement.click();
 	}
 
-	public onSelectedItemChanged(item: { name: string, id: string }) {
+	public onSelectedItemChanged(item: { name: string, id: string }): void {
 		this.form.get('barId').setValue(item.id);
 	}
 
-	public onSubmitButton() {
+	public onSubmitButton(): void {
 		this.formState = 'loading';
 		this.userService.requestOwnership(this.form.value).subscribe(
 			() => {

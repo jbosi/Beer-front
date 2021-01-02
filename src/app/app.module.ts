@@ -27,12 +27,6 @@ import {
 	BeerAdminComponent,
 	AddBeerComponent,
 	TableListBeerComponent,
-	DashboardComponent,
-	ProfileComponent,
-	BarManagementComponent,
-	OwnedBarsComponent,
-	NewRequestComponent,
-	PendingRequestComponent,
 } from './components';
 import { BarPropertiesService, UploadService } from './services';
 import { JwtInterceptor } from './utils/jwt.interceptor';
@@ -117,12 +111,6 @@ const SENTRY_PROVIDERS = [
 		LoginComponent,
 		RegisterComponent,
 		UserAdminComponent,
-		DashboardComponent,
-		ProfileComponent,
-		BarManagementComponent,
-		OwnedBarsComponent,
-		NewRequestComponent,
-		PendingRequestComponent,
 	],
 	imports: [
 		BrowserModule,

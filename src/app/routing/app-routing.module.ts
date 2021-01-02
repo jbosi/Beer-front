@@ -10,12 +10,6 @@ import {
 	LoginComponent,
 	RegisterComponent,
 	UserAdminComponent,
-	DashboardComponent,
-	ProfileComponent,
-	BarManagementComponent,
-	OwnedBarsComponent,
-	NewRequestComponent,
-	PendingRequestComponent
 } from '../components';
 import { AuthGuard } from './guards';
 
@@ -42,21 +36,7 @@ const routes: Routes = [
 			},
 			{
 				path: 'dashboard',
-				component: DashboardComponent,
-				canActivate: [AuthGuard],
-				children: [
-					{ path: '', pathMatch: 'full', redirectTo: 'profile' },
-					{ path: 'profile', component: ProfileComponent },
-					{
-						path: 'bar-management',
-						component: BarManagementComponent,
-						children: [
-							{ path: '', pathMatch: 'full', component: OwnedBarsComponent },
-							{ path: 'pending-request', component: PendingRequestComponent },
-							{ path: 'new', component: NewRequestComponent }
-						]
-					},
-				]
+				loadChildren: () => import('../pages/dashboard').then(m => m.DashboardModule)
 			},
 			{
 				path: 'map',

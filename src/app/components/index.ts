@@ -1,6 +1,5 @@
 export * from './admin-dashboard';
 export * from './beer-form';
-export * from './dashboard';
 export * from './home';
 export * from './login';
 export * from './nav-bar';
