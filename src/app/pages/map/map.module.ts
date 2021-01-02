@@ -30,22 +30,11 @@ const MATERIAL_MODULES = [
 	MatIconModule,
 	MatFormFieldModule,
 	MatSelectModule,
-	// MatToolbarModule,
 	MatButtonModule,
 	MatDialogModule,
-	// MatCardModule,
-	// MatGridListModule,
-	// MatInputModule,
 	MatProgressSpinnerModule,
-	// MatTableModule,
-	// MatPaginatorModule,
-	// MatSortModule,
-	// MatCheckboxModule,
 	MatSliderModule,
-	// MatAutocompleteModule,
 	MatSnackBarModule,
-	// MatListModule,
-	// MatProgressBarModule,
 	MatSlideToggleModule
 ];
 
