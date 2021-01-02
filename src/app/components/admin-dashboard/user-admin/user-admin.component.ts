@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/users.service';
 import { zip } from 'rxjs';
-import { IcolumnPropertiesInterface } from '../../shared';
+import { IcolumnProperties } from '@beer/shared';
 
 @Component({
 	selector: 'app-user-admin',
@@ -15,9 +15,9 @@ export class UserAdminComponent implements OnInit {
 	public userData: any;
 	public userOwners: any;
 	public userOwnersRequests: any;
-	public userColumns: IcolumnPropertiesInterface[];
-	public userOwnersColumns: IcolumnPropertiesInterface[];
-	public userOwnersRequestsColumns: IcolumnPropertiesInterface[];
+	public userColumns: IcolumnProperties[];
+	public userOwnersColumns: IcolumnProperties[];
+	public userOwnersRequestsColumns: IcolumnProperties[];
 
 	constructor(
 		private readonly userService: UserService
@@ -58,7 +58,7 @@ export class UserAdminComponent implements OnInit {
 		this.userOwnersRequestsColumns = this.initUserOwnersRequestsColumns();
 	}
 
-	private initUserColumns(): IcolumnPropertiesInterface[] {
+	private initUserColumns(): IcolumnProperties[] {
 		return [
 			{
 				columnName: 'username',
@@ -78,7 +78,7 @@ export class UserAdminComponent implements OnInit {
 		];
 	}
 
-	private initUserOwnersColumns(): IcolumnPropertiesInterface[] {
+	private initUserOwnersColumns(): IcolumnProperties[] {
 		return [
 			{
 				columnName: 'name',
@@ -103,7 +103,7 @@ export class UserAdminComponent implements OnInit {
 		];
 	}
 
-	private initUserOwnersRequestsColumns(): IcolumnPropertiesInterface[] {
+	private initUserOwnersRequestsColumns(): IcolumnProperties[] {
 		return [
 			{
 				columnName: 'barName',

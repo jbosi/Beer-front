@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputAutocompleteComponent, ToggleSwitchComponent } from './components';
+import { BeerIconComponent, BeerTableComponent, InfiniteScrollComponent, InputAutocompleteComponent, ToggleSwitchComponent } from './components';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -8,6 +8,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminTableComponent } from './components/admin-table';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -20,8 +23,8 @@ const MATERIAL_MODULES = [
 	// MatGridListModule,
 	MatInputModule,
 	// MatProgressSpinnerModule,
-	// MatTableModule,
-	// MatPaginatorModule,
+	MatTableModule,
+	MatPaginatorModule,
 	// MatSortModule,
 	// MatCheckboxModule,
 	// MatSliderModule,
@@ -35,7 +38,11 @@ const MATERIAL_MODULES = [
 @NgModule({
 	declarations: [
 		InputAutocompleteComponent,
-		ToggleSwitchComponent
+		ToggleSwitchComponent,
+		BeerTableComponent,
+		BeerIconComponent,
+		AdminTableComponent,
+		InfiniteScrollComponent
 	],
 	imports: [
 		MATERIAL_MODULES,
@@ -45,7 +52,11 @@ const MATERIAL_MODULES = [
 	],
 	exports: [
 		InputAutocompleteComponent,
-		ToggleSwitchComponent
+		ToggleSwitchComponent,
+		BeerTableComponent,
+		BeerIconComponent,
+		AdminTableComponent,
+		InfiniteScrollComponent
 	]
 })
 export class SharedModule { }

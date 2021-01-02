@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { UserService } from 'src/app/services';
 import { Observable, throwError } from 'rxjs';
+import { IcolumnProperties } from '../../models';
 
 @Component({
 	selector: '[app-admin-table]',
@@ -10,7 +11,7 @@ import { Observable, throwError } from 'rxjs';
 export class AdminTableComponent {
 	@Input() public labelEmpty: string;
 	@Input() public displayEditIcons = false;
-	@Input() public columnsProperties: IcolumnPropertiesInterface[] = [];
+	@Input() public columnsProperties: IcolumnProperties[] = [];
 	@Input() public data: any;
 	public hasError = false;
 	public errorMessage: string;
@@ -40,10 +41,4 @@ export class AdminTableComponent {
 			}
 		);
 	}
-}
-
-export interface IcolumnPropertiesInterface {
-	columnName: string;
-	value: string;
-	title: string;
 }
