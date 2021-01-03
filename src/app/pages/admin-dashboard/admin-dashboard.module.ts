@@ -11,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '@beer/shared';
+import { AdminTableModule } from 'src/app/modules';
 import { AuthGuard } from '../../routing';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { AddBeerComponent, BarAdminComponent, BeerAdminComponent, BeerFormComponent, TableListBeerComponent, UserAdminComponent } from './components';
@@ -56,7 +56,7 @@ const MATERIAL_MODULES = [
 		MATERIAL_MODULES,
 		RouterModule.forChild(routes),
 		CommonModule,
-		SharedModule,
+		AdminTableModule,
 		ReactiveFormsModule,
 		FormsModule
 	]

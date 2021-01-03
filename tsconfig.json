@@ -29,8 +29,8 @@
 			"@beer/models": [
 				"./src/app/models/index",
 			],
-			"@beer/shared": [
-				"./src/app/shared/index",
+			"@beer/modules": [
+				"./src/app/modules/index",
 			],
 		},
 		"skipLibCheck": true

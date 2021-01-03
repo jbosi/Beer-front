@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { BeerListCardComponent } from './components';
 import { RouterModule, Routes } from '@angular/router';
 import { BeersComponent } from './beers.component';
-import { SharedModule } from '@beer/shared';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BeerIconModule, InfiniteScrollModule } from '@beer/modules';
 
 const routes: Routes = [
 	{
@@ -27,7 +27,8 @@ const MATERIAL_MODULES = [
 		MATERIAL_MODULES,
 		RouterModule.forChild(routes),
 		CommonModule,
-		SharedModule
+		InfiniteScrollModule,
+		BeerIconModule
 	]
 })
 export class BeersModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBarBeerDetail, IDetailedBarProperties } from '../../../models';
-import { BEER_ICON_TYPES_COLORS } from '../../../utils';
+import { IBarBeerDetail, IDetailedBarProperties } from '@beer/models';
+import { BEER_ICON_TYPES_COLORS } from '@beer/utils';
 import { Observable, throwError } from 'rxjs';
-import { BarPropertiesService } from '../../../services';
+import { BarPropertiesService } from '@beer/services';
 
 @Component({
 	selector: '[app-beer-table]',

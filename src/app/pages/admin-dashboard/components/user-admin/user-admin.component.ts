@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '@beer/services';
-import { IcolumnProperties } from '@beer/shared';
+import { IcolumnProperties } from '@beer/modules';
 import { zip } from 'rxjs';
 
 @Component({

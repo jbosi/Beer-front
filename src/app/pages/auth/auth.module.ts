@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '@beer/shared';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { LoginComponent, RegisterComponent } from './components';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterModule, Routes } from '@angular/router';
+import { CalloutErrorModule } from '@beer/modules';
+import { LoginComponent, RegisterComponent } from './components';
 
 const routes: Routes = [
 	{
@@ -45,7 +45,7 @@ const MATERIAL_MODULES = [
 		MATERIAL_MODULES,
 		RouterModule.forChild(routes),
 		CommonModule,
-		SharedModule,
+		CalloutErrorModule,
 		ReactiveFormsModule,
 		FormsModule
 	]

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { BarManagementComponent, NewRequestComponent, OwnedBarsComponent, PendingRequestComponent, ProfileComponent } from './components';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '@beer/shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from '../../routing';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { BeerTableModule, InputAutocompleteModule } from '@beer/modules';
 
 const routes: Routes = [
 	{
@@ -64,7 +64,8 @@ const MATERIAL_MODULES = [
 		MATERIAL_MODULES,
 		CommonModule,
 		RouterModule.forChild(routes),
-		SharedModule,
+		InputAutocompleteModule,
+		BeerTableModule,
 		ReactiveFormsModule,
 		FormsModule
 	]

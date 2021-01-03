@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '@beer/shared';
 import { HomeComponent } from './home.component';
 
 const routes: Routes = [

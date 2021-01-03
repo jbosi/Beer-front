@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { UserService } from 'src/app/services';
+import { UserService } from '@beer/services';
 import { Observable, throwError } from 'rxjs';
-import { IcolumnProperties } from '../../models';
+import { IcolumnProperties } from './models';
 
 @Component({
 	selector: '[app-admin-table]',

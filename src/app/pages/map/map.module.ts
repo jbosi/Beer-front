@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
-import { SharedModule } from '../../../app/shared';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -17,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BeerTableModule, InputAutocompleteModule, ToggleSwitchModule } from '@beer/modules';
 
 const routes: Routes = [
 	{
@@ -52,7 +52,9 @@ const MATERIAL_MODULES = [
 		MATERIAL_MODULES,
 		RouterModule.forChild(routes),
 		CommonModule,
-		SharedModule,
+		InputAutocompleteModule,
+		ToggleSwitchModule,
+		BeerTableModule,
 		ScrollingModule,
 		ReactiveFormsModule,
 		FormsModule
