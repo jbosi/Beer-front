@@ -33,10 +33,9 @@ import 'hammerjs';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import {
-	HomeComponent, LoginComponent,
-
+	LoginComponent,
 	NavBarComponent,
-	PageNotFoundComponent, RegisterComponent
+	RegisterComponent
 } from './components';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { BarPropertiesService, UploadService } from './services';
@@ -91,8 +90,6 @@ const SENTRY_PROVIDERS = [
 	declarations: [
 		AppComponent,
 		NavBarComponent,
-		PageNotFoundComponent,
-		HomeComponent,
 		LoginComponent,
 		RegisterComponent
 	],

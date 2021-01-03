@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-	HomeComponent,
-	LoginComponent, NavBarComponent, PageNotFoundComponent,
+	LoginComponent, NavBarComponent,
 	RegisterComponent
 } from '../components';
 
 const routes: Routes = [
 	{
 		path: '',
-		component: HomeComponent,
+		loadChildren: () => import('../pages/home').then(m => m.HomeModule),
 		pathMatch: 'full',
 	},
 	{
@@ -44,7 +43,7 @@ const routes: Routes = [
 	},
 	{
 		path: '**',
-		component: PageNotFoundComponent
+		loadChildren: () => import('../pages/page-not-found').then(m => m.PageNotFoundModule)
 	},
 ];
 @NgModule({
