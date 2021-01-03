@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BeerIconComponent, BeerTableComponent, InfiniteScrollComponent, InputAutocompleteComponent, ToggleSwitchComponent } from './components';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdminTableComponent } from './components/admin-table';
-import { MatTableModule } from '@angular/material/table';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CalloutErrorComponent } from './components/callout-error/callout-error.component';
+import { MatTableModule } from '@angular/material/table';
+import { BeerIconComponent, BeerTableComponent, CalloutErrorComponent, InfiniteScrollComponent, InputAutocompleteComponent, ToggleSwitchComponent } from './components';
+import { AdminTableComponent } from './components/admin-table';
 
 const MATERIAL_MODULES = [
 	MatIconModule,

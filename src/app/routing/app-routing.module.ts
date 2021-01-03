@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-	LoginComponent, NavBarComponent,
-	RegisterComponent
+	NavBarComponent
 } from '../components';
 
 const routes: Routes = [
@@ -32,13 +31,9 @@ const routes: Routes = [
 				loadChildren: () => import('../pages/beers').then(m => m.BeersModule)
 			},
 			{
-				path: 'login',
-				component: LoginComponent
-			},
-			{
-				path: 'register',
-				component: RegisterComponent
-			},
+				path: 'auth',
+				loadChildren: () => import('../pages/auth').then(m => m.AuthModule)
+			}
 		]
 	},
 	{

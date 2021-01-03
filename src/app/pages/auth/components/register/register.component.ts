@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { AuthenticationService, UserService } from '../../services';
+import { AuthenticationService, UserService } from '@beer/services';
 
 
 @Component({
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
 		this.userService.register(this.registerForm.value)
 		.pipe(first())
 		.subscribe(
-			_ => this.router.navigate(['/login']),
+			_ => this.router.navigate(['/auth']),
 			error => this.handleError(error)
 		);
 	}

@@ -33,15 +33,11 @@ import 'hammerjs';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import {
-	LoginComponent,
 	NavBarComponent,
-	RegisterComponent
 } from './components';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { BarPropertiesService, UploadService } from './services';
 import { BeerPropertiesService } from './services/beer-properties.service';
-import { SharedModule } from './shared';
-import { CalloutErrorComponent } from './shared/components';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 
 
@@ -91,9 +87,7 @@ const SENTRY_PROVIDERS = [
 @NgModule({
 	declarations: [
 		AppComponent,
-		NavBarComponent,
-		LoginComponent,
-		RegisterComponent
+		NavBarComponent
 	],
 	imports: [
 		BrowserModule,
@@ -104,8 +98,7 @@ const SENTRY_PROVIDERS = [
 		FlexLayoutModule,
 		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 		ScrollingModule,
-		...MATERIAL_MODULES,
-		SharedModule
+		...MATERIAL_MODULES
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
