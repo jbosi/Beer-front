@@ -1,17 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import {
-	PageNotFoundComponent,
 	HomeComponent,
-	BarAdminComponent,
-	BeerAdminComponent,
-	AdminDashboardComponent,
-	NavBarComponent,
-	LoginComponent,
-	RegisterComponent,
-	UserAdminComponent,
+	LoginComponent, NavBarComponent, PageNotFoundComponent,
+	RegisterComponent
 } from '../components';
-import { AuthGuard } from './guards';
 
 const routes: Routes = [
 	{
@@ -25,14 +18,7 @@ const routes: Routes = [
 		children: [
 			{
 				path: 'admin-dashboard',
-				component: AdminDashboardComponent,
-				canActivate: [AuthGuard],
-				children: [
-					{ path: '', component: BarAdminComponent },
-					{ path: 'bar', component: BarAdminComponent },
-					{ path: 'biere', component: BeerAdminComponent },
-					{ path: 'user', component: UserAdminComponent }
-				]
+				loadChildren: () => import('../pages/admin-dashboard').then(m => m.AdminDashboardModule)
 			},
 			{
 				path: 'dashboard',

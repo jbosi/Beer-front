@@ -1,4 +1,4 @@
 export * from './bar-admin';
 export * from './beer-admin';
-export * from './admin-dashboard.component';
+export * from './beer-form';
 export * from './user-admin';
