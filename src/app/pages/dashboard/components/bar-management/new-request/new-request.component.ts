@@ -61,9 +61,11 @@ export class NewRequestComponent implements OnInit {
 		}
 		this.uploading = true;
 		this.progress = this.uploadService.upload(this.files);
-		let allProgressObservables = [];
-		for (let key in this.progress) {
-			allProgressObservables.push(this.progress[key].progress);
+		const allProgressObservables = [];
+		for (const key in this.progress) {
+			if (this.progress.hasOwnProperty(key)) {
+				allProgressObservables.push(this.progress[key].progress);
+			}
 		}
 
 		forkJoin(allProgressObservables).subscribe(() => {

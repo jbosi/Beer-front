@@ -1,1 +1,1 @@
-export * from "./table-list-beer.component";
+export * from './table-list-beer.component';

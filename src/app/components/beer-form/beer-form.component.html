@@ -1,6 +1,6 @@
-<div [formGroup]="form" >
+<div [formGroup]="form">
 	
-	<mat-form-field class="full-width" >
+	<mat-form-field class="full-width">
 		<mat-label for="name">Nom</mat-label>
 		<input matInput formControlName="name" id="name" required>
 		<mat-error *ngIf="nameControl.touched && nameControl.hasError('required')" class="alert alert-danger">
@@ -10,7 +10,7 @@
 	
 	<mat-form-field class="full-width">
 		<mat-label for="brewery">Brasserie</mat-label>
-		<input matInput formControlName="brewery" id="brewery" >
+		<input matInput formControlName="brewery" id="brewery">
 	</mat-form-field>
 	
 	<table class="full-width" cellsacing="0">
@@ -18,7 +18,7 @@
 			<td>
 				<mat-form-field class="full-width">
 					<mat-label for="degre">Degre</mat-label>
-					<input matInput formControlName="degre" id="degre" >
+					<input matInput formControlName="degre" id="degre">
 				</mat-form-field>
 			</td>
 			
@@ -26,7 +26,7 @@
 				<mat-form-field class="full-width">
 					<mat-label for="type">Type</mat-label>
 					<mat-select matInput formControlName="type" id="type">
-						<mat-option *ngFor="let option of options" >{{option}}</mat-option>
+						<mat-option *ngFor="let option of options" >{{ option }}</mat-option>
 					</mat-select>
 				</mat-form-field>
 			</td>

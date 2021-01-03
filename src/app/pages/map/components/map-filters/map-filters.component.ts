@@ -44,6 +44,14 @@ export class MapFiltersComponent implements OnInit {
 	public beerNames: string[] = [];
 	public isShowfavoritesChecked = false;
 
+	private readonly priceFilter = 'price';
+	private readonly typeFilter = 'type';
+	private readonly isHHFilter = 'isHappyHour';
+	private readonly isOpenedFilter = 'isOpened';
+	private readonly showfavoritesFilter = 'showfavorites';
+	private readonly beerFilter = 'beer';
+	private readonly tagFilter = 'tag';
+
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly barService: BarPropertiesService,
@@ -80,21 +88,21 @@ export class MapFiltersComponent implements OnInit {
 
 	private getFilteredData(model): Observable<IBarProperties[]> {
 		const filteredData = [...this.allData];
-		const priceField = this.form.get('price');
-		const beerTypeField = this.form.get('type');
+		const priceField = this.form.get(this.priceFilter);
+		const beerTypeField = this.form.get(this.typeFilter);
 
 		if (priceField.dirty) {
-			this.filters['price'] = model['price'];
+			this.filters[this.priceFilter] = model[this.priceFilter];
 			priceField.markAsPristine();
 			this.backFiltersChanged = true;
 		}
 
 		if (beerTypeField.dirty) {
-			this.filters['type'] = model['type'];
+			this.filters[this.typeFilter] = model[this.typeFilter];
 			beerTypeField.markAsPristine();
 			this.backFiltersChanged = true;
-			if (model['type'] === undefined) {
-				delete this.filters['type'];
+			if (model[this.typeFilter] === undefined) {
+				delete this.filters[this.typeFilter];
 			}
 		}
 
@@ -115,13 +123,13 @@ export class MapFiltersComponent implements OnInit {
 	}
 
 	private addFrontFilters(model, filteredData: IBarProperties[]): IBarProperties[] {
-		if (this.filters['isOpened']) {
+		if (this.filters[this.isOpenedFilter]) {
 			filteredData = filteredData.filter(bar => bar.opened);
 		}
-		if (this.filters['isHappyHour']) {
+		if (this.filters[this.isHHFilter]) {
 			filteredData = filteredData.filter(bar => bar.inHappy);
 		}
-		if (this.filters['showfavorites']) {
+		if (this.filters[this.showfavoritesFilter]) {
 			if (!this.isLogged) {
 				this.isShowfavoritesChecked = false;
 				this.snackBar.open('Veuillez vous connecter', '', {
@@ -136,8 +144,10 @@ export class MapFiltersComponent implements OnInit {
 
 	private processFilters(filters): string {
 		let result = '';
-		for (let filter in filters) {
-			result += `${filter}=${filters[filter]}&`
+		for (const filter in filters) {
+			if (filters.hasOwnProperty(filter)) {
+				result += `${filter}=${filters[filter]}&`;
+			}
 		}
 		return result.slice(0, -1);
 	}
@@ -149,9 +159,9 @@ export class MapFiltersComponent implements OnInit {
 
 	public onSelectedItemChanged(beerName: string): void {
 		if (beerName != null) {
-			this.filters['beer'] = beerName;
+			this.filters[this.beerFilter] = beerName;
 		} else {
-			delete this.filters['beer'];
+			delete this.filters[this.beerFilter];
 		}
 		this.backFiltersChanged = true;
 		this.form.updateValueAndValidity();
@@ -159,7 +169,7 @@ export class MapFiltersComponent implements OnInit {
 
 	public onValueChange($event): void {
 		if ($event.target.value === 'hasTerrace') {
-			$event.target.checked ? this.filters['tag'] = 'Terrasse' : delete this.filters['tag'];
+			$event.target.checked ? this.filters[this.tagFilter] = 'Terrasse' : delete this.filters[this.tagFilter];
 		}
 		this.filters[$event.target.value] = $event.target.checked;
 		this.backFiltersChanged = true;

@@ -1,6 +1,6 @@
-import { BarPropertiesService } from '../../../services';
+import { BarPropertiesService } from '@beer/services';
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
-import { IBarProperties } from '../../../models';
+import { IBarProperties } from '@beer/models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,11 +17,11 @@ export class BarAdminComponent implements AfterViewInit {
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
 	public isLoadingResults = false;
 
-	constructor(private readonly barPropertiesService: BarPropertiesService) {
-		this.isLoadingResults = true;
-	}
+	constructor(
+		private readonly barPropertiesService: BarPropertiesService
+	) {}
 
-	ngAfterViewInit() {
+	ngAfterViewInit(): void {
 		this.isLoadingResults = true;
 		this.barPropertiesService.getBarsProperties().subscribe(data => {
 			this.bars = new MatTableDataSource(data);
@@ -31,12 +31,10 @@ export class BarAdminComponent implements AfterViewInit {
 		});
 	}
 
-	applyFilter(event: Event): void {
+	public applyFilter(event: Event): void {
 		const filterValue: string = (event.target as HTMLInputElement).value;
 		this.bars.filter = filterValue.trim().toLowerCase();
 
-		if (this.bars.paginator) {
-			this.bars.paginator.firstPage();
-		}
+		this.bars.paginator?.firstPage();
 	}
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../../services';
+import { AuthenticationService } from '@beer/services';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -10,10 +10,11 @@ import { first } from 'rxjs/operators';
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-	loginForm: FormGroup;
-	loading = false;
-	submitted = false;
-	returnUrl: string;
+	public loginForm: FormGroup;
+	public loading = false;
+	public submitted = false;
+	public returnUrl: string;
+	private readonly param = 'returnUrl';
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -26,20 +27,20 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.loginForm = this.formBuilder.group({
 			email: ['', Validators.required],
 			password: ['', Validators.required]
 		});
 
 		// get return url from route parameters or default to '/map'
-		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/map';
+		this.returnUrl = this.route.snapshot.queryParams[this.param] || '/map';
 	}
 
 	// convenience getter for easy access to form fields
-	get f() { return this.loginForm.controls; }
+	public get f() { return this.loginForm.controls; }
 
-	onSubmit() {
+	onSubmit(): void {
 		this.submitted = true;
 
 		if (this.loginForm.invalid) {

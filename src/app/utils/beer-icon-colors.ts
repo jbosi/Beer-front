@@ -4,7 +4,7 @@ export const BEER_ICON_TYPES_COLORS = {
 	brown: '#622F0A',
 	white: '#D9D9D9',
 	amber: '#A76B12'
-}
+};
 
 export const BEER_ICON_TYPES = [
 	{

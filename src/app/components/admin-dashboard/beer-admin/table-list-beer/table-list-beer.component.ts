@@ -1,6 +1,6 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
-import { BeerPropertiesService } from '../../../../services';
-import { IBeerInfo } from '../../../../models';
+import { BeerPropertiesService } from '@beer/services';
+import { IBeerInfo } from '@beer/models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,17 +11,18 @@ import { MatSort } from '@angular/material/sort';
 	styleUrls: ['./table-list-beer.component.scss']
 })
 export class TableListBeerComponent implements AfterViewInit {
-	public displayedColumns: string[] = ['name'];
-	public beers: MatTableDataSource<IBeerInfo>;
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
+
+	public displayedColumns: string[] = ['name'];
+	public beers: MatTableDataSource<IBeerInfo>;
 	public isLoadingResults = false;
 
-	constructor(private readonly beerPropertiesService: BeerPropertiesService) {
-		this.isLoadingResults = true;
-	}
+	constructor(
+		private readonly beerPropertiesService: BeerPropertiesService
+	) {}
 
-	ngAfterViewInit() {
+	ngAfterViewInit(): void {
 		this.isLoadingResults = true;
 		this.beerPropertiesService.getBeers().subscribe(data => {
 			this.beers = new MatTableDataSource(data);
@@ -31,12 +32,10 @@ export class TableListBeerComponent implements AfterViewInit {
 		});
 	}
 
-	applyFilter(event: Event): void {
+	public applyFilter(event: Event): void {
 		const filterValue: string = (event.target as HTMLInputElement).value;
 		this.beers.filter = filterValue.trim().toLowerCase();
 
-		if (this.beers.paginator) {
-			this.beers.paginator.firstPage();
-		}
+		this.beers.paginator?.firstPage();
 	}
 }

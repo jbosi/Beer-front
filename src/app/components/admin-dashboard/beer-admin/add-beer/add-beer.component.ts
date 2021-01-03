@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { BeerPropertiesService } from '../../../../services';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { BeerPropertiesService } from '@beer/services';
 
 
 @Component({
@@ -8,7 +8,7 @@ import { BeerPropertiesService } from '../../../../services';
 	templateUrl: './add-beer.component.html',
 	styleUrls: ['./add-beer.component.scss']
 })
-export class AddBeerComponent implements OnInit {
+export class AddBeerComponent {
 	public addBeerForm: FormGroup;
 
 	constructor(
@@ -20,14 +20,11 @@ export class AddBeerComponent implements OnInit {
 		});
 	}
 
-	submit() {
+	public submit(): void {
 		this.beerPropertiesService.addBeer(this.addBeerForm.value);
 	}
 
-	resetForm() {
+	public resetForm(): void {
 		this.addBeerForm.reset();
-	}
-
-	ngOnInit() {
 	}
 }

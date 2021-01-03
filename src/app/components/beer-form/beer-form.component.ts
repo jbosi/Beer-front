@@ -1,8 +1,7 @@
-import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormGroup, FormControl, NG_VALIDATORS } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, forwardRef, OnDestroy } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { BeerPropertiesService } from './../../services/beer-properties.service';
-import { IBeerInfo } from './../../models';
+import { IBeerInfo } from '@beer/models';
 
 
 @Component({
@@ -31,21 +30,23 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 	onChange: any = () => {};
 	onTouched: any = () => {};
 
-	get value(): IBeerInfo {
+	public get value(): IBeerInfo {
 		return this.form.value;
 	}
 
-	set value(value: IBeerInfo) {
+	public set value(value: IBeerInfo) {
 		this.form.setValue(value);
 		this.onChange(value);
 		this.onTouched();
 	}
 
-	get nameControl() {
+	public get nameControl() {
 		return this.form.controls.name;
 	}
 
-	constructor(private beerPropertiesService: BeerPropertiesService, private formBuilder: FormBuilder) {
+	constructor(
+		private readonly formBuilder: FormBuilder
+	) {
 		this.form = this.formBuilder.group({
 			name: [],
 			brewery: [],
@@ -61,15 +62,15 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 		);
 	}
 
-	ngOnDestroy() {
+	ngOnDestroy(): void {
 		this.subscriptions.forEach(s => s.unsubscribe());
 	}
 
-	registerOnChange(fn) {
+	registerOnChange(fn): void {
 		this.onChange = fn;
 	}
 
-	writeValue(value) {
+	writeValue(value): void {
 		if (value) {
 			this.value = value;
 		}
@@ -79,11 +80,11 @@ export class BeerFormComponent implements ControlValueAccessor, OnDestroy {
 		}
 	}
 
-	registerOnTouched(fn) {
+	registerOnTouched(fn): void {
 		this.onTouched = fn;
 	}
 
-	validate(_: FormControl) {
+	public validate(_: FormControl): { addBeer: { valid: boolean } } {
 		return this.form.valid ? null : { addBeer: { valid: false } };
 	}
 

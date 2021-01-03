@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/users.service';
-import { zip } from 'rxjs';
+import { UserService } from '@beer/services';
 import { IcolumnProperties } from '@beer/shared';
+import { zip } from 'rxjs';
 
 @Component({
 	selector: 'app-user-admin',

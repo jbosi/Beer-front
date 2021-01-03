@@ -7,11 +7,11 @@ import { AuthenticationService } from './services';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'Drinks for all';
-	currentUserToken: {token: string};
-	
+	public title = 'Drinks for all';
+	public currentUserToken: { token: string };
+
 	constructor(
-		private authenticationService: AuthenticationService
+		private readonly authenticationService: AuthenticationService
 	) {
 		this.authenticationService.currentUser.subscribe(userToken => this.currentUserToken = userToken);
 	}
