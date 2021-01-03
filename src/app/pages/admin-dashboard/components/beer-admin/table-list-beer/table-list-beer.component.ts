@@ -1,4 +1,4 @@
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import { BeerPropertiesService } from '@beer/services';
 import { IBeerInfo } from '@beer/models';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,7 +10,7 @@ import { MatSort } from '@angular/material/sort';
 	templateUrl: './table-list-beer.component.html',
 	styleUrls: ['./table-list-beer.component.scss']
 })
-export class TableListBeerComponent implements AfterViewInit {
+export class TableListBeerComponent implements OnInit {
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -22,7 +22,7 @@ export class TableListBeerComponent implements AfterViewInit {
 		private readonly beerPropertiesService: BeerPropertiesService
 	) {}
 
-	ngAfterViewInit(): void {
+	ngOnInit(): void {
 		this.isLoadingResults = true;
 		this.beerPropertiesService.getBeers().subscribe(data => {
 			this.beers = new MatTableDataSource(data);

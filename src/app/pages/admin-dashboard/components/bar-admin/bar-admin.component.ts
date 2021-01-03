@@ -1,5 +1,5 @@
 import { BarPropertiesService } from '@beer/services';
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import { IBarProperties } from '@beer/models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,7 +10,7 @@ import { MatSort } from '@angular/material/sort';
 	templateUrl: './bar-admin.component.html',
 	styleUrls: ['./bar-admin.component.scss']
 })
-export class BarAdminComponent implements AfterViewInit {
+export class BarAdminComponent implements OnInit {
 	public displayedColumns: string[] = ['name'];
 	public bars: MatTableDataSource<IBarProperties>;
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -21,7 +21,7 @@ export class BarAdminComponent implements AfterViewInit {
 		private readonly barPropertiesService: BarPropertiesService
 	) {}
 
-	ngAfterViewInit(): void {
+	ngOnInit(): void {
 		this.isLoadingResults = true;
 		this.barPropertiesService.getBarsProperties().subscribe(data => {
 			this.bars = new MatTableDataSource(data);
