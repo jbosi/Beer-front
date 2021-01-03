@@ -1,0 +1,6 @@
+ <h2>Ajouter une bière</h2>
+ <form [formGroup]="addBeerForm" (ngSubmit)="submit()" class="form">
+	<app-beer-form formControlName="addBeer"></app-beer-form>
+	<button mat-stroked-button type="submit" color="primary">Ajouter</button>
+	<button mat-stroked-button type="button" (click)="resetForm()">Reset</button>
+</form>

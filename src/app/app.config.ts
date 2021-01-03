@@ -1,1 +1,1 @@
-export const API_URL: string = 'https://aleforall.herokuapp.com';
+export const API_URL = 'https://aleforall.herokuapp.com';

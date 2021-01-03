@@ -4,7 +4,6 @@ import { API_URL } from '../app.config';
 import { IOwnershipResponse, IOwnershipRequest } from '../models';
 import { Observable } from 'rxjs';
 
-
 @Injectable({ providedIn: 'root' })
 export class UserService {
 	constructor(private http: HttpClient) { }

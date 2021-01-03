@@ -1,3 +1,2 @@
-export * from "./app-routing.module";
-export * from "./guards";
-export * from "./resolvers";
+export * from './app-routing.module';
+export * from './guards';

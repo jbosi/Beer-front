@@ -1,31 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import {
-	PageNotFoundComponent,
-	BeerListComponent,
-	MapPageComponent,
-	HomeComponent,
-	BarAdminComponent,
-	BeerAdminComponent,
-	AdminDashboardComponent,
-	NavBarComponent,
-	LoginComponent,
-	RegisterComponent,
-	UserAdminComponent,
-	DashboardComponent,
-	ProfileComponent,
-	BarManagementComponent,
-	OwnedBarsComponent,
-	NewRequestComponent,
-	PendingRequestComponent
+	NavBarComponent
 } from '../components';
-import { MapResolver } from './resolvers';
-import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
 	{
 		path: '',
-		component: HomeComponent,
+		loadChildren: () => import('../pages/home').then(m => m.HomeModule),
 		pathMatch: 'full',
 	},
 	{
@@ -34,56 +16,29 @@ const routes: Routes = [
 		children: [
 			{
 				path: 'admin-dashboard',
-				component: AdminDashboardComponent,
-				canActivate: [AuthGuard],
-				children: [
-					{ path: '', component: BarAdminComponent },
-					{ path: 'bar', component: BarAdminComponent },
-					{ path: 'biere', component: BeerAdminComponent },
-					{ path: 'user', component: UserAdminComponent }
-				]
+				loadChildren: () => import('../pages/admin-dashboard').then(m => m.AdminDashboardModule)
 			},
 			{
 				path: 'dashboard',
-				component: DashboardComponent,
-				canActivate: [AuthGuard],
-				children: [
-					{ path: '', pathMatch: 'full', redirectTo: 'profile' },
-					{ path: 'profile', component: ProfileComponent },
-					{
-						path: 'bar-management',
-						component: BarManagementComponent,
-						children: [
-							{ path: '', pathMatch: 'full', component: OwnedBarsComponent },
-							{ path: 'pending-request', component: PendingRequestComponent },
-							{ path: 'new', component: NewRequestComponent }
-						]
-					},
-				]
+				loadChildren: () => import('../pages/dashboard').then(m => m.DashboardModule)
 			},
 			{
 				path: 'map',
-				component: MapPageComponent,
-				resolve: { mapData: MapResolver }
+				loadChildren: () => import('../pages/map').then(m => m.MapModule)
 			},
 			{
 				path: 'beers',
-				component: BeerListComponent,
-				resolve: { mapData: MapResolver }
+				loadChildren: () => import('../pages/beers').then(m => m.BeersModule)
 			},
 			{
-				path: 'login',
-				component: LoginComponent
-			},
-			{
-				path: 'register',
-				component: RegisterComponent
-			},
+				path: 'auth',
+				loadChildren: () => import('../pages/auth').then(m => m.AuthModule)
+			}
 		]
 	},
 	{
 		path: '**',
-		component: PageNotFoundComponent
+		loadChildren: () => import('../pages/page-not-found').then(m => m.PageNotFoundModule)
 	},
 ];
 @NgModule({

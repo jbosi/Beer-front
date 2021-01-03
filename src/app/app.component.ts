@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from './services';
 
 @Component({
 	selector: 'app-root',
@@ -7,12 +6,5 @@ import { AuthenticationService } from './services';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'Drinks for all';
-	currentUserToken: {token: string};
-	
-	constructor(
-		private authenticationService: AuthenticationService
-	) {
-		this.authenticationService.currentUser.subscribe(userToken => this.currentUserToken = userToken);
-	}
+	public title = 'Drinks for all';
 }

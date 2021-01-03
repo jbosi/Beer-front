@@ -1,76 +1,46 @@
-import { BeerPropertiesService } from './services/beer-properties.service';
-import { AppComponent } from './app.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector, ErrorHandler, APP_INITIALIZER } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import * as Sentry from '@sentry/angular';
-
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './routing/app-routing.module';
-import { createCustomElement } from '@angular/elements';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import 'hammerjs';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import {
-	UserAdminComponent,
-	RegisterComponent,
-	LoginComponent,
-	BeerIconComponent,
-	BeerListCardComponent,
-	BeerListComponent,
-	MapFiltersComponent,
-	HomeComponent,
-	MapComponent,
-	MapPopupComponent,
-	MapPageComponent,
-	NavBarComponent,
-	BeerFormComponent,
-	PageNotFoundComponent,
-	AdminDashboardComponent,
-	BarAdminComponent,
-	BeerAdminComponent,
-	AddBeerComponent,
-	TableListBeerComponent,
-	DashboardComponent,
-	InputAutocompleteComponent,
-	ProfileComponent,
-	BarManagementComponent,
-	BeerTableComponent,
-	OwnedBarsComponent,
-	NewRequestComponent,
-	PendingRequestComponent,
-	ToggleSwitchComponent,
-	AdminTableComponent,
-	InfiniteScrollComponent
-} from './components';
-import { BarPropertiesService, UploadService } from './services';
-import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { Router } from '@angular/router';
-
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSliderModule } from '@angular/material/slider';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import * as Sentry from '@sentry/angular';
+import 'hammerjs';
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import {
+	NavBarComponent,
+} from './components';
+import { AppRoutingModule } from './routing/app-routing.module';
+import { BarPropertiesService, UploadService } from './services';
+import { BeerPropertiesService } from './services/beer-properties.service';
+import { JwtInterceptor } from './utils/jwt.interceptor';
+
+
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -117,36 +87,7 @@ const SENTRY_PROVIDERS = [
 @NgModule({
 	declarations: [
 		AppComponent,
-		MapComponent,
-		MapPageComponent,
-		NavBarComponent,
-		BeerFormComponent,
-		PageNotFoundComponent,
-		MapPopupComponent,
-		HomeComponent,
-		AdminDashboardComponent,
-		BarAdminComponent,
-		BeerAdminComponent,
-		AddBeerComponent,
-		TableListBeerComponent,
-		MapFiltersComponent,
-		BeerListComponent,
-		BeerListCardComponent,
-		BeerIconComponent,
-		LoginComponent,
-		RegisterComponent,
-		UserAdminComponent,
-		InputAutocompleteComponent,
-		DashboardComponent,
-		ProfileComponent,
-		BarManagementComponent,
-		BeerTableComponent,
-		OwnedBarsComponent,
-		NewRequestComponent,
-		PendingRequestComponent,
-		ToggleSwitchComponent,
-		AdminTableComponent,
-		InfiniteScrollComponent
+		NavBarComponent
 	],
 	imports: [
 		BrowserModule,
@@ -157,7 +98,7 @@ const SENTRY_PROVIDERS = [
 		FlexLayoutModule,
 		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 		ScrollingModule,
-		...MATERIAL_MODULES,
+		...MATERIAL_MODULES
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -167,12 +108,7 @@ const SENTRY_PROVIDERS = [
 		UploadService,
 		...SENTRY_PROVIDERS
 	],
-	entryComponents: [MapPopupComponent],
+	entryComponents: [],
 	bootstrap: [AppComponent]
 })
-export class AppModule {
-	constructor(private injector: Injector) {
-		const PopupElement = createCustomElement(MapPopupComponent, { injector });
-		customElements.define('popup-element', PopupElement);
-	}
-}
+export class AppModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../services';
+import { AuthenticationService } from '@beer/services';
 @Component({
 	selector: 'app-nav-bar',
 	templateUrl: './nav-bar.component.html',
@@ -12,16 +12,16 @@ export class NavBarComponent implements OnInit {
 	public isLogged = false;
 
 	constructor(
-		private router: Router,
-		private authenticationService: AuthenticationService
+		private readonly router: Router,
+		private readonly authenticationService: AuthenticationService
 	) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.authenticationService.isLogged.subscribe(isLogged => this.isLogged = isLogged);
 	}
 
-	public logout() {
+	public logout(): void {
 		this.authenticationService.logout();
-		this.router.navigate(['/login']);
+		this.router.navigate(['/auth']);
 	}
 }
