@@ -36,20 +36,10 @@ const MATERIAL_MODULES = [
 	MatSelectModule,
 	MatToolbarModule,
 	MatButtonModule,
-	// MatDialogModule,
-	// MatCardModule,
-	// MatGridListModule,
 	MatInputModule,
 	MatProgressSpinnerModule,
 	MatTableModule,
-	MatPaginatorModule,
-	// MatSortModule,
-	// MatCheckboxModule,
-	// MatSliderModule,
-	// MatSnackBarModule,
-	// MatListModule,
-	// MatProgressBarModule,
-	// MatSlideToggleModule
+	MatPaginatorModule
 ];
 
 @NgModule({
@@ -60,7 +50,7 @@ const MATERIAL_MODULES = [
 		BarAdminComponent,
 		BeerAdminComponent,
 		AddBeerComponent,
-		TableListBeerComponent,
+		TableListBeerComponent
 	],
 	imports: [
 		MATERIAL_MODULES,
