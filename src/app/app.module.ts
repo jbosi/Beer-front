@@ -40,6 +40,8 @@ import {
 import { AppRoutingModule } from './routing/app-routing.module';
 import { BarPropertiesService, UploadService } from './services';
 import { BeerPropertiesService } from './services/beer-properties.service';
+import { SharedModule } from './shared';
+import { CalloutErrorComponent } from './shared/components';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 
 
@@ -103,6 +105,7 @@ const SENTRY_PROVIDERS = [
 		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 		ScrollingModule,
 		...MATERIAL_MODULES,
+		SharedModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
