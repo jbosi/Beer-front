@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
 	// convenience getter for easy access to form fields
 	get f() { return this.registerForm.controls; }
 
-	onSubmit() {
+	onSubmit(): void {
 		this.submitted = true;
 		this.hasError = false;
 
@@ -62,12 +62,12 @@ export class RegisterComponent implements OnInit {
 		this.userService.register(this.registerForm.value)
 		.pipe(first())
 		.subscribe(
-			data => this.router.navigate(['/login']),
+			_ => this.router.navigate(['/login']),
 			error => this.handleError(error)
 		);
 	}
 
-	private handleError(error) {
+	private handleError(error): void {
 		this.hasError = true;
 		this.loading = false;
 		const message = error.error.message;

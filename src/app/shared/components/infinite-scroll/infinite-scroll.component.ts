@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'app-infinite-scroll',
@@ -12,16 +12,16 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
 
 	private observer: IntersectionObserver;
 
-	constructor(private host: ElementRef) { }
+	constructor(private readonly host: ElementRef) { }
 
-	get element() {
+	public get element() {
 		return this.host.nativeElement;
 	}
 
 	ngOnInit(): void {
 		const options = {
-		  root: this.isHostScrollable() ? this.host.nativeElement : null,
-		  ...this.options
+			root: this.isHostScrollable() ? this.host.nativeElement : null,
+			...this.options
 		};
 
 		this.observer = new IntersectionObserver(([entry]) => {

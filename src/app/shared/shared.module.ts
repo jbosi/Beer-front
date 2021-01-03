@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminTableComponent } from './components/admin-table';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CalloutErrorComponent } from './components/callout-error/callout-error.component';
 
 const MATERIAL_MODULES = [
 	MatIconModule,
@@ -42,7 +43,8 @@ const MATERIAL_MODULES = [
 		BeerTableComponent,
 		BeerIconComponent,
 		AdminTableComponent,
-		InfiniteScrollComponent
+		InfiniteScrollComponent,
+		CalloutErrorComponent
 	],
 	imports: [
 		MATERIAL_MODULES,

@@ -1,6 +1,4 @@
-<ng-container *ngIf="hasError">
-	<span *ngFor="let errorMessage of errorsMessage" class="callout-error error-message-container">{{ errorMessage }}</span>
-</ng-container>
+<app-callout-error *ngIf="hasError" [errorsMessage]="errorsMessage"></app-callout-error>
 
 <mat-card class="register-card">
 	<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">

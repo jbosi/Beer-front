@@ -14,6 +14,10 @@ export class LoginComponent implements OnInit {
 	public loading = false;
 	public submitted = false;
 	public returnUrl: string;
+
+	public hasError = false;
+	public errorsMessage: string[];
+
 	private readonly param = 'returnUrl';
 
 	constructor(
@@ -42,6 +46,7 @@ export class LoginComponent implements OnInit {
 
 	onSubmit(): void {
 		this.submitted = true;
+		this.hasError = false;
 
 		if (this.loginForm.invalid) {
 			return;
@@ -51,12 +56,15 @@ export class LoginComponent implements OnInit {
 		this.authenticationService.login(this.f.email.value, this.f.password.value)
 		.pipe(first())
 		.subscribe(
-			data => {
-				this.router.navigate([this.returnUrl]);
-			},
-			error => {
-				console.log('[authError]', error);
-				this.loading = false;
-		});
+			_ => this.router.navigate([this.returnUrl]),
+			error => this.handleError(error)
+		);
+	}
+
+	private handleError(error): void {
+		this.hasError = true;
+		this.loading = false;
+		const message = error.error.message;
+		this.errorsMessage = Array.isArray(message) ? message : [message];
 	}
 }
