@@ -56,7 +56,7 @@ export class MapComponent implements OnInit {
 
 	public onSelectedItemChanged(bar: IBarNames): void {
 		if (bar != null && bar.id) {
-			if (this.barProperties.some(item => item.id == bar.id)) {
+			if (this.barProperties.some(item => item.id === bar.id)) {
 				this.highlightedMarkerId.next(bar.id);
 				return;
 			}
