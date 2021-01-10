@@ -27,6 +27,10 @@ li {
 	color: white;
 }
 
+.fullHeight {
+	height: calc(100% - 50px);
+}
+
 app-root {
 	display: flex;
 	-webkit-box-orient: vertical;

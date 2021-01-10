@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-	NavBarComponent
-} from '../components';
 
 const routes: Routes = [
 	{
@@ -12,7 +9,6 @@ const routes: Routes = [
 	},
 	{
 		path: '',
-		component: NavBarComponent,
 		children: [
 			{
 				path: 'admin-dashboard',
@@ -33,13 +29,13 @@ const routes: Routes = [
 			{
 				path: 'auth',
 				loadChildren: () => import('../pages/auth').then(m => m.AuthModule)
+			},
+			{
+				path: '**',
+				loadChildren: () => import('../pages/page-not-found').then(m => m.PageNotFoundModule)
 			}
 		]
-	},
-	{
-		path: '**',
-		loadChildren: () => import('../pages/page-not-found').then(m => m.PageNotFoundModule)
-	},
+	}
 ];
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
